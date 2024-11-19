@@ -49,6 +49,7 @@ class TokenAnalyzer:
     def create_analysis_pipeline(self, storage):
         """Creates a reusable analysis pipeline function."""
 
+        @safe_operation
         def process_single(prompt: str) -> Result[str, Exception]:
 
             result =  (Success(prompt)
@@ -61,7 +62,7 @@ class TokenAnalyzer:
                     self.process_and_save(r, storage)
                     return r
                 case Failure(error):
-                    return error
+                    raise error
 
         def process_batch(prompts: List[str]) -> Result[List[str], Exception]:
             results = []
@@ -135,7 +136,8 @@ You are a helpful AI assistant.<|eot_id|><|start_header_id|>user<|end_header_id|
             case Failure(error):
                 return error
 
-    def process_and_save(self, result: AnalysisResult, storage: TokenAnalysisStorage) -> Result[None, Exception]:
+    @safe_operation
+    def process_and_save(self, result: AnalysisResult, storage: TokenAnalysisStorage):
         """Process and save analysis results"""
         try:
             storage.save(result)
@@ -146,11 +148,8 @@ You are a helpful AI assistant.<|eot_id|><|start_header_id|>user<|end_header_id|
             result.data.association_matrix = pad_matrix(matrix_np,
                                                         len(result.data.input_tokens),
                                                         len(result.data.output_tokens))
-            logger.info("Analysis complete")
-            return Success(None)
         except Exception as e:
             logger.error(f"Analysis failed: {e}")
-            return Failure(e)
 
     def _try_process_tokens(
             self,
