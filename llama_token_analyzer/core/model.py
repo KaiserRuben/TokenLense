@@ -1,4 +1,6 @@
-from typing import Dict, Optional, Any, Tuple
+from typing import Dict, Optional, Any, Tuple, Union
+
+import psutil
 import torch
 from returns.pointfree import bind
 from transformers import AutoTokenizer, AutoModelForCausalLM, PreTrainedModel, PreTrainedTokenizer
@@ -17,7 +19,7 @@ class ModelConfig(BaseModel):
     device: str = Field(default="auto")
     torch_dtype: str = Field(default="float16")
     tokenizer_padding_side: str = Field(default="left")
-    max_memory: Optional[Dict[int, str]] = None
+    max_memory: Optional[Dict[str, str]] = None
     load_in_8bit: bool = Field(default=False)
     trust_remote_code: bool = Field(default=False)
 
@@ -50,16 +52,15 @@ class ModelManager:
             tokenizer: Loaded tokenizer
             config: Model configuration
         """
+
         self.model = model
         self.tokenizer = tokenizer
         self.config = config
-        self._setup_tokenizer()
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.tokenizer.padding_side = self.config.tokenizer_padding_side
 
     @classmethod
-    def initialize(cls, config: Dict[str, Any]) -> Result[
-        'ModelManager',
-        Exception
-    ]:
+    def initialize(cls, config: Dict[str, Any]) -> Result['ModelManager', Exception]:
         """
         Safely initialize ModelManager from configuration.
 
@@ -72,18 +73,14 @@ class ModelManager:
 
         def create_config(cfg: Dict[str, Any]) -> Result[ModelConfig, Exception]:
             try:
+                if cfg.get("max_memory") is None:
+                    cfg["max_memory"] = cls._setup_device_map()
                 return Success(ModelConfig(**cfg))
             except Exception as e:
                 logger.error(f"Failed to create model config: {str(e)}")
                 return Failure(e)
 
-        def load_model_and_tokenizer(
-                config: ModelConfig
-        ) -> Result[ModelManager, Exception]:
-            """
-            Load model and tokenizer with configuration.
-            Returns a single Result instead of nested Results.
-            """
+        def load_model_and_tokenizer(config: ModelConfig) -> Result[ModelManager, Exception]:
             logger.info(f"Loading model {config.llm_id}")
             try:
                 tokenizer = AutoTokenizer.from_pretrained(
@@ -91,12 +88,16 @@ class ModelManager:
                     trust_remote_code=config.trust_remote_code
                 )
 
-                device_map = cls._determine_device_map(config.device)
+                device_map = cls._determine_device_map(device=config.device)
+
+                # Print memory allocation info
+                logger.info(f"Device map: {device_map}")
+                logger.info(f"Memory configuration: {config.max_memory}")
 
                 model = AutoModelForCausalLM.from_pretrained(
                     config.llm_id,
                     device_map=device_map,
-                    torch_dtype=getattr(torch, config.torch_dtype),
+                    torch_dtype=config.torch_dtype,
                     max_memory=config.max_memory,
                     load_in_8bit=config.load_in_8bit,
                     trust_remote_code=config.trust_remote_code
@@ -108,7 +109,6 @@ class ModelManager:
                 logger.error(f"Failed to load model and tokenizer: {str(e)}")
                 return Failure(e)
 
-        # Use flow to compose the operations
         return flow(
             config,
             create_config,
@@ -116,72 +116,74 @@ class ModelManager:
         )
 
     @classmethod
-    @retry_operation(max_attempts=2)
-    def _load_model_and_tokenizer(
-            cls,
-            config: ModelConfig
-    ) -> 'ModelManager':
+    def _setup_device_map(cls) -> Dict[str, str]:
         """
-        Load model and tokenizer with configuration.
-
-        Args:
-            config: Model configuration
+        Create an optimized device map for multiple GPUs and CPU.
+        Returns a dictionary mapping device identifiers to memory allocations.
 
         Returns:
-            ModelManager instance
-
-        Raises:
-            RuntimeError: If model or tokenizer loading fails
+            Dict[str, str]: Device map with format {"device": "memoryGiB"}
+                           e.g., {"cpu": "24GiB", "0": "18GiB", "1": "18GiB"}
         """
-        logger.info(f"Loading model {config.llm_id}")
-        try:
-            tokenizer = AutoTokenizer.from_pretrained(
-                config.llm_id,
-                trust_remote_code=config.trust_remote_code
-            )
+        # Get available CPU memory
+        cpu_memory_bytes = psutil.virtual_memory().available
+        cpu_memory_gib = int(cpu_memory_bytes * 0.7 / (1024 ** 3))  # Use 70% of available memory
+        device_map = {"cpu": f"{cpu_memory_gib}GiB"}
 
-            device_map = cls._determine_device_map(config.device)
+        if not torch.cuda.is_available():
+            logger.info("No CUDA devices available, using CPU only")
+            return device_map
 
-            model = AutoModelForCausalLM.from_pretrained(
-                config.llm_id,
-                device_map=device_map,
-                torch_dtype=getattr(torch, config.torch_dtype),
-                max_memory=config.max_memory,
-                load_in_8bit=config.load_in_8bit,
-                trust_remote_code=config.trust_remote_code
-            )
+        n_gpus = torch.cuda.device_count()
+        if n_gpus == 0:
+            logger.info("No GPU devices found, using CPU only")
+            return device_map
 
-            instance = cls(model, tokenizer, config)
-            return Success(instance)
-        except Exception as e:
-            logger.error(f"Failed to load model and tokenizer: {str(e)}")
-            return Failure(e)
+        # Get memory info for each GPU
+        for i in range(n_gpus):
+            try:
+                gpu_properties = torch.cuda.get_device_properties(i)
+                total_memory = gpu_properties.total_memory
+                # Convert to GiB and leave buffer (use 80% of available memory)
+                usable_memory = int(total_memory * 0.8 / (1024 ** 3))
+                device_map[str(i)] = f"{usable_memory}GiB"
+                logger.info(f"GPU {i}: {gpu_properties.name}, "
+                            f"Total Memory: {total_memory / (1024 ** 3):.1f} GiB, "
+                            f"Allocated: {usable_memory} GiB")
+            except Exception as e:
+                logger.warning(f"Failed to get properties for GPU {i}: {str(e)}")
+                continue
 
-    @staticmethod
-    def _determine_device_map(device: str) -> str:
+        return device_map
+
+    @classmethod
+    def _determine_device_map(cls,
+                              device: str) -> Union[str, Dict[str, str]]:
         """
         Determine appropriate device mapping for model.
 
         Args:
             device: Requested device string
+            model_id: Model identifier for memory requirement checking
 
         Returns:
-            Device mapping string
+            Union[str, Dict[str, str]]: Device mapping configuration
         """
         if device != "auto":
             return device
 
-        # Check available devices
-        if torch.cuda.is_available():
-            return "cuda"
-        elif torch.backends.mps.is_available():
-            return "mps"
-        return "cpu"
+        if not torch.cuda.is_available():
+            if torch.mps.is_available():
+                return "mps"
+            return "cpu"
 
-    def _setup_tokenizer(self) -> None:
-        """Configure tokenizer settings"""
-        self.tokenizer.pad_token = self.tokenizer.eos_token
-        self.tokenizer.padding_side = self.config.tokenizer_padding_side
+        n_gpus = torch.cuda.device_count()
+        if n_gpus == 0:
+            return "cpu"
+        elif n_gpus == 1:
+            return "cuda"
+        else:
+            return cls._setup_device_map()
 
     @safe_operation
     def generate_text(
