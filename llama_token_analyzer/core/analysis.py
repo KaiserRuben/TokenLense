@@ -34,6 +34,21 @@ class AssociationError(AnalysisError):
     pass
 
 
+def prepare_prompt(text: str) -> str:
+    """
+    Format prompt for model input.
+
+    Args:
+        text: Raw input text
+
+    Returns:
+        Formatted prompt
+    """
+    return f"""<|start_header_id|>system<|end_header_id|>
+You are a helpful AI assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>
+{text}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
+
+
 class TokenAnalyzer:
     """Analyzes token importance and associations in model outputs"""
 
@@ -53,7 +68,7 @@ class TokenAnalyzer:
         def process_single(prompt: str) -> Result[str, Exception]:
 
             result =  (Success(prompt)
-                    .map(self.prepare_prompt)
+                    .map(prepare_prompt)
                     .map(self.generate_text)
                     .map(self.compute_token_association))
 
@@ -92,20 +107,6 @@ class TokenAnalyzer:
             return result
 
         return pipeline
-
-    def prepare_prompt(self, text: str) -> str:
-        """
-        Format prompt for model input.
-
-        Args:
-            text: Raw input text
-
-        Returns:
-            Formatted prompt
-        """
-        return f"""<|start_header_id|>system<|end_header_id|>
-You are a helpful AI assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>
-{text}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
 
     def generate_text(
             self,

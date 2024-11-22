@@ -1,4 +1,7 @@
-from typing import Dict, Optional, Any, Tuple, Union
+import os
+os.environ['HF_HOME'] = './cache/model/'
+
+from typing import Dict, Any, Tuple, Union
 
 import psutil
 import torch
@@ -8,7 +11,7 @@ from returns.result import Result, Success, Failure
 from returns.pipeline import flow
 import logging
 from pydantic import BaseModel, Field, ConfigDict
-from ..utils.functional import safe_operation, retry_operation
+from ..utils.functional import safe_operation
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +22,6 @@ class ModelConfig(BaseModel):
     device: str = Field(default="auto")
     torch_dtype: str = Field(default="float16")
     tokenizer_padding_side: str = Field(default="left")
-    max_memory: Optional[Dict[str, str]] = None
     load_in_8bit: bool = Field(default=False)
     trust_remote_code: bool = Field(default=False)
 
@@ -73,8 +75,6 @@ class ModelManager:
 
         def create_config(cfg: Dict[str, Any]) -> Result[ModelConfig, Exception]:
             try:
-                if cfg.get("max_memory") is None:
-                    cfg["max_memory"] = cls._setup_device_map()
                 return Success(ModelConfig(**cfg))
             except Exception as e:
                 logger.error(f"Failed to create model config: {str(e)}")
@@ -92,13 +92,11 @@ class ModelManager:
 
                 # Print memory allocation info
                 logger.info(f"Device map: {device_map}")
-                logger.info(f"Memory configuration: {config.max_memory}")
 
                 model = AutoModelForCausalLM.from_pretrained(
                     config.llm_id,
                     device_map=device_map,
                     torch_dtype=config.torch_dtype,
-                    max_memory=config.max_memory,
                     load_in_8bit=config.load_in_8bit,
                     trust_remote_code=config.trust_remote_code
                 )
@@ -155,7 +153,6 @@ class ModelManager:
                 continue
 
         return device_map
-
     @classmethod
     def _determine_device_map(cls,
                               device: str) -> Union[str, Dict[str, str]]:
