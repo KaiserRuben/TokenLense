@@ -30,7 +30,7 @@ def is_system_token(token):
 def pad_matrix(matrix: np.ndarray, n_input_tokens: int, n_output_tokens: int) -> np.ndarray:
     """
     Pad a matrix to match token dimensions, handling the fact that the matrix
-    is structured as [output_tokens x input_tokens].
+    is structured as [n_input_tokens + n_output_tokens - 1 x input_tokens].
 
     Args:
         matrix: Input matrix with shape [n_output, n_input]
@@ -41,22 +41,17 @@ def pad_matrix(matrix: np.ndarray, n_input_tokens: int, n_output_tokens: int) ->
         Padded matrix with shape [n_output_tokens, n_input_tokens]
     """
     current_output, current_input = matrix.shape
+    max_width = n_input_tokens + n_output_tokens - 1
 
-    # First pad to match the number of input tokens (columns)
-    if current_input < n_input_tokens:
-        padding_width = ((0, 0), (0, n_input_tokens - current_input))
+    # Pad width if necessary
+    if current_input < max_width:
+        padding_width = ((0, 0), (0, max_width - current_input))
         matrix = np.pad(matrix, padding_width, mode='constant', constant_values=0)
-    elif current_input > n_input_tokens:
-        # Trim if necessary
-        matrix = matrix[:, :n_input_tokens]
 
-    # Then pad to match the number of output tokens (rows)
+    # Pad height if necessary
     if current_output < n_output_tokens:
         padding_height = ((0, n_output_tokens - current_output), (0, 0))
         matrix = np.pad(matrix, padding_height, mode='constant', constant_values=0)
-    elif current_output > n_output_tokens:
-        # Trim if necessary
-        matrix = matrix[:n_output_tokens, :]
 
     return matrix
 
