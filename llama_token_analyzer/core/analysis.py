@@ -37,14 +37,34 @@ class AssociationError(AnalysisError):
 def prepare_prompt(text: str) -> str:
     """
     Format prompt for model input.
+    Detects if the input already contains conversation formatting.
+    Always ensures it ends with assistant header for model response.
 
     Args:
-        text: Raw input text
+        text: Raw input text or formatted conversation
 
     Returns:
         Formatted prompt
     """
-    return f"""<|start_header_id|>system<|end_header_id|>
+    if not text.strip():  # Handle empty or whitespace-only input
+        return f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful AI assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>
+<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
+
+    if "<|begin_of_text|>" in text:
+        # Remove any trailing whitespace
+        text = text.rstrip()
+        # For pre-formatted conversations, just add the assistant header if needed
+        if not text.endswith("<|start_header_id|>assistant<|end_header_id|>"):
+            # If it ends with eot_id, just append the assistant header
+            if text.endswith("<|eot_id|>"):
+                return text + "<|start_header_id|>assistant<|end_header_id|>"
+            # If it already has content after the last eot_id, add both eot_id and assistant header
+            return text + "<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+        return text
+
+    # For single-turn prompts, format as a conversation
+    return f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 You are a helpful AI assistant.<|eot_id|><|start_header_id|>user<|end_header_id|>
 {text}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
 
