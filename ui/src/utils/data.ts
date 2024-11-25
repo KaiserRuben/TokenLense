@@ -20,7 +20,7 @@ interface AssociationData {
     input_tokens: TokenData[];
     output_tokens: TokenData[];
     association_matrix: number[][];
-    normalized_association?: number[][];
+    normalized_association: number[][];
     input_preview: string; // Added this field
 }
 

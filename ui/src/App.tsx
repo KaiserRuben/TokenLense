@@ -1,13 +1,16 @@
 import './App.css'
-import AnalysisOverview from "./components/AnalysisOverview.tsx";
+import {BrowserRouter} from "react-router";
+import AppRoutes from "@/Routes.tsx";
+import {AnalysisProvider} from "@/contexts/AnalysisContext.tsx";
 
 function App() {
-
-  return (
-    <>
-      <AnalysisOverview />
-    </>
-  )
+    return (
+        <BrowserRouter>
+            <AnalysisProvider>
+                <AppRoutes/>
+            </AnalysisProvider>
+        </BrowserRouter>
+    );
 }
 
 export default App

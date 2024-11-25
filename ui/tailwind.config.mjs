@@ -4,7 +4,7 @@ export default {
 		"./index.html",
 		"./src/**/*.{js,ts,jsx,tsx}",
 	],
-	darkMode: "class",  // Changed to just "class" instead of ['class', "class"]
+	darkMode: "class",
 	theme: {
 		extend: {
 			colors: {
@@ -105,8 +105,77 @@ export default {
 				'card-light': '0 4px 24px -4px rgba(0, 0, 0, 0.1)',
 				'hover-dark': '0 8px 32px -4px rgba(0, 0, 0, 0.5)',
 				'hover-light': '0 8px 32px -4px rgba(0, 0, 0, 0.2)'
-			}
+			},
+			keyframes: {
+				fadeIn: {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' },
+				},
+				slideIn: {
+					'0%': { transform: 'translateY(20px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' },
+				},
+				slideInLeft: {
+					'0%': { transform: 'translateX(-20px)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' },
+				},
+				slideInRight: {
+					'0%': { transform: 'translateX(20px)', opacity: '0' },
+					'100%': { transform: 'translateX(0)', opacity: '1' },
+				},
+				scaleIn: {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' },
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' },
+				},
+				pulse: {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.5' },
+				},
+				shimmer: {
+					'0%': { backgroundPosition: '-1000px 0' },
+					'100%': { backgroundPosition: '1000px 0' },
+				},
+				expandWidth: {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' },
+				},
+				spin: {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' },
+				},
+				bounce: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				}
+			},
+			animation: {
+				fadeIn: 'fadeIn 0.5s ease-out',
+				slideIn: 'slideIn 0.5s ease-out forwards',
+				slideInLeft: 'slideInLeft 0.5s ease-out forwards',
+				slideInRight: 'slideInRight 0.5s ease-out forwards',
+				scaleIn: 'scaleIn 0.5s ease-out forwards',
+				float: 'float 3s ease-in-out infinite',
+				pulse: 'pulse 2s ease-in-out infinite',
+				shimmer: 'shimmer 2.5s linear infinite',
+				expandWidth: 'expandWidth 0.5s ease-out forwards',
+				spin: 'spin 1s linear infinite',
+				bounce: 'bounce 2s ease-in-out infinite',
+			},
+			transitionDelay: {
+				'0': '0ms',
+				'100': '100ms',
+				'200': '200ms',
+				'300': '300ms',
+				'400': '400ms',
+				'500': '500ms',
+			},
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require("tailwindcss-animate"),
+	],
 }

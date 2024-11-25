@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
+import {AnalysisResult} from "@/utils/data.ts";
 
 type BackgroundShapesProps = {
     isDark: boolean;
@@ -13,6 +14,11 @@ type ThemeToggleProps = {
 type DashboardLayoutProps = {
     children: React.ReactNode;
 };
+
+export interface LayoutState {
+    view: 'list' | 'detail';
+    selectedAnalysis: AnalysisResult | null;
+}
 
 export interface WithDarkMode {
     isDark?: boolean;
