@@ -7,17 +7,18 @@ interface WordCloudProps {
     useRelativeStrength: boolean;
 }
 
+interface Connection {
+    path: string;
+    opacity: number;
+    strokeWidth: number;
+}
+
 const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelativeStrength}) => {
     const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null);
-    const [connections, setConnections] = useState<Array<{
-        path: string;
-        opacity: number;
-        strokeWidth: number;
-    }>>([]);
+    const [connections, setConnections] = useState<Connection[]>([]);
     const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Calculate aggregate importance for each token
     const calculateImportance = () => {
         const inputImportance = analysis.data.input_tokens.map((_, idx) => {
             return analysis.data.normalized_association
@@ -28,21 +29,19 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
         const outputImportance = analysis.data.normalized_association.map(row => {
             return row.reduce((sum, val) => sum + val, 0);
         });
-
-        console.log(inputImportance, outputImportance);
         const importance_per_token = [...inputImportance, ...outputImportance];
-        if(useRelativeStrength) {
-            const max_element = Math.max(...importance_per_token)
-            return importance_per_token.map(e => e/max_element)
-        }
-        return importance_per_token
+        const max_element = Math.max(...importance_per_token)
+        return importance_per_token.map(e => e / max_element)
     };
 
     const tokenImportance = calculateImportance();
 
-    const createConnection = (startIndex: number, endIndex: number, strength: number, influences: Array<{
-        value: number
-    }>) => {
+    const createConnection = (
+        startIndex: number,
+        endIndex: number,
+        strength: number,
+        influences: Array<{value: number}>
+    ): Connection | null => {
         const startEl = wordRefs.current[startIndex];
         const endEl = wordRefs.current[endIndex];
         const container = containerRef.current;
@@ -79,10 +78,11 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
     const handleWordHover = (index: number) => {
         if (index === activeWordIndex) return;
 
-        const newConnections = [];
+        const newConnections: Connection[] = [];
         const isInputToken = index < analysis.data.input_tokens.length;
 
         if (isInputToken) {
+            // Handle input token connections
             const influences = analysis.data.normalized_association.map(row => row[index]);
             const topInfluences = influences
                 .map((value, idx) => ({value, idx}))
@@ -101,19 +101,42 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
                 }
             }
         } else {
+            // Handle output token connections
             const outputIndex = index - analysis.data.input_tokens.length;
             const row = analysis.data.normalized_association[outputIndex];
-            const influences = row
+
+            // Get influences from input tokens
+            const inputInfluences = row
+                .slice(0, analysis.data.input_tokens.length)
                 .map((value, idx) => ({value, idx}))
-                .filter(({idx}) => idx < analysis.data.input_tokens.length)
+                .filter(({value}) => value > 0)
                 .sort((a, b) => b.value - a.value)
                 .slice(0, maxConnections);
 
-            for (const {value, idx} of influences) {
+            // Add connections from input tokens
+            for (const {value, idx} of inputInfluences) {
+                const connection = createConnection(idx, index, value, inputInfluences);
+                if (connection) newConnections.push(connection);
+            }
+
+            // Get influences from previous output tokens
+            const previousOutputInfluences: Array<{value: number; idx: number}> = [];
+            for (let i = analysis.data.input_tokens.length; i < index; i++) {
+                const outputIdx = i - analysis.data.input_tokens.length;
+                const value = row[analysis.data.input_tokens.length + outputIdx];
                 if (value > 0) {
-                    const connection = createConnection(idx, index, value, influences);
-                    if (connection) newConnections.push(connection);
+                    previousOutputInfluences.push({value, idx: i});
                 }
+            }
+
+            // Add connections from previous output tokens
+            const topPreviousInfluences = previousOutputInfluences
+                .sort((a, b) => b.value - a.value)
+                .slice(0, maxConnections);
+
+            for (const {value, idx} of topPreviousInfluences) {
+                const connection = createConnection(idx, index, value, topPreviousInfluences);
+                if (connection) newConnections.push(connection);
             }
         }
 
@@ -121,28 +144,42 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
         setConnections(newConnections);
     };
 
-    const getTokenStyle = (index: number) => {
+    const getTokenStyle = (index: number): React.CSSProperties => {
         if (activeWordIndex === null) return {};
 
         const isInputToken = index < analysis.data.input_tokens.length;
         let strength = 0;
 
-        if (isInputToken) {
-            if (index === activeWordIndex) {
-                return {backgroundColor: 'rgba(234, 88, 12, 0.2)'};
-            }
-            if (activeWordIndex >= analysis.data.input_tokens.length) {
-                const outputIndex = activeWordIndex - analysis.data.input_tokens.length;
-                strength = analysis.data.normalized_association[outputIndex][index];
-            }
-        } else {
-            if (index === activeWordIndex) {
-                return {backgroundColor: 'rgba(234, 88, 12, 0.2)'};
-            }
-            if (activeWordIndex < analysis.data.input_tokens.length) {
+        // If we're hovering over an input token
+        if (activeWordIndex < analysis.data.input_tokens.length) {
+            // Only output tokens should light up
+            if (!isInputToken) {
                 const outputIndex = index - analysis.data.input_tokens.length;
                 strength = analysis.data.normalized_association[outputIndex][activeWordIndex];
             }
+        }
+        // If we're hovering over an output token
+        else {
+            const activeOutputIndex = activeWordIndex - analysis.data.input_tokens.length;
+
+            // Input tokens can influence any output token
+            if (isInputToken) {
+                strength = analysis.data.normalized_association[activeOutputIndex][index];
+            }
+            // Output tokens can only influence later tokens
+            else {
+                const currentOutputIndex = index - analysis.data.input_tokens.length;
+                // Only show influence if this token came before the active token
+                if (currentOutputIndex < activeOutputIndex) {
+                    const row = analysis.data.normalized_association[activeOutputIndex];
+                    strength = row[analysis.data.input_tokens.length + currentOutputIndex] || 0;
+                }
+            }
+        }
+
+        // Highlight the active token
+        if (index === activeWordIndex) {
+            return {backgroundColor: 'rgba(234, 88, 12, 0.2)'};
         }
 
         if (useRelativeStrength && strength > 0) {
@@ -154,14 +191,13 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
         }
 
         return {
-            backgroundColor: `rgba(234, 88, 12, ${strength * 0.2})`,
-            opacity: 0.6 + (strength * 0.4)
+            backgroundColor: `rgba(234, 88, 12, ${strength * 0.1})`,
+            opacity: 0.3 + (strength * 0.7) // now ranges from 0.3 to 1.0
         };
     };
 
     return (
         <div className="space-y-4">
-
             <div
                 ref={containerRef}
                 className="relative min-h-[400px] rounded-lg border border-gray-800/50"
@@ -181,8 +217,16 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
                                         setConnections([]);
                                     }}
                                 >
-                                  {token.clean_token} ({tokenImportance[index]})
+                                    {token.clean_token}
                                 </span>
+                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                    <div
+                                        className="bg-orange-500 rounded-full h-2 transition-all duration-300"
+                                        style={{
+                                            width: `${tokenImportance[index] * 100}%`
+                                        }}
+                                    />
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -212,18 +256,26 @@ const WordCloud: React.FC<WordCloudProps> = ({analysis, maxConnections, useRelat
                             const globalIndex = index + analysis.data.input_tokens.length;
                             return (
                                 <div key={index} className="flex flex-col items-center gap-1">
-                                  <span
-                                      ref={el => wordRefs.current[globalIndex] = el}
-                                      className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-200"
-                                      style={getTokenStyle(globalIndex)}
-                                      onMouseEnter={() => handleWordHover(globalIndex)}
-                                      onMouseLeave={() => {
-                                          setActiveWordIndex(null);
-                                          setConnections([]);
-                                      }}
-                                  >
-                                    {token.clean_token}  ({tokenImportance[index]})
-                                  </span>
+                                    <span
+                                        ref={el => wordRefs.current[globalIndex] = el}
+                                        className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-200"
+                                        style={getTokenStyle(globalIndex)}
+                                        onMouseEnter={() => handleWordHover(globalIndex)}
+                                        onMouseLeave={() => {
+                                            setActiveWordIndex(null);
+                                            setConnections([]);
+                                        }}
+                                    >
+                                        {token.clean_token}
+                                    </span>
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                        <div
+                                            className="bg-orange-500 rounded-full h-2 transition-all duration-300"
+                                            style={{
+                                                width: `${tokenImportance[analysis.data.input_tokens.length + index] * 100}%`
+                                            }}
+                                        />
+                                    </div>
                                 </div>
                             );
                         })}

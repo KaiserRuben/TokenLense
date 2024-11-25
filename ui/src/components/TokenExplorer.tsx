@@ -11,7 +11,7 @@ interface TokenExplorerProps {
 }
 
 export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
-    const [maxConnections, setMaxConnections] = useState(5);
+    const [maxConnections, setMaxConnections] = useState(3);
     const [useRelativeStrength, setUseRelativeStrength] = useState(false);
 
     return (
@@ -31,7 +31,7 @@ export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
                                     value={[maxConnections]}
                                     onValueChange={([value]) => setMaxConnections(value)}
                                     min={1}
-                                    max={10}
+                                    max={analysis.data.normalized_association.length}
                                     step={1}
                                     className="w-48"
                                 />
