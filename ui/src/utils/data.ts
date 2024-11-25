@@ -74,7 +74,7 @@ interface AssociationData {
      * Same structure as association_matrix but with values scaled to [0,1]
      * Padded values remain 0
      */
-    normalized_association?: number[][];
+    normalized_association: number[][];
 }
 
 export interface AnalysisResult {
