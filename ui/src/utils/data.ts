@@ -1,7 +1,7 @@
 /**
  * Represents a single token and its properties
  */
-interface TokenData {
+export interface TokenData {
     /** Raw token as it appears in the model's vocabulary */
     token: string;
     /** Unique identifier for this token in the model's vocabulary */
@@ -84,10 +84,28 @@ export interface AnalysisResult {
 
 const SYSTEM_TOKENS = new Set([
     "<|begin_of_text|>", "<|start_header_id|>", "<|end_header_id|>",
-    "<|eot_id|>", "system", "user", "assistant"
+    "<|eot_id|>", "system"
 ]);
 
-const getInputPreview = (tokens: Array<{ clean_token: string; token: string }>, maxLength = 150) => {
+export function cleanSystemTokens(tokens: TokenData[], startIndex: number = 0, endIndex: number = tokens.length) {
+    return tokens
+        .slice(startIndex, endIndex)
+        .filter(t => !SYSTEM_TOKENS.has(t.clean_token))
+        .map(t => {
+            if (t.token === 'assistant' && t.clean_token === 'assistant') {
+                return "\nAssistant: ";
+            }
+            if (t.token === 'user' && t.clean_token === 'user') {
+                return "\nUser: ";
+            }
+            return t.clean_token;
+        })
+        .filter(t => t.trim() !== '') // Remove empty tokens
+        .join(' ')
+        .trim();
+}
+
+const getInputPreview = (tokens:TokenData[], maxLength = 150) => {
     // Find the user section
     let startIndex = -1;
     for (let i = 0; i < tokens.length; i++) {
@@ -114,14 +132,7 @@ const getInputPreview = (tokens: Array<{ clean_token: string; token: string }>, 
         t.clean_token === "<|eot_id|>"
     );
     endIndex = endIndex === -1 ? tokens.length : startIndex + endIndex;
-
-    const filteredTokens = tokens
-        .slice(startIndex, endIndex)
-        .filter(t => !SYSTEM_TOKENS.has(t.clean_token))
-        .map(t => t.clean_token)
-        .filter(t => t.trim() !== '') // Remove empty tokens
-        .join(' ')
-        .trim();
+    const filteredTokens = cleanSystemTokens(tokens, startIndex, endIndex);
 
     return filteredTokens.length > maxLength
         ? `${filteredTokens.slice(0, maxLength)}...`

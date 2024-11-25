@@ -16,6 +16,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/components/ui/tooltip';
+import {cleanSystemTokens} from "@/utils/data.ts";
 
 interface MetadataCardProps {
     title: string;
@@ -161,8 +162,10 @@ const Dashboard: React.FC = () => {
                     {/* Analysis Metadata Header */}
                     <div className="space-y-6">
                         <div>
-                            <p className="text-s dark:text-gray-400 text-gray-600">
-                                {selectedAnalysis.data.input_preview}
+                            <p className="text-s dark:text-gray-400 text-gray-600  whitespace-pre-wrap">
+                                {cleanSystemTokens(selectedAnalysis.data.input_tokens)
+                                    .replace(/\u010a/g, '\n')
+                                    .trim()}
                             </p>
                             <p className="text-lg dark:text-gray-200 text-gray-800 whitespace-pre-wrap">
                                 {selectedAnalysis.data.output_tokens
