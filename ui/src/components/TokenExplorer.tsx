@@ -12,7 +12,7 @@ interface TokenExplorerProps {
 
 export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
     const [maxConnections, setMaxConnections] = useState(3);
-    const [useRelativeStrength, setUseRelativeStrength] = useState(false);
+    const [useRelativeStrength, setUseRelativeStrength] = useState(true);
 
     return (
         <Card>
