@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import {ArrowLeft, Brain, Cpu, Info, Settings2, Terminal, Timer} from 'lucide-react';
+import {ArrowLeft, Brain, Cpu, Settings2, Terminal, Timer} from 'lucide-react';
 import { useNavigate, useParams } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAnalysis } from '@/contexts/AnalysisContext';
@@ -69,7 +69,9 @@ const Dashboard: React.FC = () => {
     // Find and set the selected analysis if not already set
     React.useEffect(() => {
         if (!selectedAnalysis && id && analyses.length > 0) {
-            const found = analyses.find(a => encodeURIComponent(a.metadata.timestamp) === id);
+            const found = analyses.find(a => {
+                return encodeURIComponent(a.metadata.timestamp) === encodeURIComponent(id)
+            });
             if (found) {
                 setSelectedAnalysis(found);
             }
@@ -102,6 +104,7 @@ const Dashboard: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            key={0}
         >
             {/* Navigation Header */}
             <motion.div
@@ -109,6 +112,7 @@ const Dashboard: React.FC = () => {
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
+                key={1}
             >
                 <div className="max-w-[1400px] mx-auto px-6 h-full flex items-center justify-between">
                     <button
@@ -152,15 +156,20 @@ const Dashboard: React.FC = () => {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3 }}
+                    key={2}
                 >
                     {/* Analysis Metadata Header */}
                     <div className="space-y-6">
                         <div>
-                            <h1 className="text-2xl font-light dark:text-white text-gray-900 mb-2">
-                                Prompt
-                            </h1>
-                            <p className="text-lg dark:text-gray-400 text-gray-600">
+                            <p className="text-s dark:text-gray-400 text-gray-600">
                                 {selectedAnalysis.data.input_preview}
+                            </p>
+                            <p className="text-lg dark:text-gray-200 text-gray-800 whitespace-pre-wrap">
+                                {selectedAnalysis.data.output_tokens
+                                    .map(t => t.clean_token)
+                                    .join(' ')
+                                    .replace("<|eot_id|>", "")
+                                    .replace(/\u010a/g, '\n').trim()}
                             </p>
                         </div>
                     </div>
@@ -168,17 +177,18 @@ const Dashboard: React.FC = () => {
                     {/* Main Content Tabs */}
                     <Tabs value={activeTab} onValueChange={setActiveTab}>
                         <TabsList>
-                            <TabsTrigger value="relationships">Token Relationships</TabsTrigger>
+                        <TabsTrigger value="relationships">Token Relationships</TabsTrigger>
                             <TabsTrigger value="matrix">Association Matrix</TabsTrigger>
                             <TabsTrigger value="stats">Statistics</TabsTrigger>
                         </TabsList>
 
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence key={0}>
                             <TabsContent value="relationships" className="mt-6">
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
+                                    key={3}
                                 >
                                     <TokenExplorer analysis={selectedAnalysis} />
                                 </motion.div>
@@ -189,6 +199,7 @@ const Dashboard: React.FC = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
+                                    key={4}
                                 >
                                     {/* Matrix visualization will go here */}
                                     <Card>
@@ -209,6 +220,7 @@ const Dashboard: React.FC = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
+                                    key={5}
                                 >
                                     {/* Statistics will go here */}
                                     <Card>
