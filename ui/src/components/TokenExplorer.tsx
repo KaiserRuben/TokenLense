@@ -11,20 +11,24 @@ interface TokenExplorerProps {
 }
 
 export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
-    const [maxConnections, setMaxConnections] = useState(3);
+    const [maxConnections, setMaxConnections] = useState(Math.round(analysis.data.output_tokens.length/4));
     const [useRelativeStrength, setUseRelativeStrength] = useState(true);
+    const [showBackground, setShowBackground] = useState(true);
+    const [showConnections, setShowConnections] = useState(true);
+    const [showImportanceBars, setShowImportanceBars] = useState(true);
+
+    // Just to trick TypeScript into not complaining about unused variables
+    void(setUseRelativeStrength)
 
     return (
         <Card>
-            <CardContent className="p-0"> {/* Remove padding for better space usage */}
+            <CardContent className="p-0">
                 <AnimatePresence key={1}>
                     <motion.div>
-                        {/* Simplified controls */}
-                        <div className="p-4 border-b border-gray-100 dark:border-gray-800">
+                        <div className="p-4 space-y-4 border-b border-gray-100 dark:border-gray-800">
+                            {/* Connection controls */}
                             <div className="flex items-center gap-4">
-                                <label
-                                    className="text-sm font-medium text-gray-700 dark:text-gray-300 min-w-[180px]"
-                                >
+                                <label className="text-sm font-medium text-gray-700 dark:text-gray-300 min-w-[180px]">
                                     Max Connections per Token
                                 </label>
                                 <Slider
@@ -36,22 +40,51 @@ export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
                                     className="w-48"
                                 />
                                 <span className="text-sm text-gray-500 dark:text-gray-400 min-w-[30px]">
-                                {maxConnections}
-                            </span>
-                                <span className="text-sm text-gray-400">Normalize per token</span>
-                                <Switch
-                                    checked={useRelativeStrength}
-                                    onCheckedChange={setUseRelativeStrength}
-                                />
+                                    {maxConnections}
+                                </span>
+                            </div>
+
+                            {/* Visualization toggles */}
+                            <div className="flex items-center gap-8">
+                                {/*<div className="flex items-center gap-2">*/}
+                                {/*    <span className="text-sm text-gray-400">Normalize per token</span>*/}
+                                {/*    <Switch*/}
+                                {/*        checked={useRelativeStrength}*/}
+                                {/*        onCheckedChange={setUseRelativeStrength}*/}
+                                {/*    />*/}
+                                {/*</div>*/}
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm text-gray-400">Show background</span>
+                                    <Switch
+                                        checked={showBackground}
+                                        onCheckedChange={setShowBackground}
+                                    />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm text-gray-400">Show connections</span>
+                                    <Switch
+                                        checked={showConnections}
+                                        onCheckedChange={setShowConnections}
+                                    />
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm text-gray-400">Show importance bars</span>
+                                    <Switch
+                                        checked={showImportanceBars}
+                                        onCheckedChange={setShowImportanceBars}
+                                    />
+                                </div>
                             </div>
                         </div>
 
-                        {/* Word Cloud with maximized height */}
                         <div className="">
                             <WordCloud
                                 analysis={analysis}
                                 maxConnections={maxConnections}
                                 useRelativeStrength={useRelativeStrength}
+                                showBackground={showBackground}
+                                showConnections={showConnections}
+                                showImportanceBars={showImportanceBars}
                             />
                         </div>
                     </motion.div>
