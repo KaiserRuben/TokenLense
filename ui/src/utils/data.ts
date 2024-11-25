@@ -1,14 +1,27 @@
+/**
+ * Represents a single token and its properties
+ */
 interface TokenData {
+    /** Raw token as it appears in the model's vocabulary */
     token: string;
+    /** Unique identifier for this token in the model's vocabulary */
     token_id: number;
+    /** Cleaned version of the token (whitespace and special chars removed) */
     clean_token: string;
 }
-
+/**
+ * Represents metadata about the analysis run
+ */
 interface AnalysisMetadata {
+    /** Timestamp of the analysis */
     timestamp: string;
+    /** Full model identifier (e.g. "meta-llama/Meta-Llama-3.1-8B-Instruct") */
     llm_id: string;
+    /** Short model version (e.g. "Meta-Llama-3.1-8B-Instruct") */
     llm_version: string;
+    /** The complete prompt that was used, including system and user messages */
     prompt: string;
+    /** Parameters used for generation */
     generation_params: {
         max_new_tokens: number;
         [key: string]: unknown;
@@ -16,12 +29,52 @@ interface AnalysisMetadata {
     version: string;
 }
 
+/**
+ * Contains the actual token association analysis
+ */
 interface AssociationData {
+    input_preview: string;
+    /** All tokens from the input sequence (including system & formatting tokens) */
     input_tokens: TokenData[];
+
+    /** All tokens that were generated as output */
     output_tokens: TokenData[];
+
+    /**
+     * The association matrix showing influence of each token on generation
+     *
+     * Matrix dimensions are [output_tokens.length][max_width]
+     * where max_width = input_tokens.length + output_tokens.length
+     *
+     * For each row i (generating output_token[i]):
+     * - First input_tokens.length columns: influences of input tokens
+     * - Next i columns: influences of previously generated tokens
+     * - Remaining columns: padded with zeros
+     *
+     * Example for input "A B C" generating "X Y":
+     * max_width = 3 + 2 - 1 = 4 columns
+     * [
+     *   // Generating "X": looks at ["A", "B", "C"]
+     *   [0.1, 0.2, 0.3, 0.0, 0.0],  // last value is padding, plus one value 0 cause x has 0 self-attention
+     *
+     *   // Generating "Y": looks at ["A", "B", "C", "X"]
+     *   [0.2, 0.1, 0.4, 0.5, 0.0]
+     * ]
+     *
+     * Values:
+     * - Higher values indicate stronger influence
+     * - Values are gradient-based importance scores
+     * - Padded values are always 0
+     * - Each row i contains i meaningful values after input_tokens.length
+     */
     association_matrix: number[][];
-    normalized_association: number[][];
-    input_preview: string; // Added this field
+
+    /**
+     * Optional normalized version of the association matrix
+     * Same structure as association_matrix but with values scaled to [0,1]
+     * Padded values remain 0
+     */
+    normalized_association?: number[][];
 }
 
 export interface AnalysisResult {
