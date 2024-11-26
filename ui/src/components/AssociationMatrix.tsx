@@ -67,9 +67,10 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                                         return (
                                             <div
                                                 key={`col-header-${colIdx}`}
-                                                className="w-4 flex items-center justify-center"
+                                                className="w-4 flex items-end justify-center relative"
                                             >
-                                                <span className="text-[10px] block transform -rotate-90 translate-y-3 origin-left">
+                                                <span
+                                                    className="absolute bottom-0 left-2 text-xs whitespace-nowrap origin-bottom-left -rotate-45">
                                                     {formatToken(token.clean_token || token.token)}
                                                 </span>
                                             </div>
@@ -101,13 +102,16 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                                                                 <TooltipContent>
                                                                     <div className="space-y-1 p-1">
                                                                         <p className="text-xs">
-                                                                            <span className="font-medium">Generated:</span> {output_tokens[rowIdx].clean_token || output_tokens[rowIdx].token}
+                                                                            <span
+                                                                                className="font-medium">Generated:</span> {output_tokens[rowIdx].clean_token || output_tokens[rowIdx].token}
                                                                         </p>
                                                                         <p className="text-xs">
-                                                                            <span className="font-medium">Influenced by:</span> {getColumnToken(colIdx).clean_token || getColumnToken(colIdx).token}
+                                                                            <span
+                                                                                className="font-medium">Influenced by:</span> {getColumnToken(colIdx).clean_token || getColumnToken(colIdx).token}
                                                                         </p>
                                                                         <p className="text-xs">
-                                                                            <span className="font-medium">Strength:</span> {formatNumber(value)}
+                                                                            <span
+                                                                                className="font-medium">Strength:</span> {formatNumber(value)}
                                                                         </p>
                                                                     </div>
                                                                 </TooltipContent>
@@ -126,11 +130,11 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                         <div className="mt-4 flex items-center gap-2 text-xs">
                             <span className="text-gray-600 dark:text-gray-400">Influence:</span>
                             <div className="flex items-center gap-1">
-                                <div className="w-4 h-4" style={{ backgroundColor: getColor(0) }} />
+                                <div className="w-4 h-4" style={{backgroundColor: getColor(0)}}/>
                                 <span>0%</span>
-                                <div className="w-4 h-4" style={{ backgroundColor: getColor(0.5) }} />
+                                <div className="w-4 h-4" style={{backgroundColor: getColor(0.5)}}/>
                                 <span>50%</span>
-                                <div className="w-4 h-4" style={{ backgroundColor: getColor(1) }} />
+                                <div className="w-4 h-4" style={{backgroundColor: getColor(1)}}/>
                                 <span>100%</span>
                             </div>
                         </div>
