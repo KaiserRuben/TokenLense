@@ -11,7 +11,7 @@ interface TokenExplorerProps {
 }
 
 export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
-    const [maxConnections, setMaxConnections] = useState(Math.round(analysis.data.output_tokens.length/4));
+    const [maxConnections, setMaxConnections] = useState(3)  //Math.round(analysis.data.output_tokens.length/4));
     const [useRelativeStrength, setUseRelativeStrength] = useState(true);
     const [showBackground, setShowBackground] = useState(true);
     const [showConnections, setShowConnections] = useState(true);

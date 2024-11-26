@@ -69,7 +69,7 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                                                 key={`col-header-${colIdx}`}
                                                 className="w-4 flex items-center justify-center"
                                             >
-                                                <span className="text-[10px] block transform -rotate-45 translate-y-3 origin-left">
+                                                <span className="text-[10px] block transform -rotate-90 translate-y-3 origin-left">
                                                     {formatToken(token.clean_token || token.token)}
                                                 </span>
                                             </div>
