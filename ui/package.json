@@ -1,7 +1,7 @@
 {
   "name": "ui",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,10 +9,11 @@
     "prebuild": "bun run compress",
     "build:tsc": "bun x tsc -b",
     "build:vite": "bun x vite build",
-    "build": "export NODE_OPTIONS='--max-old-space-size=16384' && bun run build:tsc && bun run build:vite",
+    "build": "export NODE_OPTIONS='--max-old-space-size=32768' && bun run build:tsc && bun run build:vite",
     "clean": "rm -rf src/data/*.compressed.json",
     "lint": "eslint .",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "docker:build": "chmod +x docker-build-push.sh && ./docker-build-push.sh"
   },
   "dependencies": {
     "@radix-ui/react-slider": "^1.2.1",

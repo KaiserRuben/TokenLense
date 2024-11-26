@@ -7,7 +7,7 @@ import { AnalysisProvider } from "@/contexts/AnalysisContext";
 function App() {
     return (
         <BrowserRouter>
-            <AnalysisProvider batchSize={5}>
+            <AnalysisProvider>
                 <AppRoutes/>
             </AnalysisProvider>
         </BrowserRouter>
