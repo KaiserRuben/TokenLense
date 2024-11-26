@@ -5,9 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "compress": "bun run src/compress.ts",
+    "prebuild": "bun run compress",
+    "build:tsc": "bun x tsc -b",
+    "build:vite": "bun x vite build",
+    "build": "export NODE_OPTIONS='--max-old-space-size=16384' && bun run build:tsc && bun run build:vite",
+    "clean": "rm -rf src/data/*.compressed.json",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "dependencies": {
     "@radix-ui/react-slider": "^1.2.1",

@@ -120,13 +120,12 @@ sympy==1.13.1
 terminado==0.18.1
 threadpoolctl==3.5.0
 tinycss2==1.4.0
-tokenizers==0.20.3
 toolz==0.12.1
 torch==2.5.1
 tornado==6.4.1
 tqdm==4.67.0
 traitlets==5.14.3
-transformers==4.46.2
+transformers==4.44.0
 types-python-dateutil==2.9.0.20241003
 typing_extensions==4.12.2
 tzdata==2024.2

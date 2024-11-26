@@ -22,6 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+
+    "incremental": true,
+
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -29,5 +32,9 @@
       ]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "src/data/*.json" // Exclude data files from TS compilation
+  ]
 }

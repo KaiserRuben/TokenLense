@@ -1,4 +1,3 @@
-// src/contexts/AnalysisContext.tsx
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { AnalysisResult, getAnalysisResults } from '@/utils/data';
 
@@ -28,7 +27,7 @@ export const AnalysisProvider: React.FC<AnalysisProviderProps> = ({ children }) 
     const refreshAnalyses = async () => {
         try {
             setLoading(true);
-            const results = await getAnalysisResults();
+            const results = await getAnalysisResults({ offset: 0, limit: 100 });
             setAnalyses(results);
             setError(null);
         } catch (err) {

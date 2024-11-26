@@ -1,3 +1,5 @@
+import {CompressedMatrix, decompressAnalysis} from "@/utils/matrixUtils.ts";
+
 /**
  * Represents a single token and its properties
  */
@@ -9,6 +11,7 @@ export interface TokenData {
     /** Cleaned version of the token (whitespace and special chars removed) */
     clean_token: string;
 }
+
 /**
  * Represents metadata about the analysis run
  */
@@ -105,7 +108,7 @@ export function cleanSystemTokens(tokens: TokenData[], startIndex: number = 0, e
         .trim();
 }
 
-const getInputPreview = (tokens:TokenData[], maxLength = 150) => {
+export const getInputPreview = (tokens: TokenData[], maxLength = 150) => {
     // Find the user section
     let startIndex = -1;
     for (let i = 0; i < tokens.length; i++) {
@@ -139,12 +142,27 @@ const getInputPreview = (tokens:TokenData[], maxLength = 150) => {
         : filteredTokens;
 };
 // Validates a single AnalysisResult
-const validateAnalysisResult = (data: unknown): data is AnalysisResult => {
-    try {
-        // Check basic structure
-        if (!data || typeof data !== 'object' || !('metadata' in data) || !('data' in data)) return false;
+// Add this helper to detect compressed format
+const isCompressedMatrix = (data: CompressedMatrix): boolean => {
+    return data &&
+        Array.isArray(data.values) &&
+        Array.isArray(data.indices) &&
+        Array.isArray(data.shape) &&
+        data.shape.length === 2;
+};
 
-        // Validate metadata
+// Modify your existing validation to handle compressed format
+export const validateAnalysisResult = (data: unknown): data is AnalysisResult => {
+    try {
+        if (!data || typeof data !== 'object') return false;
+
+        // Check if it's compressed and needs decompression
+        const anyData = data as unknown as { data: { association_matrix: CompressedMatrix } };
+        if (isCompressedMatrix(anyData.data?.association_matrix)) {
+            data = decompressAnalysis(data as AnalysisResult);
+        }
+
+        // Rest of your existing validation...
         const metadata = (data as AnalysisResult).metadata;
         if (
             typeof metadata.timestamp !== 'string' ||
@@ -156,7 +174,7 @@ const validateAnalysisResult = (data: unknown): data is AnalysisResult => {
             typeof metadata.generation_params.max_new_tokens !== 'number'
         ) return false;
 
-        // Validate data
+        // Validate data structure
         const associationData = (data as AnalysisResult).data;
         if (
             !Array.isArray(associationData.input_tokens) ||
@@ -191,32 +209,47 @@ const validateAnalysisResult = (data: unknown): data is AnalysisResult => {
         }
 
         return true;
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (e) {
+    } catch {
         return false;
     }
 };
+
+interface GetAnalysisParams {
+    offset: number;
+    limit: number;
+}
 
 /**
  * Loads and validates all analysis result JSONs from the data directory
  * @returns Promise containing array of valid analysis results
  * @throws Error if no valid results are found or if loading fails
  */
-export const getAnalysisResults = async (): Promise<AnalysisResult[]> => {
+export const getAnalysisResults = async ({offset, limit}: GetAnalysisParams): Promise<AnalysisResult[]> => {
     const results: AnalysisResult[] = [];
     const errors: string[] = [];
 
     try {
-        // Load all JSON files from the data directory
-        const modules = import.meta.glob('/src/data/*.json', { eager: true });
+// For compressed files
+        const compressedModules = import.meta.glob('/src/data/*.compressed.json', {
+            eager: true
+        });
 
-        Object.entries(modules).forEach(([path, module]) => {
+// For regular JSON files
+        const regularModules = import.meta.glob('/src/data/!(*.compressed).json', {
+            eager: true
+        });
+// In production, only use compressed files
+        const modules = import.meta.env.PROD ? compressedModules : regularModules;
+
+        const moduleEntries = Object.entries(modules)
+            .slice(offset, offset + limit);
+
+        for (const [path, module] of moduleEntries) {
             try {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
-                const data = module.default || module; // Handle both ESM and CJS modules
+                const data = module.default || module;
                 if (validateAnalysisResult(data)) {
-                    // Add input preview to the data
                     const enrichedData = {
                         ...data,
                         data: {
@@ -231,9 +264,9 @@ export const getAnalysisResults = async (): Promise<AnalysisResult[]> => {
             } catch (e) {
                 errors.push(`Error loading ${path}: ${e instanceof Error ? e.message : 'Unknown error'}`);
             }
-        });
+        }
 
-        if (results.length === 0) {
+        if (results.length === 0 && offset === 0) {
             throw new Error(`No valid analysis results found. ${errors.length > 0 ? `Errors: ${errors.join(', ')}` : ''}`);
         }
 

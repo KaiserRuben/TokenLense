@@ -17,6 +17,7 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip';
 import {cleanSystemTokens} from "@/utils/data.ts";
+import AssociationMatrix from "@/components/AssociationMatrix.tsx";
 
 interface MetadataCardProps {
     title: string;
@@ -205,16 +206,7 @@ const Dashboard: React.FC = () => {
                                     key={4}
                                 >
                                     {/* Matrix visualization will go here */}
-                                    <Card>
-                                        <CardHeader>
-                                            <CardTitle>Association Matrix</CardTitle>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <div className="h-[600px] flex items-center justify-center text-gray-500">
-                                                Matrix visualization coming soon...
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                    <AssociationMatrix analysis={selectedAnalysis} />
                                 </motion.div>
                             </TabsContent>
 

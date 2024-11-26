@@ -15,7 +15,7 @@ export const TokenExplorer: React.FC<TokenExplorerProps> = ({analysis}) => {
     const [useRelativeStrength, setUseRelativeStrength] = useState(true);
     const [showBackground, setShowBackground] = useState(true);
     const [showConnections, setShowConnections] = useState(true);
-    const [showImportanceBars, setShowImportanceBars] = useState(true);
+    const [showImportanceBars, setShowImportanceBars] = useState(false);
 
     // Just to trick TypeScript into not complaining about unused variables
     void(setUseRelativeStrength)

@@ -1,6 +1,24 @@
-import React, {useRef, useState} from 'react';
-import { Lock } from 'lucide-react';
-import {AnalysisResult, TokenData} from "@/utils/data.ts";
+import React, { useRef, useState } from 'react';
+import { Lock, Info } from 'lucide-react';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+interface TokenData {
+    clean_token: string;
+    token_id: number;
+}
+
+interface AnalysisResult {
+    data: {
+        input_tokens: TokenData[];
+        output_tokens: TokenData[];
+        normalized_association: number[][];
+    };
+}
 
 interface WordCloudProps {
     analysis: AnalysisResult;
@@ -80,11 +98,10 @@ const WordCloud: React.FC<WordCloudProps> = ({
             normalizedStrength = strength / maxValue;
         }
 
-        // Match the background visualization style
         return {
             path,
             opacity: normalizedStrength,
-            strokeWidth: Math.max(1, normalizedStrength * 2) // Scale down to 2x to make it less overwhelming
+            strokeWidth: Math.max(1, normalizedStrength * 2)
         };
     };
 
@@ -93,7 +110,6 @@ const WordCloud: React.FC<WordCloudProps> = ({
         const isInputToken = index < analysis.data.input_tokens.length;
 
         if (isInputToken) {
-            // When hovering an input token, show its influence on output tokens
             const influences = analysis.data.normalized_association.map(row => row[index]);
             const topInfluences = influences
                 .map((value, idx) => ({value, idx}))
@@ -112,20 +128,16 @@ const WordCloud: React.FC<WordCloudProps> = ({
                 }
             }
         } else {
-            // When hovering an output token
             const outputIndex = index - analysis.data.input_tokens.length;
             const row = analysis.data.normalized_association[outputIndex];
 
-            // Consider all possible influences (both input and previous output tokens)
             const allInfluences = [
-                // Input token influences
                 ...row.slice(0, analysis.data.input_tokens.length)
                     .map((value, idx) => ({
                         value,
                         idx,
                         type: 'input' as const
                     })),
-                // Previous output token influences
                 ...row.slice(
                     analysis.data.input_tokens.length,
                     analysis.data.input_tokens.length + outputIndex
@@ -136,12 +148,10 @@ const WordCloud: React.FC<WordCloudProps> = ({
                 }))
             ].filter(({value}) => value > 0);
 
-            // Sort by influence strength and take top N
             const topInfluences = allInfluences
                 .sort((a, b) => b.value - a.value)
                 .slice(0, maxConnections);
 
-            // Create connections for all top influences
             for (const {value, idx} of topInfluences) {
                 const connection = createConnection(idx, index, value, topInfluences);
                 if (connection) newConnections.push(connection);
@@ -161,12 +171,10 @@ const WordCloud: React.FC<WordCloudProps> = ({
 
     const handleWordClick = (index: number) => {
         if (lockedWordIndex === index) {
-            // Unlock if clicking the locked word
             setLockedWordIndex(null);
             setActiveWordIndex(null);
             setConnections([]);
         } else {
-            // Lock new word
             setLockedWordIndex(index);
             setActiveWordIndex(index);
             updateConnections(index);
@@ -225,45 +233,86 @@ const WordCloud: React.FC<WordCloudProps> = ({
         };
     };
 
-    const renderToken = (token: TokenData, index: number, globalIndex: number) => (
-        <div key={index} className="flex flex-col items-center gap-1">
-            <div className="relative">
-                <span
-                    ref={el => wordRefs.current[globalIndex] = el}
-                    className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-200"
-                    style={getTokenStyle(globalIndex)}
-                    onMouseEnter={() => handleWordHover(globalIndex)}
-                    onMouseLeave={handleWordLeave}
-                    onClick={() => handleWordClick(globalIndex)}
-                >
-                    {token.clean_token}
-                </span>
-                {lockedWordIndex === globalIndex && (
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-                        <Lock size={12} className="text-orange-600" />
-                    </div>
-                )}
+    const renderLegend = () => (
+        <div className="absolute top-4 right-4 flex items-center gap-4 text-sm">
+            <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-orange-500" />
+                <span>Input Tokens</span>
             </div>
-            {showImportanceBars && (
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                        className="bg-orange-500 rounded-full h-2 transition-all duration-300"
-                        style={{
-                            width: `${tokenImportance[globalIndex] * 100}%`
-                        }}
-                    />
-                </div>
-            )}
+            <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-blue-500" />
+                <span>Output Tokens</span>
+            </div>
+            <TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Info size={16} className="text-gray-400" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Hover over tokens to see relationships.</p>
+                        <p>Click to lock the selection.</p>
+                        <p>Connection strength shown by line thickness.</p>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
         </div>
+    );
+
+    const renderToken = (token: TokenData, index: number, globalIndex: number) => (
+        <TooltipProvider key={index}>
+            <Tooltip>
+                <TooltipTrigger>
+                    <div className="flex flex-col items-center gap-1 group">
+                        <div className="relative">
+                            <span
+                                ref={el => wordRefs.current[globalIndex] = el}
+                                className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-in-out
+                                    hover:shadow-lg hover:scale-105"
+                                style={getTokenStyle(globalIndex)}
+                                onMouseEnter={() => handleWordHover(globalIndex)}
+                                onMouseLeave={handleWordLeave}
+                                onClick={() => handleWordClick(globalIndex)}
+                            >
+                                {token.clean_token}
+                            </span>
+                            {lockedWordIndex === globalIndex && (
+                                <div className="absolute -top-2 left-1/2 -translate-x-1/2 animate-bounce">
+                                    <Lock size={12} className="text-orange-600" />
+                                </div>
+                            )}
+                        </div>
+                        {showImportanceBars && (
+                            <div className="w-full bg-gray-200 dark:bg-gray-800 rounded-full h-1.5">
+                                <div
+                                    className="bg-gray-800 dark:bg-gray-200 rounded-full h-1.5 transition-all duration-300"
+                                    style={{
+                                        width: `${tokenImportance[globalIndex] * 100}%`
+                                    }}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>Global Importance: {(tokenImportance[globalIndex] * 100).toFixed(1)}%</p>
+                    <p>Token ID: {token.token_id}</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 
     return (
         <div className="space-y-4">
             <div
                 ref={containerRef}
-                className="relative min-h-[400px] rounded-lg border border-gray-800/50"
+                className="relative min-h-[400px] rounded-xl border dark:border-gray-800/50 dark:bg-gray-950/50 backdrop-blur-sm"
             >
-                <div className="relative p-6 border-b border-gray-800/50">
+                {renderLegend()}
+
+                <div className="relative p-8 border-b dark:border-gray-800/50">
+                    <h3 className="absolute -top-3 left-4 px-2 bg-gray-200 dark:bg-gray-950 text-sm text-orange-500">
+                        Input Tokens
+                    </h3>
                     <div className="flex flex-wrap gap-4">
                         {analysis.data.input_tokens.map((token, index) =>
                             renderToken(token, index, index)
@@ -273,13 +322,19 @@ const WordCloud: React.FC<WordCloudProps> = ({
 
                 {showConnections && (
                     <svg className="absolute inset-0 pointer-events-none overflow-visible">
+                        <defs>
+                            <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="rgb(234, 88, 12)" />
+                                <stop offset="100%" stopColor="rgb(59, 130, 246)" />
+                            </linearGradient>
+                        </defs>
                         <g className="connection-lines">
                             {connections.map((connection, index) => (
                                 <path
                                     key={index}
                                     d={connection.path}
                                     fill="none"
-                                    stroke="rgb(234, 88, 12)"
+                                    stroke="url(#connectionGradient)"
                                     strokeWidth={connection.strokeWidth}
                                     strokeOpacity={connection.opacity}
                                     className="transition-all duration-300"
@@ -289,7 +344,10 @@ const WordCloud: React.FC<WordCloudProps> = ({
                     </svg>
                 )}
 
-                <div className="relative p-6">
+                <div className="relative p-8">
+                    <h3 className="absolute -top-3 left-4 px-2 bg-gray-200 dark:bg-gray-950 text-sm text-blue-500">
+                        Output Tokens
+                    </h3>
                     <div className="flex flex-wrap gap-4">
                         {analysis.data.output_tokens.map((token, index) =>
                             renderToken(token, index, index + analysis.data.input_tokens.length)
