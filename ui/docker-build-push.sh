@@ -11,7 +11,8 @@ VERSION_TAG="$IMAGE_NAME:v$VERSION"
 
 # Build the Docker image
 echo "🏗️  Building Docker image..."
-docker build -t $LATEST_TAG -t $VERSION_TAG .
+docker buildx build --platform linux/arm64 -t $LATEST_TAG -t $VERSION_TAG .
+docker buildx build --platform linux/amd64 -t $LATEST_TAG -t $VERSION_TAG .
 
 # Push the Docker image
 echo "⬆️  Pushing Docker image..."

@@ -13,7 +13,8 @@
     "clean": "rm -rf src/data/*.compressed.json",
     "lint": "eslint .",
     "preview": "vite preview --host",
-    "docker:build": "chmod +x docker-build-push.sh && ./docker-build-push.sh"
+    "docker:build": "chmod +x docker-build-push.sh && ./docker-build-push.sh",
+    "docker:run": "docker run -p 8080:80 ghcr.io/kaiserruben/tokenlense:latest"
   },
   "dependencies": {
     "@radix-ui/react-slider": "^1.2.1",
