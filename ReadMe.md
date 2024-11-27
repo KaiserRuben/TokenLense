@@ -76,14 +76,11 @@ For a more interactive exploration:
 
 1. Generate JSON files using the analyzer
 2. Copy the generated files from your output directory to `ui/src/data/`
-3. Follow the [TokenLens UI setup instructions](ui/README.md) to explore your visualizations
+3. Follow the [TokenLens UI setup instructions](ui/ReadMe.md) to explore your visualizations
 
 The UI provides enhanced features like:
 - Interactive token relationship exploration
 - Association strength visualization
-- Statistical analysis tools
-
-See the [UI documentation](ui/README.md) for deployment options and features.
 
 ## Example Notebook
 
