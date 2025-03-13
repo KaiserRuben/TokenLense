@@ -1,4 +1,7 @@
 import os
+
+from core.utils.functional import safe_operation
+
 os.environ['HF_HOME'] = './cache/model/'
 
 from typing import Dict, Any, Tuple, Union
@@ -11,7 +14,6 @@ from returns.result import Result, Success, Failure
 from returns.pipeline import flow
 import logging
 from pydantic import BaseModel, Field, ConfigDict
-from ..utils.functional import safe_operation
 
 logger = logging.getLogger(__name__)
 
@@ -85,17 +87,17 @@ class ModelManager:
             try:
                 tokenizer = AutoTokenizer.from_pretrained(
                     config.llm_id,
-                    trust_remote_code=config.trust_remote_code
+                    trust_remote_code=config.trust_remote_code,
+                    device=config.device
                 )
 
-                device_map = cls._determine_device_map(device=config.device)
+                # device_map = cls._determine_device_map(device=config.device)
 
                 # Print memory allocation info
-                logger.info(f"Device map: {device_map}")
+                # logger.info(f"Device map: {device_map}")
 
                 model = AutoModelForCausalLM.from_pretrained(
                     config.llm_id,
-                    device_map=device_map,
                     torch_dtype=config.torch_dtype,
                     load_in_8bit=config.load_in_8bit,
                     trust_remote_code=config.trust_remote_code
