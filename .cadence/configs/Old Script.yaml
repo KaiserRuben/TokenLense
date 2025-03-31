@@ -1,0 +1,46 @@
+project_name: Default
+working_dir: "."
+cmd:
+- python old.py
+provisioning:
+  gpu_count: 0
+  cpu_count: 48
+  ram: 96
+teamcity:
+  url: https://api.cadence.jetbrains.com
+  build_conf_id: id8ecbe8985b5b416bB6c0782d6e8f7d2b_JetTrain
+env:
+  variables:
+    PYTHONUNBUFFERED: "1"
+  python:
+    pip:
+      requirements_path: requirements.txt
+    version: 3.12.5
+  secrets:
+    variables: {}
+    ssh_keys: []
+  aws:
+    sync_config: false
+    sync_credentials: false
+    sync_cache: false
+project_sync:
+  local:
+    root: "."
+    storage_name: Cadence Storage
+    uri: ""
+    exclude: []
+    include: []
+    sync_back: false
+    snapshots: true
+    storage_type: DEFAULT
+inputs: []
+outputs:
+- type: OUTPUT
+  storage_name: Cadence Storage
+  uri: ""
+  path: "."
+  acceleration: false
+  storage_type: DEFAULT
+mounts: []
+storages: []
+description: ""
