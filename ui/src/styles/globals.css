@@ -1,0 +1,143 @@
+/* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base theme values */
+:root {
+    /* Token colors */
+    --token-highlight-rgb: 254, 215, 170; /* Light orange */
+    --token-active-rgb: 249, 115, 22; /* Orange */
+
+    /* Container backgrounds */
+    --token-container-bg: 255, 255, 255; /* White */
+    --token-input-color: 234, 88, 12; /* Orange */
+    --token-output-color: 59, 130, 246; /* Blue */
+
+    /* Connection colors */
+    --connection-gradient-start: rgb(234, 88, 12);
+    --connection-gradient-end: rgb(59, 130, 246);
+
+    /* Card backgrounds */
+    --sidebar-bg: 255, 255, 255, 0.95; /* Slightly transparent white */
+    --card-bg: 255, 255, 255; /* White */
+    --card-border: 229, 231, 235; /* Gray-200 */
+}
+
+/* Dark mode variables */
+.dark {
+    /* Token colors for dark mode */
+    --token-highlight-rgb: 249, 115, 22; /* More vibrant in dark mode */
+    --token-active-rgb: 254, 215, 170; /* Lighter orange in dark mode */
+
+    /* Container backgrounds for dark mode */
+    --token-container-bg: 17, 24, 39; /* Dark gray */
+    --token-input-color: 251, 146, 60; /* Lighter orange */
+    --token-output-color: 96, 165, 250; /* Lighter blue */
+
+    /* Connection colors for dark mode */
+    --connection-gradient-start: rgb(251, 146, 60);
+    --connection-gradient-end: rgb(96, 165, 250);
+
+    /* Card backgrounds for dark mode */
+    --sidebar-bg: 17, 24, 39, 0.95; /* Slightly transparent dark gray */
+    --card-bg: 24, 24, 27; /* Gray-900 */
+    --card-border: 63, 63, 70; /* Gray-700 */
+}
+
+/* Token visualization components */
+@layer components {
+    /* Token container */
+    .token-visualization-container {
+        @apply relative min-h-[400px] rounded-xl backdrop-blur-sm;
+        background-color: rgba(var(--token-container-bg), 0.03);
+        border: 1px solid rgba(var(--token-container-bg), 0.1);
+    }
+
+    /* Token section headers */
+    .token-section-input {
+        border-bottom: 1px solid rgba(var(--token-input-color), 0.2);
+    }
+
+    .token-section-header-input {
+        color: rgb(var(--token-input-color));
+    }
+
+    .token-section-header-output {
+        color: rgb(var(--token-output-color));
+    }
+
+    /* Individual tokens */
+    .token {
+        @apply px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-300;
+        @apply hover:shadow-lg hover:scale-105;
+    }
+
+    .token-input {
+        border: 1px solid rgba(var(--token-input-color), 0.2);
+    }
+
+    .token-output {
+        border: 1px solid rgba(var(--token-output-color), 0.2);
+    }
+
+    /* Connection lines */
+    .connection-line {
+        fill: none;
+        stroke: url(#connectionGradient);
+        transition: all 0.3s;
+    }
+
+    /* Info sidebar */
+    .token-info-sidebar {
+        @apply animate-in slide-in-from-right duration-300 z-20;
+        background-color: rgba(var(--sidebar-bg));
+        backdrop-filter: blur(8px);
+    }
+
+    /* Token metrics visualizations */
+    .importance-bar-bg {
+        @apply rounded-full h-2;
+        background-color: rgba(var(--token-container-bg), 0.2);
+    }
+
+    .importance-bar-fill-input {
+        @apply rounded-full h-2;
+        background-color: rgb(var(--token-input-color));
+    }
+
+    .importance-bar-fill-output {
+        @apply rounded-full h-2;
+        background-color: rgb(var(--token-output-color));
+    }
+
+    /* Token indicator elements */
+    .token-indicator-input {
+        @apply absolute -top-2 left-1/2 -translate-x-1/2 animate-bounce;
+        color: rgb(var(--token-input-color));
+    }
+
+    .token-indicator-output {
+        @apply absolute -top-2 left-1/2 -translate-x-1/2 animate-bounce;
+        color: rgb(var(--token-output-color));
+    }
+
+    /* Animations */
+    .animate-fadeIn {
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .animate-slideIn {
+        animation: slideIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+}

@@ -1,30 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { AnalysisResult } from "@/utils/data.ts";
+import { AnalysisResult, TokenData } from "@/utils/types";
+import { ensureDecompressedAnalysis } from '@/utils/matrixUtils';
 
 interface AssociationMatrixProps {
     analysis: AnalysisResult;
 }
 
 const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
-    const { normalized_association, input_tokens, output_tokens } = analysis.data;
+    // Ensure we're working with decompressed matrices
+    const decompressedAnalysis = useMemo(() => ensureDecompressedAnalysis(analysis), [analysis]);
+    const { normalized_association, input_tokens, output_tokens } = decompressedAnalysis.data;
 
-    const getColor = (value: number) => {
+    const getColor = (value: number): string => {
         if (value === 0) return 'rgb(243, 244, 246)';
-        const intensity = Math.floor(value * 255);
-        return `rgb(${255 - intensity}, ${255 - intensity}, 255)`;
+        // Use CSS variables for theming
+        return `rgba(var(--token-highlight-rgb), ${value})`;
     };
 
-    const formatNumber = (num: number) => {
+    const formatNumber = (num: number): string => {
         return (num * 100).toFixed(1) + '%';
     };
 
-    const formatToken = (token: string) => {
+    const formatToken = (token: string): string => {
         return token.length > 15 ? token.slice(0, 15) + '...' : token;
     };
 
-    const getColumnToken = (idx: number) => {
+    const getColumnToken = (idx: number): TokenData => {
         if (idx < input_tokens.length) {
             return input_tokens[idx];
         }
@@ -32,7 +35,7 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
     };
 
     // Calculate total context width for each row
-    const getContextWidth = (rowIdx: number) => {
+    const getContextWidth = (rowIdx: number): number => {
         return input_tokens.length + rowIdx;
     };
 
@@ -51,7 +54,7 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                                 {output_tokens.map((token, idx) => (
                                     <div key={`row-header-${idx}`}
                                          className="h-4 flex items-center">
-                                        <span className="text-[10px] block w-12">
+                                        <span className="text-[10px] block w-12 dark:text-gray-300">
                                             {formatToken(token.clean_token || token.token)}
                                         </span>
                                     </div>
@@ -70,7 +73,7 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                                                 className="w-4 flex items-end justify-center relative"
                                             >
                                                 <span
-                                                    className="absolute bottom-0 left-2 text-xs whitespace-nowrap origin-bottom-left -rotate-45">
+                                                    className="absolute bottom-0 left-2 text-xs whitespace-nowrap origin-bottom-left -rotate-45 dark:text-gray-300">
                                                     {formatToken(token.clean_token || token.token)}
                                                 </span>
                                             </div>
@@ -131,11 +134,11 @@ const AssociationMatrix: React.FC<AssociationMatrixProps> = ({ analysis }) => {
                             <span className="text-gray-600 dark:text-gray-400">Influence:</span>
                             <div className="flex items-center gap-1">
                                 <div className="w-4 h-4" style={{backgroundColor: getColor(0)}}/>
-                                <span>0%</span>
+                                <span className="dark:text-gray-300">0%</span>
                                 <div className="w-4 h-4" style={{backgroundColor: getColor(0.5)}}/>
-                                <span>50%</span>
+                                <span className="dark:text-gray-300">50%</span>
                                 <div className="w-4 h-4" style={{backgroundColor: getColor(1)}}/>
-                                <span>100%</span>
+                                <span className="dark:text-gray-300">100%</span>
                             </div>
                         </div>
                     </div>

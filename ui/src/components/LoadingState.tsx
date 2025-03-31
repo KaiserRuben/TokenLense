@@ -1,4 +1,4 @@
-// components/LoadingState.tsx
+// src/components/LoadingState.tsx
 import React from 'react';
 import { LoaderCircle } from 'lucide-react';
 
@@ -19,11 +19,11 @@ const LoadingState: React.FC<LoadingStateProps> = ({
     return (
         <div
             className={`
-        flex flex-col items-center justify-center
-        min-h-[400px] w-full
-        dark:text-gray-400 text-gray-600
-        ${className}
-      `}
+                flex flex-col items-center justify-center
+                min-h-[400px] w-full
+                dark:text-gray-400 text-gray-600
+                ${className}
+            `}
         >
             <LoaderCircle className="w-8 h-8 animate-spin mb-4" />
             <p className="text-lg">{message}</p>
@@ -41,10 +41,10 @@ export const InlineLoadingState: React.FC<LoadingStateProps> = ({
     return (
         <div
             className={`
-        flex items-center gap-3
-        dark:text-gray-400 text-gray-600
-        ${className}
-      `}
+                flex items-center gap-3
+                dark:text-gray-400 text-gray-600
+                ${className}
+            `}
         >
             <LoaderCircle className="w-4 h-4 animate-spin" />
             <span className="text-sm">{message}</span>

@@ -1,15 +1,14 @@
-import {AnalysisResult} from "@/utils/data.ts";
 import React from "react";
-import {Card, CardContent} from "@/components/ui/card.tsx";
-import {Brain, CalendarDays, Cpu} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Brain, CalendarDays, Cpu } from "lucide-react";
+import { AnalysisResult } from "@/utils/types";
 
 interface AnalysisCardProps {
     analysis: AnalysisResult;
     onClick: () => void;
 }
 
-export const AnalysisCard: React.FC<AnalysisCardProps> = ({analysis, onClick}) => {
-
+const AnalysisCard: React.FC<AnalysisCardProps> = ({ analysis, onClick }) => {
     const date = new Date(analysis.metadata.timestamp);
     const formattedDate = new Intl.DateTimeFormat('en-US', {
         day: 'numeric',
@@ -48,8 +47,8 @@ export const AnalysisCard: React.FC<AnalysisCardProps> = ({analysis, onClick}) =
                             <div className="flex items-center gap-2">
                                 <Brain className="w-4 h-4 dark:text-gray-400 text-gray-600"/>
                                 <span className="text-sm font-medium dark:text-gray-400 text-gray-600">
-                  Input Tokens
-                </span>
+                                    Input Tokens
+                                </span>
                             </div>
                             <p className="text-2xl font-light pl-6 dark:text-white text-gray-900">
                                 {inputTokenCount.toLocaleString()}
@@ -61,8 +60,8 @@ export const AnalysisCard: React.FC<AnalysisCardProps> = ({analysis, onClick}) =
                             <div className="flex items-center gap-2">
                                 <Cpu className="w-4 h-4 dark:text-gray-400 text-gray-600"/>
                                 <span className="text-sm font-medium dark:text-gray-400 text-gray-600">
-                  Output Tokens
-                </span>
+                                    Output Tokens
+                                </span>
                             </div>
                             <p className="text-2xl font-light pl-6 dark:text-white text-gray-900">
                                 {outputTokenCount.toLocaleString()}
@@ -74,9 +73,9 @@ export const AnalysisCard: React.FC<AnalysisCardProps> = ({analysis, onClick}) =
                 {/* Metadata */}
                 <div className="flex items-center justify-between text-sm">
                     <div className="flex items-center gap-4">
-            <span className="font-medium dark:text-gray-300 text-gray-700">
-              {analysis.metadata.llm_id}
-            </span>
+                        <span className="font-medium dark:text-gray-300 text-gray-700">
+                            {analysis.metadata.llm_id}
+                        </span>
                         <div className="flex items-center gap-1.5 dark:text-gray-400 text-gray-600">
                             <CalendarDays className="w-4 h-4"/>
                             <span>{formattedDate}</span>
@@ -92,4 +91,5 @@ export const AnalysisCard: React.FC<AnalysisCardProps> = ({analysis, onClick}) =
         </Card>
     );
 };
+
 export default AnalysisCard;

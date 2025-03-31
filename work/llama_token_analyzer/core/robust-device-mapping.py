@@ -2,7 +2,7 @@ import os
 import torch
 import psutil
 from returns.result import Success, Failure
-from llama_token_analyzer import ModelManager, TokenAnalyzer, TokenAnalysisStorage
+from work.llama_token_analyzer import ModelManager, TokenAnalyzer, TokenAnalysisStorage
 import logging
 
 # Configure logging
@@ -123,7 +123,7 @@ match init_result:
             match analysis_result:
                 case Success(r):
                     print("Analysis successful!")
-                    from llama_token_analyzer.visualization.main import visualize
+                    from work.llama_token_analyzer.visualization.main import visualize
 
                     visualize(r, storage=storage)
                 case Failure(error):

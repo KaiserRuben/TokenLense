@@ -1,3 +1,4 @@
+// src/contexts/AnalysisContext.tsx
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { AnalysisResult, getAnalysisResults } from '@/utils/data';
 

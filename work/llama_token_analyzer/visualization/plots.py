@@ -5,7 +5,7 @@ from sklearn.preprocessing import MinMaxScaler
 import logging
 import time
 
-from llama_token_analyzer.persistence.storage import is_system_token, TokenAnalysisStorage
+from work.llama_token_analyzer.persistence.storage import is_system_token, TokenAnalysisStorage
 
 logger = logging.getLogger(__name__)
 

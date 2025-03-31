@@ -29,9 +29,10 @@ huggingface-cli login
 ## Quick Start
 
 1. Import required components:
+
 ```python
-from llama_token_analyzer import ModelManager, TokenAnalyzer, TokenAnalysisStorage
-from llama_token_analyzer.visualization.main import visualize
+from work.llama_token_analyzer import ModelManager, TokenAnalyzer, TokenAnalysisStorage
+from work.llama_token_analyzer.visualization.main import visualize
 ```
 
 2. Initialize the model:

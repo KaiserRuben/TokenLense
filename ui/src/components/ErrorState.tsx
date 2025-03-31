@@ -1,3 +1,4 @@
+// src/components/ErrorState.tsx
 import React from 'react';
 import { AlertCircle, ArrowLeft, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';

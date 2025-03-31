@@ -1,23 +1,23 @@
 import React, { useState, useMemo } from 'react';
-import {ArrowLeft, Brain, Cpu, Settings2, Terminal, Timer} from 'lucide-react';
+import { ArrowLeft, Brain, Cpu, Terminal, Timer } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
 import { useAnalysis } from '@/contexts/AnalysisContext';
-import { TokenExplorer } from '@/components/TokenExplorer';
+import TokenVisualization from '@/components/TokenVisualization';
 import LoadingState from '@/components/LoadingState';
 import ErrorState from '@/components/ErrorState';
+import SettingsPanel from '@/components/SettingsPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { cleanSystemTokens } from "@/utils/tokenUtils";
+import AssociationMatrix from "@/components/AssociationMatrix";
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
-import {cleanSystemTokens} from "@/utils/data.ts";
-import AssociationMatrix from "@/components/AssociationMatrix.tsx";
+    TokenImportanceSettings,
+    DEFAULT_IMPORTANCE_SETTINGS
+} from '@/utils/types';
+import { ensureDecompressedAnalysis } from '@/utils/matrixUtils';
 
 interface MetadataCardProps {
     title: string;
@@ -30,17 +30,17 @@ const MetadataCard: React.FC<MetadataCardProps> = ({ title, value, icon }) => (
         <CardContent className="pt-6">
             <div className="flex items-start justify-between">
                 <div>
-                    <p className={`text-sm font-medium text-gray-600 dark:text-gray-400`}>
+                    <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                         {title}
                     </p>
-                    <h3 className={`mt-2 text-2xl font-light text-gray-900 dark:text-white`}>
+                    <h3 className="mt-2 text-2xl font-light text-gray-900 dark:text-white">
                         {value}
                     </h3>
                 </div>
                 {icon && (
-                    <span className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800`}>
-            {icon}
-          </span>
+                    <span className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+                        {icon}
+                    </span>
                 )}
             </div>
             <div
@@ -57,22 +57,31 @@ const Dashboard: React.FC = () => {
     const { analyses, selectedAnalysis, setSelectedAnalysis, loading, error } = useAnalysis();
     const [activeTab, setActiveTab] = useState('relationships');
 
+    // Visualization settings with defaults
+    const [settings, setSettings] = useState<TokenImportanceSettings>(DEFAULT_IMPORTANCE_SETTINGS);
+
+    // Ensure we're working with decompressed data
+    const decompressedAnalysis = useMemo(() => {
+        if (!selectedAnalysis) return null;
+        return ensureDecompressedAnalysis(selectedAnalysis);
+    }, [selectedAnalysis]);
+
     // Memoized metadata values
     const metadata = useMemo(() => {
-        if (!selectedAnalysis) return null;
+        if (!decompressedAnalysis) return null;
         return {
-            tokenCountOutput: selectedAnalysis.data.output_tokens.length,
-            tokenCountInput: selectedAnalysis.data.input_tokens.length,
-            modelVersion: selectedAnalysis.metadata.llm_version,
-            timestamp: new Date(selectedAnalysis.metadata.timestamp).toLocaleString(),
+            tokenCountOutput: decompressedAnalysis.data.output_tokens.length,
+            tokenCountInput: decompressedAnalysis.data.input_tokens.length,
+            modelVersion: decompressedAnalysis.metadata.llm_version,
+            timestamp: new Date(decompressedAnalysis.metadata.timestamp).toLocaleString(),
         };
-    }, [selectedAnalysis]);
+    }, [decompressedAnalysis]);
 
     // Find and set the selected analysis if not already set
     React.useEffect(() => {
         if (!selectedAnalysis && id && analyses.length > 0) {
             const found = analyses.find(a => {
-                return encodeURIComponent(a.metadata.timestamp) === encodeURIComponent(id)
+                return encodeURIComponent(a.metadata.timestamp) === encodeURIComponent(id);
             });
             if (found) {
                 setSelectedAnalysis(found);
@@ -89,7 +98,7 @@ const Dashboard: React.FC = () => {
         return <LoadingState />;
     }
 
-    if (error || !selectedAnalysis || !metadata) {
+    if (error || !decompressedAnalysis || !metadata) {
         return (
             <ErrorState
                 error={error || "Analysis not found"}
@@ -133,20 +142,12 @@ const Dashboard: React.FC = () => {
                             variant="secondary"
                             className="bg-blue-500/10 text-blue-500 dark:bg-blue-500/20 dark:text-blue-400"
                         >
-                            v{selectedAnalysis.metadata.version}
+                            v{decompressedAnalysis.metadata.version}
                         </Badge>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button variant="ghost" size="icon">
-                                        <Settings2 className="w-4 h-4" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>Analysis Settings</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
+                        <SettingsPanel
+                            settings={settings}
+                            onSettingsChange={setSettings}
+                        />
                     </div>
                 </div>
             </motion.div>
@@ -162,26 +163,40 @@ const Dashboard: React.FC = () => {
                 >
                     {/* Analysis Metadata Header */}
                     <div className="space-y-6">
-                        <div>
-                            <p className="text-s dark:text-gray-400 text-gray-600  whitespace-pre-wrap">
-                                {cleanSystemTokens(selectedAnalysis.data.input_tokens)
-                                    .replace(/\u010a/g, '\n')
-                                    .trim()}
-                            </p>
-                            <p className="text-lg dark:text-gray-200 text-gray-800 whitespace-pre-wrap">
-                                {selectedAnalysis.data.output_tokens
-                                    .map(t => t.clean_token)
-                                    .join(' ')
-                                    .replace("<|eot_id|>", "")
-                                    .replace(/\u010a/g, '\n').trim()}
-                            </p>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* Input Text */}
+                            <Card>
+                                <CardHeader className="pb-2">
+                                    <CardTitle className="text-sm font-medium text-gray-500 dark:text-gray-400">Input Text</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-sm dark:text-gray-300 text-gray-700 whitespace-pre-wrap">
+                                        {cleanSystemTokens(decompressedAnalysis.data.input_tokens)}
+                                    </p>
+                                </CardContent>
+                            </Card>
+
+                            {/* Output Text */}
+                            <Card>
+                                <CardHeader className="pb-2">
+                                    <CardTitle className="text-sm font-medium text-gray-500 dark:text-gray-400">Output Text</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-sm dark:text-gray-300 text-gray-700 whitespace-pre-wrap">
+                                        {decompressedAnalysis.data.output_tokens
+                                            .map(t => t.clean_token)
+                                            .join(' ')
+                                            .replace("<|eot_id|>", "")}
+                                    </p>
+                                </CardContent>
+                            </Card>
                         </div>
                     </div>
 
                     {/* Main Content Tabs */}
                     <Tabs value={activeTab} onValueChange={setActiveTab}>
                         <TabsList>
-                        <TabsTrigger value="relationships">Token Relationships</TabsTrigger>
+                            <TabsTrigger value="relationships">Token Relationships</TabsTrigger>
                             <TabsTrigger value="matrix">Association Matrix</TabsTrigger>
                             <TabsTrigger value="stats">Statistics</TabsTrigger>
                         </TabsList>
@@ -194,7 +209,10 @@ const Dashboard: React.FC = () => {
                                     exit={{ opacity: 0, y: -20 }}
                                     key={3}
                                 >
-                                    <TokenExplorer analysis={selectedAnalysis} />
+                                    <TokenVisualization
+                                        analysis={decompressedAnalysis}
+                                        settings={settings}
+                                    />
                                 </motion.div>
                             </TabsContent>
 
@@ -205,8 +223,7 @@ const Dashboard: React.FC = () => {
                                     exit={{ opacity: 0, y: -20 }}
                                     key={4}
                                 >
-                                    {/* Matrix visualization will go here */}
-                                    <AssociationMatrix analysis={selectedAnalysis} />
+                                    <AssociationMatrix analysis={decompressedAnalysis} />
                                 </motion.div>
                             </TabsContent>
 
@@ -217,13 +234,12 @@ const Dashboard: React.FC = () => {
                                     exit={{ opacity: 0, y: -20 }}
                                     key={5}
                                 >
-                                    {/* Statistics will go here */}
                                     <Card>
                                         <CardHeader>
                                             <CardTitle>Analysis Statistics</CardTitle>
                                         </CardHeader>
                                         <CardContent>
-                                            <div className="h-[600px] flex items-center justify-center text-gray-500">
+                                            <div className="h-[600px] flex items-center justify-center text-gray-500 dark:text-gray-400">
                                                 Detailed statistics coming soon...
                                             </div>
                                         </CardContent>
@@ -234,8 +250,9 @@ const Dashboard: React.FC = () => {
                     </Tabs>
                 </motion.div>
             </div>
-            <div className="px-6">
-                {/* Metadata Cards */}
+
+            {/* Metadata Cards */}
+            <div className="px-6 max-w-[1400px] mx-auto pb-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <MetadataCard
                         title="Total Input Tokens"
