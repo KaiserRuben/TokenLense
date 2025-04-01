@@ -1,6 +1,5 @@
-from work.llama_token_analyzer.persistence.storage import TokenAnalysisStorage
-from work.llama_token_analyzer.visualization.plots import visualize_token_influence, visualize_summed_token_association
-from returns.result import Result, Success, Failure
+from src.persistence.storage import TokenAnalysisStorage
+from src.visualization.plots import visualize_token_influence, visualize_summed_token_association
 import logging
 
 logger = logging.getLogger(__name__)

@@ -12,13 +12,13 @@ import numpy as np
 import torch
 from unittest.mock import MagicMock, patch
 
-from work.llama_token_analyzer.persistence.inseq_schema import (
+from src import (
     InseqFeatureAttributionOutput,
     InseqFeatureAttributionSequence,
     AttributionMethod
 )
-from work.llama_token_analyzer.core.inseq_analysis import InseqTokenAnalyzer
-from work.llama_token_analyzer.persistence.schema import AnalysisResult, AssociationData
+from src import InseqTokenAnalyzer
+from src import AnalysisResult
 
 
 class TestInseqDataStructure(unittest.TestCase):

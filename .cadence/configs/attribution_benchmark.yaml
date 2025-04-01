@@ -1,0 +1,58 @@
+project_name: Attribution Benchmark
+working_dir: "."
+cmd:
+- python -m src.benchmark.run_attribution_benchmark
+provisioning:
+  gpu_type: a100
+  gpu_count: 1
+  cpu_count: 32
+  ram: 128
+teamcity:
+  url: https://mlops.staging.sandbox.teamcity.aws.intellij.net
+  build_conf_id: id8ecbe8985b5b416bB6c0782d6e8f7d2b_JetTrain
+env:
+  variables:
+    PYTHONUNBUFFERED: "1"
+    # Enable debug logging
+    LOG_LEVEL: "DEBUG"
+    # Configure attribution parameters
+    ATTRIBUTION_METHODS: "attention,saliency,integrated_gradients"
+    MODELS: "gpt2,meta-llama/Llama-3.2-3B-Instruct,deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
+    # Configure test prompts
+    TEST_PROMPTS: "output/benchmark/prompts.json"
+  python:
+    pip:
+      requirements_path: requirements.txt
+    version: 3.12.5
+  secrets:
+    variables: {}
+    ssh_keys: []
+  aws:
+    sync_config: false
+    sync_credentials: false
+    sync_cache: false
+project_sync:
+  local:
+    root: "."
+    storage_name: Cadence Storage
+    uri: ""
+    exclude:
+      - "__pycache__"
+      - ".git"
+      - "*.pyc"
+      - "cache/model/hub"
+    include: []
+    sync_back: true
+    snapshots: true
+    storage_type: DEFAULT
+inputs: []
+outputs:
+- type: OUTPUT
+  storage_name: Cadence Storage
+  uri: ""
+  path: "output/benchmark"
+  acceleration: false
+  storage_type: DEFAULT
+mounts: []
+storages: []
+description: "Runs detailed attribution benchmarks comparing different models and methods"

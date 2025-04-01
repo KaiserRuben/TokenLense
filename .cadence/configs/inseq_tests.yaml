@@ -1,13 +1,14 @@
-project_name: Default
+project_name: Inseq Tests
 working_dir: "."
 cmd:
-- python old.py
+- python tests/inseq/test_inseq_methods.py
 provisioning:
-  gpu_count: 0
-  cpu_count: 48
-  ram: 96
+  gpu_type: a10g
+  gpu_count: 1
+  cpu_count: 16
+  ram: 64
 teamcity:
-  url: https://api.cadence.jetbrains.com
+  url: https://mlops.staging.sandbox.teamcity.aws.intellij.net
   build_conf_id: id8ecbe8985b5b416bB6c0782d6e8f7d2b_JetTrain
 env:
   variables:
@@ -28,9 +29,12 @@ project_sync:
     root: "."
     storage_name: Cadence Storage
     uri: ""
-    exclude: []
+    exclude:
+      - "__pycache__"
+      - ".git"
+      - "*.pyc"
     include: []
-    sync_back: false
+    sync_back: true
     snapshots: true
     storage_type: DEFAULT
 inputs: []
@@ -38,9 +42,9 @@ outputs:
 - type: OUTPUT
   storage_name: Cadence Storage
   uri: ""
-  path: "."
+  path: "work/notebooks/output/inseq_methods_test"
   acceleration: false
   storage_type: DEFAULT
 mounts: []
 storages: []
-description: ""
+description: "Runs Inseq attribution tests across different models and methods"

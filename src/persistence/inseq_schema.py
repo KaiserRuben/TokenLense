@@ -95,8 +95,16 @@ class InseqFeatureAttributionSequence(BaseModel):
                 if hasattr(attribution_matrix, 'dtype'):
                     attribution_matrix = attribution_matrix.astype(np.float64)
                 
-                # Convert to numpy array
-                attribution_matrix = np.array(attribution_matrix)
+                # Convert to numpy array if possible
+                # Handle case when attribution_matrix might be a list instead of tensor
+                if isinstance(attribution_matrix, list):
+                    # Convert nested lists to numpy array
+                    attribution_matrix = np.array(attribution_matrix, dtype=np.float64)
+                else:
+                    # Convert to numpy if it's a tensor
+                    if hasattr(attribution_matrix, 'numpy'):
+                        attribution_matrix = attribution_matrix.numpy()
+                    attribution_matrix = np.array(attribution_matrix, dtype=np.float64)
                 
                 # Handle multi-dimensional attributions - aggregate if needed
                 if len(attribution_matrix.shape) > 2:
@@ -153,6 +161,14 @@ class InseqFeatureAttributionSequence(BaseModel):
         Returns:
             Normalized attribution matrix
         """
+        # Convert input to numpy array if it's not already
+        if not isinstance(matrix, np.ndarray):
+            try:
+                matrix = np.array(matrix, dtype=np.float64)
+            except Exception as e:
+                print(f"Error converting to numpy array: {e}")
+                return np.array([[0.0]])
+                
         # Ensure we have a 2D matrix - check dimensionality first
         matrix_shape = getattr(matrix, "shape", None)
         if matrix_shape is None or len(matrix_shape) == 0:
@@ -183,16 +199,20 @@ class InseqFeatureAttributionSequence(BaseModel):
                 valid_values = col_values[col_values != 0]
                 
                 if len(valid_values) > 0:
-                    column_min = valid_values.min()
-                    column_max = valid_values.max()
-                    if column_max > column_min:
-                        normalized[:, i] = (
-                                (matrix[:, i] - column_min)
-                                / (column_max - column_min)
-                        )
-                    else:
-                        # If all values are the same, set to 0.5
-                        normalized[:, i] = 0.5
+                    try:
+                        column_min = valid_values.min()
+                        column_max = valid_values.max()
+                        if column_max > column_min:
+                            normalized[:, i] = (
+                                    (matrix[:, i] - column_min)
+                                    / (column_max - column_min)
+                            )
+                        else:
+                            # If all values are the same, set to 0.5
+                            normalized[:, i] = 0.5
+                    except Exception as e:
+                        print(f"Error normalizing column {i}: {e}")
+                        normalized[:, i] = 0.0
                 else:
                     # If all values are 0, leave as 0
                     normalized[:, i] = 0.0
