@@ -60,7 +60,7 @@ class TokenAnalysisStorage:
     def __init__(
             self,
             base_path: str | Path,
-            version: DataVersion = DataVersion.V1_0_0
+            version: DataVersion = DataVersion.V1_1_0
     ) -> None:
         self.base_path = Path(base_path)
         self.data_path = self.base_path / "data"
@@ -180,7 +180,7 @@ class TokenAnalysisStorage:
         """Generate a filename for storing analysis results."""
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
         clean_prompt = "".join(
-            c for c in metadata.prompt.split()[:5]
+            c for c in metadata.prompt.split()[:10]
             if c.isalnum() or c in "._- "
         ).replace(" ", "_")[:50]
         filename = f"{timestamp}_{metadata.llm_version}_{clean_prompt}.json"

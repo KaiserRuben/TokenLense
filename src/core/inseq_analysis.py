@@ -13,7 +13,7 @@ import logging
 from tqdm import tqdm
 import inseq
 import numpy.linalg
-
+from datetime import datetime
 from .model import ModelManager
 from ..persistence.schema import AnalysisResult, AnalysisMetadata, AssociationData, TokenData
 from ..persistence.inseq_schema import (
@@ -72,7 +72,7 @@ class InseqTokenAnalyzer:
             # Use string method name for compatibility with Inseq 0.6.0+
             inseq_model = inseq.load_model(
                 self.model_manager.model,
-                self.attribution_method,  # Already a string
+                self.attribution_method,
                 tokenizer=self.model_manager.tokenizer
             )
             return inseq_model
@@ -95,13 +95,24 @@ class InseqTokenAnalyzer:
             """Process a single prompt through the attribution pipeline"""
             try:
                 # Get attribution from Inseq
-                attribution = self.inseq_model.attribute(prompt)
+                attribution = self.inseq_model.attribute(prompt, pretty_progress=False, show_progress=False)
                 
                 try:
+                    # Save native Inseq format
+                    inseq_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    model_name = self.model_manager.config.llm_id.split('/')[-1]
+                    clean_prompt = "".join(c for c in prompt.split()[:5] if c.isalnum() or c in "._- ").replace(" ", "_")[:50]
+                    inseq_filename = f"{inseq_timestamp}_{model_name}_{clean_prompt}_inseq.json"
+                    inseq_path = storage.data_path / inseq_filename
+                    
+                    # Save in native Inseq format
+                    attribution.save(str(inseq_path))
+                    logger.info(f"Saved Inseq native format to {inseq_path}")
+                    
                     # Convert Inseq attribution to compatible format
                     analysis_result = self._convert_to_analysis_result(attribution, prompt)
                     
-                    # Save to storage
+                    # Save to our custom storage format
                     storage.save(analysis_result)
                     
                     return Success(analysis_result)
@@ -166,15 +177,29 @@ class InseqTokenAnalyzer:
                 if seq_count > 0:
                     first_seq = attribution.sequence_attributions[0]
                     logger.info(f"First sequence has source len: {len(first_seq.source)}, target len: {len(first_seq.target)}")
-                    logger.info(f"Source attributions shape: {getattr(first_seq.source_attributions, 'shape', 'unknown')}")
                     
-                    # Additional handling for list-type attributions
-                    if isinstance(first_seq.source_attributions, list):
-                        logger.info(f"Source attributions is a list of type: {type(first_seq.source_attributions[0])}")
-                        # If it's a list of integers, we need special handling
-                        if isinstance(first_seq.source_attributions[0], (int, list)):
-                            # Convert to numpy array when passing to model
-                            first_seq.source_attributions = np.array(first_seq.source_attributions, dtype=np.float64)
+                    # Log all attribution information
+                    if hasattr(first_seq, 'source_attributions') and first_seq.source_attributions is not None:
+                        logger.info(f"Source attributions present with shape: {getattr(first_seq.source_attributions, 'shape', 'unknown')}")
+                        # Additional handling for list-type attributions
+                        if isinstance(first_seq.source_attributions, list):
+                            logger.info(f"Source attributions is a list of type: {type(first_seq.source_attributions[0])}")
+                            # If it's a list of integers, we need special handling
+                            if isinstance(first_seq.source_attributions[0], (int, list)):
+                                # Convert to numpy array when passing to model
+                                first_seq.source_attributions = np.array(first_seq.source_attributions, dtype=np.float64)
+                    else:
+                        logger.warning("Source attributions are None or not present")
+                    
+                    # Check for target attributions too
+                    if hasattr(first_seq, 'target_attributions') and first_seq.target_attributions is not None:
+                        logger.info(f"Target attributions present with shape: {getattr(first_seq.target_attributions, 'shape', 'unknown')}")
+                        if isinstance(first_seq.target_attributions, list):
+                            logger.info(f"Target attributions is a list of type: {type(first_seq.target_attributions[0])}")
+                            if isinstance(first_seq.target_attributions[0], (int, list)):
+                                first_seq.target_attributions = np.array(first_seq.target_attributions, dtype=np.float64)
+                    else:
+                        logger.warning("Target attributions are None or not present")
             
             # Convert raw Inseq attribution to our Pydantic model
             inseq_output = self._to_pydantic_model(attribution)
@@ -232,27 +257,47 @@ class InseqTokenAnalyzer:
                     else:
                         target_tokens.append(str(token))
                 
-                # Handle source_attributions special case for Llama models
-                source_attributions = seq_attr.source_attributions
-                if isinstance(source_attributions, list):
-                    try:
-                        # Convert list to numpy array for uniform handling
-                        source_attributions = np.array(source_attributions, dtype=np.float64)
-                    except Exception as e:
-                        logger.warning(f"Could not convert list attributions to numpy: {e}")
+                # Handle source_attributions
+                source_attributions = None
+                if hasattr(seq_attr, 'source_attributions') and seq_attr.source_attributions is not None:
+                    source_attributions = seq_attr.source_attributions
+                    if isinstance(source_attributions, list):
+                        try:
+                            # Convert list to numpy array for uniform handling
+                            source_attributions = np.array(source_attributions, dtype=np.float64)
+                            logger.info(f"Converted source attributions list to numpy array with shape {source_attributions.shape}")
+                        except Exception as e:
+                            logger.warning(f"Could not convert source attributions list to numpy: {e}")
+                else:
+                    logger.warning("Source attributions not available in sequence")
                 
-                sequences.append(
-                    InseqFeatureAttributionSequence(
-                        source=source_tokens,
-                        target=target_tokens,
-                        source_attributions=source_attributions,
-                        target_attributions=seq_attr.target_attributions if hasattr(seq_attr, 'target_attributions') else None,
-                        step_scores=seq_attr.step_scores if hasattr(seq_attr, 'step_scores') else {},
-                        sequence_scores=seq_attr.sequence_scores if hasattr(seq_attr, 'sequence_scores') else None,
-                        attr_pos_start=seq_attr.attr_pos_start if hasattr(seq_attr, 'attr_pos_start') else 0,
-                        attr_pos_end=seq_attr.attr_pos_end if hasattr(seq_attr, 'attr_pos_end') else None
-                    )
+                # Handle target_attributions
+                target_attributions = None
+                if hasattr(seq_attr, 'target_attributions') and seq_attr.target_attributions is not None:
+                    target_attributions = seq_attr.target_attributions
+                    if isinstance(target_attributions, list):
+                        try:
+                            # Convert list to numpy array for uniform handling
+                            target_attributions = np.array(target_attributions, dtype=np.float64)
+                            logger.info(f"Converted target attributions list to numpy array with shape {target_attributions.shape}")
+                        except Exception as e:
+                            logger.warning(f"Could not convert target attributions list to numpy: {e}")
+                else:
+                    logger.warning("Target attributions not available in sequence")
+                
+                # Create the sequence with all available data
+                sequence = InseqFeatureAttributionSequence(
+                    source=source_tokens,
+                    target=target_tokens,
+                    source_attributions=source_attributions,
+                    target_attributions=target_attributions,
+                    step_scores=seq_attr.step_scores if hasattr(seq_attr, 'step_scores') else {},
+                    sequence_scores=seq_attr.sequence_scores if hasattr(seq_attr, 'sequence_scores') else None,
+                    attr_pos_start=seq_attr.attr_pos_start if hasattr(seq_attr, 'attr_pos_start') else 0,
+                    attr_pos_end=seq_attr.attr_pos_end if hasattr(seq_attr, 'attr_pos_end') else None
                 )
+                
+                sequences.append(sequence)
                 
             # Create the complete output model
             return InseqFeatureAttributionOutput(
@@ -261,7 +306,7 @@ class InseqTokenAnalyzer:
                 info=attribution.info if hasattr(attribution, 'info') else {}
             )
         except Exception as e:
-            logger.error(f"Error converting to Pydantic model: {str(e)}")
+            logger.error(f"Error converting to Pydantic model: {str(e)}", exc_info=True)
             raise AttributionError(f"Error converting to Pydantic model: {str(e)}")
     
     def _enrich_with_token_ids(self, result: AnalysisResult) -> AnalysisResult:
@@ -288,6 +333,49 @@ class InseqTokenAnalyzer:
             logger.error(f"Error enriching token IDs: {str(e)}")
             return result  # Return original result if we can't enrich
 
+    @staticmethod
+    def load_native_inseq(filepath: str) -> Result:
+        """
+        Load native Inseq attribution from file.
+        
+        Args:
+            filepath: Path to saved Inseq attribution file
+            
+        Returns:
+            Result containing loaded Inseq attribution
+        """
+        try:
+            attribution = inseq.FeatureAttributionOutput.load(filepath)
+            return Success(attribution)
+        except Exception as e:
+            logger.error(f"Failed to load Inseq attribution from {filepath}: {str(e)}")
+            return Failure(e)
+            
+    def convert_native_to_analysis_result(self, filepath: str, prompt: str) -> Result[AnalysisResult, Exception]:
+        """
+        Convert a native Inseq attribution file to our AnalysisResult format.
+        
+        Args:
+            filepath: Path to saved Inseq attribution file
+            prompt: Original prompt used for attribution
+            
+        Returns:
+            Result containing converted AnalysisResult
+        """
+        try:
+            # Load native Inseq format
+            result = self.load_native_inseq(filepath)
+            match result:
+                case Success(attribution):
+                    # Convert to our format
+                    analysis_result = self._convert_to_analysis_result(attribution, prompt)
+                    return Success(analysis_result)
+                case Failure(error):
+                    return Failure(error)
+        except Exception as e:
+            logger.error(f"Failed to convert Inseq attribution: {str(e)}")
+            return Failure(e)
+    
     @staticmethod
     def _normalize_attribution_matrix(matrix: np.ndarray) -> np.ndarray:
         """

@@ -28,7 +28,7 @@ model_config = {
 model_result = ModelManager.initialize(model_config)
 
 # Initialize other components
-storage = TokenAnalysisStorage(base_path="../work/notebooks/output")
+storage = TokenAnalysisStorage(base_path="notebooks/output")
 
 match model_result:
     case Success(manager):

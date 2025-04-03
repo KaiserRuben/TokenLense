@@ -7,7 +7,7 @@ from enum import Enum
 class DataVersion(str, Enum):
     V1_0_0 = "1.0.0"
     V1_0_1 = "1.0.1"
-    # ... if needed
+    V1_1_0 = "1.1.0"  # Added support for attribution source and method
 
 
 class TokenData(BaseModel):
@@ -26,12 +26,24 @@ class TokenData(BaseModel):
         return self.clean_token or self.token.lstrip('Ġ').strip()
 
 
+class AttributionSource(str, Enum):
+    """Source of attribution data"""
+    SOURCE = "source"  # Source attributions (from input to output)
+    TARGET = "target"  # Target attributions (from output to output)
+    COMBINED = "combined"  # Combined attributions
+    UNKNOWN = "unknown"  # Unknown source
+
+
 class AssociationData(BaseModel):
     """Token association analysis results"""
     input_tokens: List[TokenData]
     output_tokens: List[TokenData]
     association_matrix: List[List[float]]
     normalized_association: Optional[List[List[float]]] = None
+    attribution_source: AttributionSource = Field(default=AttributionSource.UNKNOWN, 
+                                                 description="Source of the attribution data")
+    raw_dimensions: Optional[List[int]] = Field(default=None, 
+                                               description="Original dimensions of raw attribution data before processing")
 
     model_config = ConfigDict(
         protected_namespaces=()
@@ -45,7 +57,8 @@ class AnalysisMetadata(BaseModel):
     llm_version: str = Field(..., description="Model version")
     prompt: str
     generation_params: Dict[str, Union[str, int, float]] = Field(default_factory=dict)
-    version: DataVersion = Field(default=DataVersion.V1_0_0)
+    version: DataVersion = Field(default=DataVersion.V1_1_0)  # Updated default version
+    attribution_method: Optional[str] = Field(default=None, description="Method used for attribution")
 
     model_config = ConfigDict(
         protected_namespaces=()
