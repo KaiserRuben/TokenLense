@@ -24,6 +24,7 @@ class ModelConfig(BaseModel):
     tokenizer_padding_side: str = Field(default="left")
     load_in_8bit: bool = Field(default=False)
     trust_remote_code: bool = Field(default=False)
+    max_new_tokens: int = Field(default=1024, description="Maximum number of new tokens to generate")
 
     model_config = ConfigDict(
         protected_namespaces=()
@@ -186,7 +187,7 @@ class ModelManager:
     def generate_text(
             self,
             prompt: str,
-            max_new_tokens: int = 1000,
+            max_new_tokens: int = None,
             **generation_kwargs: Any
     ) -> Result[Tuple[torch.Tensor, torch.Tensor], Exception]:
         """
@@ -194,7 +195,7 @@ class ModelManager:
 
         Args:
             prompt: Input prompt
-            max_new_tokens: Maximum number of tokens to generate
+            max_new_tokens: Maximum number of tokens to generate (overrides config value if provided)
             **generation_kwargs: Additional generation parameters
 
         Returns:
@@ -202,6 +203,10 @@ class ModelManager:
             or Failure with error
         """
         try:
+            # Use config's max_new_tokens if not explicitly provided
+            if max_new_tokens is None:
+                max_new_tokens = self.config.max_new_tokens
+                
             inputs = self.tokenizer(
                 prompt,
                 return_tensors="pt",
