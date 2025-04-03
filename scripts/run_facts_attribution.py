@@ -196,11 +196,8 @@ class TimingData:
 
 @dataclass
 class PromptTimingData:
-    """Data class for storing detailed timing information for a single prompt"""
-    tokenization_time: float = 0.0
-    forward_pass_time: float = 0.0
-    attribution_time: float = 0.0
-    processing_time: float = 0.0  # Total processing time
+    """Data class for storing timing information for a single prompt"""
+    attribution_time: float = 0.0  # Time taken by inseq attribution
     
     def to_dict(self) -> Dict[str, float]:
         """Convert to dictionary"""
@@ -219,9 +216,9 @@ class PromptResult:
     output_token_count: int = 0  # Number of tokens in the output
     
     @property
-    def processing_time(self) -> float:
-        """Get total processing time"""
-        return self.timing.processing_time
+    def attribution_time(self) -> float:
+        """Get attribution time"""
+        return self.timing.attribution_time
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary"""
@@ -230,7 +227,7 @@ class PromptResult:
             "prompt_text": self.prompt_text,
             "success": self.success,
             "error_message": self.error_message,
-            "timing": asdict(self.timing),
+            "attribution_time": self.timing.attribution_time,
             "token_count": self.token_count,
             "output_token_count": self.output_token_count
         }
@@ -241,13 +238,10 @@ class PromptResult:
             "prompt_id": self.prompt_id,
             "prompt_text": self.prompt_text,
             "success": self.success,
-            "tokenization_time": self.timing.tokenization_time,
-            "forward_pass_time": self.timing.forward_pass_time,
             "attribution_time": self.timing.attribution_time,
-            "total_time": self.timing.processing_time,
             "token_count": self.token_count,
             "output_token_count": self.output_token_count,
-            "tokens_per_second": self.token_count / self.timing.processing_time if self.timing.processing_time > 0 else 0
+            "tokens_per_second": self.token_count / self.timing.attribution_time if self.timing.attribution_time > 0 else 0
         }
 
 
@@ -606,24 +600,6 @@ def extract_prompts_from_dataframe(df: pd.DataFrame) -> List[str]:
     return []
 
 
-def load_facts_dataset(limit: Optional[int] = None) -> List[str]:
-    """
-    Load prompts from the FACTS dataset (legacy function for compatibility).
-    
-    Args:
-        limit: Optional limit on number of prompts to load
-        
-    Returns:
-        List of prompts from the dataset
-    """
-    result = load_dataset(limit=limit)
-    match result:
-        case Success(prompts):
-            return prompts
-        case Failure(_):
-            return []
-
-
 def create_output_structure(
     model_name: str, 
     method: str, 
@@ -729,17 +705,17 @@ def process_prompt(
     total_prompts: int
 ) -> PromptResult:
     """
-    Process a single prompt with detailed timing measurement.
+    Process a single prompt with attribution timing measurement.
     
     Args:
         analyze_fn: Analysis pipeline function
-        model_manager: ModelManager instance for tokenization
+        model_manager: ModelManager instance (used only for error case token counting)
         prompt: Prompt text to analyze
         prompt_idx: Index of the prompt (0-based)
         total_prompts: Total number of prompts
         
     Returns:
-        PromptResult with success status and detailed timing
+        PromptResult with success status and attribution timing
     """
     prompt_id = f"prompt_{prompt_idx+1}"
     logger.info(f"Processing prompt {prompt_idx+1}/{total_prompts}")
@@ -747,48 +723,35 @@ def process_prompt(
     # Initialize timing data
     timing = PromptTimingData()
     
-    # Count tokens in the prompt
+    # Initialize token counts
     token_count = 0
     output_token_count = 0
     
     try:
-        # Measure tokenization time
-        token_start = time.time()
-        tokens = model_manager.tokenizer(prompt, return_tensors="pt")
-        timing.tokenization_time = time.time() - token_start
-        token_count = len(tokens["input_ids"][0])
+        # Start timing the attribution process
+        start_time = time.time()
         
-        # Start timing total prompt processing
-        total_start_time = time.time()
-        
-        # Run analysis with timing hooks
-        # Note: The analysis function doesn't provide hooks for detailed timing yet,
-        # so we'll just measure total time for now. In a future update, we could
-        # modify the InseqTokenAnalyzer to provide these detailed metrics.
+        # Run attribution analysis - this is the operation we want to measure
         result = analyze_fn(prompt)
         
-        # Calculate total processing time
-        timing.processing_time = time.time() - total_start_time
+        # Record attribution time
+        timing.attribution_time = time.time() - start_time
         
-        # We don't have detailed breakdowns yet, so as a rough estimate:
-        # Attribution time is approximately 80% of total time after tokenization
-        attribution_time = timing.processing_time * 0.8
-        timing.attribution_time = attribution_time
+        logger.info(f"Prompt {prompt_idx+1} processed in {timing.attribution_time:.2f} seconds")
         
-        # Forward pass is approximately 20% of total time after tokenization
-        timing.forward_pass_time = timing.processing_time - attribution_time
-        
-        logger.info(f"Prompt {prompt_idx+1} processed in {timing.processing_time:.2f} seconds")
-        
-        # Return result based on success/failure
+        # Process result based on success/failure
         match result:
             case Success(analysis_result):
-                logger.info(f"✅ Successfully processed prompt {prompt_idx+1}")
+                # Success already logged in the outer logging
                 
-                # Try to extract output token count if available
+                # Extract token counts from the analysis result
                 try:
+                    token_count = len(analysis_result.data.input_tokens)
                     output_token_count = len(analysis_result.data.output_tokens)
                 except (AttributeError, TypeError):
+                    # If we can't get token counts from the result, estimate from the tokenizer
+                    # This is a fallback and should rarely be needed if attribution is successful
+                    token_count = len(model_manager.tokenizer(prompt, return_tensors="pt")["input_ids"][0])
                     output_token_count = 0
                 
                 return PromptResult(
@@ -801,6 +764,13 @@ def process_prompt(
                 )
             case Failure(error):
                 logger.error(f"❌ Failed to process prompt {prompt_idx+1}: {error}")
+                
+                # In case of failure, get token count for analysis
+                try:
+                    token_count = len(model_manager.tokenizer(prompt, return_tensors="pt")["input_ids"][0])
+                except Exception:
+                    token_count = 0
+                
                 return PromptResult(
                     prompt_id=prompt_id,
                     prompt_text=prompt,
@@ -811,11 +781,17 @@ def process_prompt(
                 )
     except Exception as e:
         # Handle unexpected exceptions
-        total_time = time.time() - total_start_time if 'total_start_time' in locals() else 0
-        timing.processing_time = total_time
+        attribution_time = time.time() - start_time if 'start_time' in locals() else 0
+        timing.attribution_time = attribution_time
         
         logger.error(f"❌ Exception processing prompt {prompt_idx+1}: {e}")
         logger.error(traceback.format_exc())
+        
+        # Try to get token count for the error case
+        try:
+            token_count = len(model_manager.tokenizer(prompt, return_tensors="pt")["input_ids"][0])
+        except Exception:
+            token_count = 0
         
         return PromptResult(
             prompt_id=prompt_id,
@@ -901,31 +877,29 @@ def run_attribution_analysis(
                     attribution_time = time.time() - attribution_start_time
                     result.timing.attribution_time = attribution_time
                     
-                    # Calculate average prompt time and aggregate timing metrics
+                    # Calculate average attribution time and token throughput
                     if result.prompt_results:
-                        # Calculate averages
-                        avg_processing_time = sum(p.processing_time for p in result.prompt_results) / len(result.prompt_results)
-                        avg_tokenization_time = sum(p.timing.tokenization_time for p in result.prompt_results) / len(result.prompt_results)
-                        avg_forward_time = sum(p.timing.forward_pass_time for p in result.prompt_results) / len(result.prompt_results)
-                        avg_attribution_time = sum(p.timing.attribution_time for p in result.prompt_results) / len(result.prompt_results)
+                        # Calculate average attribution time
+                        avg_attribution_time = sum(p.attribution_time for p in result.prompt_results) / len(result.prompt_results)
                         
                         # Set in result
-                        result.timing.average_prompt_time = avg_processing_time
+                        result.timing.average_prompt_time = avg_attribution_time
                         
-                        # Log detailed timing information
-                        logger.info(f"Average prompt processing time: {avg_processing_time:.2f} seconds")
-                        logger.info(f"  - Average tokenization time: {avg_tokenization_time:.2f} seconds")
-                        logger.info(f"  - Average forward pass time: {avg_forward_time:.2f} seconds")
-                        logger.info(f"  - Average attribution time: {avg_attribution_time:.2f} seconds")
+                        # Log timing information
+                        logger.info(f"Average attribution time: {avg_attribution_time:.2f} seconds")
                         
                         # Calculate and log token processing throughput
                         total_tokens = sum(p.token_count for p in result.prompt_results)
-                        if total_tokens > 0 and attribution_time > 0:
+                        successful_prompts = sum(1 for p in result.prompt_results if p.success)
+                        
+                        if total_tokens > 0 and attribution_time > 0 and successful_prompts > 0:
                             tokens_per_second = total_tokens / attribution_time
+                            avg_tokens_per_prompt = total_tokens / successful_prompts
                             logger.info(f"Token processing throughput: {tokens_per_second:.2f} tokens/second")
+                            logger.info(f"Average tokens per prompt: {avg_tokens_per_prompt:.1f} tokens")
                 
                 case Failure(error):
-                    # Handle analyzer initialization failure
+                    # Handle analyzer initialization failure (error already logged in initialize_analyzer)
                     result.failed_prompts = len(prompts)
                     result.errors.append(AnalysisError(
                         stage="analyzer_initialization",
@@ -933,7 +907,7 @@ def run_attribution_analysis(
                     ))
         
         case Failure(error):
-            # Handle model loading failure
+            # Handle model loading failure (error already logged in load_model)
             result.failed_prompts = len(prompts)
             result.errors.append(AnalysisError(
                 stage="model_loading",
@@ -1095,7 +1069,7 @@ def create_per_prompt_dataframe(results: Dict[str, AnalysisResultData]) -> pd.Da
         results: Dictionary of analysis results
         
     Returns:
-        DataFrame with detailed per-prompt timing data
+        DataFrame with per-prompt attribution timing data
     """
     all_prompt_rows = []
     
@@ -1126,7 +1100,7 @@ def create_per_prompt_dataframe(results: Dict[str, AnalysisResultData]) -> pd.Da
     # Reorder columns for better readability
     if not df.empty:
         first_columns = ["model", "attribution_method", "prompt_id", "token_count", "output_token_count"]
-        timing_columns = ["tokenization_time", "forward_pass_time", "attribution_time", "total_time", "tokens_per_second"]
+        timing_columns = ["attribution_time", "tokens_per_second"]
         
         # Get remaining columns
         other_columns = [col for col in df.columns if col not in first_columns + timing_columns]
@@ -1221,9 +1195,9 @@ def save_timing_results(method_df: pd.DataFrame, prompt_df: pd.DataFrame, output
         # Print summary statistics for per-prompt data
         logger.info("\nPer-Prompt Timing Summary:")
         try:
-            # Find prompt with fastest total time
-            fastest_prompt = prompt_df.loc[prompt_df['total_time'].idxmin()]
-            logger.info(f"Fastest prompt: {fastest_prompt['prompt_id']} for {fastest_prompt['model']}/{fastest_prompt['attribution_method']} ({fastest_prompt['total_time']:.2f}s)")
+            # Find prompt with fastest attribution time
+            fastest_prompt = prompt_df.loc[prompt_df['attribution_time'].idxmin()]
+            logger.info(f"Fastest prompt: {fastest_prompt['prompt_id']} for {fastest_prompt['model']}/{fastest_prompt['attribution_method']} ({fastest_prompt['attribution_time']:.2f}s)")
             
             # Prompt with highest tokens per second
             if 'tokens_per_second' in prompt_df.columns:
@@ -1233,13 +1207,14 @@ def save_timing_results(method_df: pd.DataFrame, prompt_df: pd.DataFrame, output
             # Group by model and method to get average timing stats
             if len(prompt_df) > 1:
                 grouped = prompt_df.groupby(['model', 'attribution_method']).agg({
-                    'tokenization_time': 'mean',
-                    'forward_pass_time': 'mean',
                     'attribution_time': 'mean',
-                    'total_time': 'mean',
                     'tokens_per_second': 'mean' if 'tokens_per_second' in prompt_df.columns else 'sum',
-                    'token_count': 'sum'
+                    'token_count': ['sum', 'mean', 'std'],
+                    'output_token_count': ['sum', 'mean', 'std']
                 }).reset_index()
+                
+                # Flatten multi-level columns
+                grouped.columns = ['_'.join(col).strip('_') for col in grouped.columns.values]
                 
                 # Save aggregated stats
                 agg_csv_path = os.path.join(output_dir, "prompt_aggregated_results.csv")
