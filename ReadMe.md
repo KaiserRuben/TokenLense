@@ -1,8 +1,7 @@
 # Llama Token Analyzer
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.9-blue.svg)](https://www.python.org/)
 [![Poetry](https://img.shields.io/badge/Poetry-Package_Manager-blue)](https://python-poetry.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 A comprehensive framework for analyzing, visualizing, and interpreting token relationships and attribution metrics in Large Language Model outputs. This tool provides deep insights into how LLMs generate text through gradient-based attribution analysis.
 
@@ -14,6 +13,7 @@ A comprehensive framework for analyzing, visualizing, and interpreting token rel
 - **Flexible Model Support**: Compatible with Hugging Face models including Llama, GPT-2, and more
 - **Batch Processing**: Analyze multiple prompts efficiently
 - **Data Persistence**: Store analysis results in structured JSON format
+- **Comprehensive Benchmarking**: Measure performance across different models and attribution methods
 
 ## Installation
 
@@ -90,6 +90,99 @@ result = analyze("Your prompt here")
 visualize(result, storage=storage)
 ```
 
+## Benchmarking Attribution Methods
+
+The framework includes a comprehensive benchmarking module to evaluate the performance and accuracy of different attribution methods across various models.
+
+### Running a Benchmark
+
+```bash
+# Run the benchmark script with default settings
+python scripts/run_facts_attribution.py
+```
+
+### Configuring Benchmarks
+
+The benchmark configuration can be customized in `src/benchmark/config.py`:
+
+```python
+# Edit benchmark configuration
+from src.benchmark.config import MODELS, ATTRIBUTION_METHODS, MAX_PROMPTS
+
+# Add your model to the benchmark
+MODELS.append({
+    "name": "Your-Model-Name",
+    "llm_id": "your-model-id",
+    "device": "auto",
+    "torch_dtype": "float16",
+    "type": "causal"
+})
+
+# Choose specific attribution methods
+MY_METHODS = ['saliency', 'integrated_gradients', 'attention']
+
+# Run with custom configuration
+from src.benchmark.runner import run_all_permutations
+from src.benchmark.dataset import load_dataset
+from src.benchmark.reporting import create_output_directory
+
+output_dir, _ = create_output_directory()
+dataset_result = load_dataset(limit=10)
+if dataset_result.is_success():
+    prompts = dataset_result.unwrap()
+    results = run_all_permutations(
+        prompts=prompts,
+        output_dir=output_dir,
+        models=MY_MODELS,
+        methods=MY_METHODS
+    )
+```
+
+### Benchmark Components
+
+The benchmarking system includes:
+
+- **Dataset Module**: Load and preprocess prompts for evaluation
+- **Runner Module**: Execute attribution methods with detailed timing
+- **System Module**: Collect hardware and environment information
+- **Reporting Module**: Generate visualizations and summary metrics
+- **Schema Module**: Define structured data models for benchmark results
+
+### Benchmark Output
+
+Benchmarks generate multiple outputs:
+
+- **Summary Report**: Human-readable overview of results
+- **CSV Files**: Detailed timing metrics for analysis
+- **System Information**: Hardware configuration details
+- **Per-prompt Metrics**: Token processing rates and success rates
+- **Error Logs**: Detailed diagnostics for failed attributions
+
+Example summary output:
+```
+FACTS Attribution Analysis - 20250403_123045
+Total prompts: 20
+
+System Information:
+  Platform: Linux (5.15.0-1041-azure)
+  CPU: AMD EPYC 7763 64-Core Processor
+  CPU Cores: 16
+  Memory: 64.00 GB
+  GPU: NVIDIA A100-SXM4-40GB (CUDA 11.8)
+  PyTorch: 2.0.1+cu118
+  Available Devices: CUDA
+
+Results by model/method combination:
+
+GPT-2/saliency:
+  Success rate: 100.0% (20/20)
+  Timing:
+    Model loading time: 2.34 seconds
+    Attribution time: 15.67 seconds
+    Average time per prompt: 0.78 seconds
+    Total execution time: 18.01 seconds
+```
+
 ## Available Attribution Methods
 
 ### Custom Gradient-Based Attribution
@@ -136,6 +229,7 @@ The UI provides advanced features:
 - **Run Single Test**: `poetry run pytest tests/test_file.py::test_function`
 - **Code Formatting**: `poetry run black .`
 - **Type Checking**: `poetry run mypy .`
+- **Run Benchmarks**: `python scripts/run_facts_attribution.py`
 - **UI Development**: `cd ui && bun run dev`
 - **UI Lint**: `cd ui && bun run lint`
 - **UI Build**: `cd ui && bun run build`
@@ -148,6 +242,7 @@ The UI provides advanced features:
 - `src/core/inseq_analysis.py`: Inseq-powered attribution methods
 - `src/persistence/storage.py`: Analysis result storage and retrieval
 - `src/visualization/`: Visualization utilities and plotting functions
+- `src/benchmark/`: Performance evaluation and attribution method comparison
 - `ui/`: React/TypeScript UI for interactive exploration
 
 ## Output Format
@@ -187,11 +282,3 @@ result = analyzer.convert_native_to_analysis_result("path/to/file_inseq.json", o
 attribution = inseq.FeatureAttributionOutput.load("path/to/file_inseq.json")
 attribution.show()  # HTML visualization in Jupyter
 ```
-
-## Contributing
-
-Contributions are welcome! Please check out our [contributing guidelines](CONTRIBUTING.md) for details on how to get started.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
