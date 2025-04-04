@@ -95,6 +95,9 @@ class InseqTokenAnalyzer:
             """Process a single prompt through the attribution pipeline"""
             try:
                 # Get attribution from Inseq
+                generation_args = {
+                    "max_new_tokens": self.model_manager.config.max_new_tokens if self.model_manager.config.max_new_tokens else None,
+                }
                 attribution = self.inseq_model.attribute(prompt, pretty_progress=False, show_progress=False)
                 
                 try:
@@ -121,7 +124,7 @@ class InseqTokenAnalyzer:
                     # Return a failure while preserving the error type
                     return Failure(convert_error)
             except Exception as e:
-                logger.error(f"Analysis failed for prompt: {prompt}, {e}")
+                logger.error(f"Analysis failed for prompt: {prompt[:50]}, {e}")
                 return Failure(e)
 
         def process_batch(prompts: List[str]) -> Result[List[AnalysisResult], Exception]:

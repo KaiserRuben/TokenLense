@@ -32,13 +32,13 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
-    #    {
-    #        "llm_id": "meta-llama/Llama-3.2-1B",
-    #        "name": "Llama-3-2-1B",
-    #        "device": "auto",
-    #        "torch_dtype": "float16",
-    #        "type": "causal"
-    #    },
+       {
+           "llm_id": "meta-llama/Llama-3.2-1B",
+           "name": "Llama-3-2-1B",
+           "device": "auto",
+           "torch_dtype": "float16",
+           "type": "causal"
+       },
     #    {
     #        "name": "Llama-3-1-8B",
     #        "llm_id": "meta-llama/Llama-3.1-8B",
@@ -181,14 +181,14 @@ MODELS = [
 # Define attribution methods to test
 ATTRIBUTION_METHODS = [
     'input_x_gradient',
-    'discretized_integrated_gradients',
-    'value_zeroing',
+    # 'discretized_integrated_gradients',
+    # 'value_zeroing',
     'saliency',
     'lime',
     'integrated_gradients',
     'layer_gradient_x_activation',
     'attention',
-    'gradient_shap',
+    # 'gradient_shap',
     # Additional methods can be uncommented as needed
     # 'layer_deeplift',
     # 'layer_integrated_gradients',

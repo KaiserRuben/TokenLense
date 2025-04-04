@@ -21,7 +21,7 @@ from src.persistence.storage import TokenAnalysisStorage
 logger = logging.getLogger(__name__)
 
 
-def create_output_directory() -> Tuple[str, str]:
+def create_output_directory(name="attribution") -> Tuple[str, str]:
     """
     Create output directory for results.
 
@@ -29,7 +29,7 @@ def create_output_directory() -> Tuple[str, str]:
         Tuple of (output_dir, timestamp)
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = os.path.join("output", "facts_attribution", timestamp)
+    output_dir = os.path.join("output", name, timestamp)
     os.makedirs(output_dir, exist_ok=True)
     logger.info(f"Results will be saved to {output_dir}")
 

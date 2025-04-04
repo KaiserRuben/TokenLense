@@ -157,7 +157,9 @@ class InseqFeatureAttributionSequence(BaseModel):
                     if np.isnan(attribution_matrix).any():
                         logger.warning(f"NaN values still present after transformation, replacing with random values")
                         nan_mask = np.isnan(attribution_matrix)
-                        attribution_matrix[nan_mask] = np.random.uniform(0.1, 0.2, size=np.count_nonzero(nan_mask))
+                        # Fix the size parameter to ensure it's a tuple of ints
+                        nan_count = np.count_nonzero(nan_mask)
+                        attribution_matrix[nan_mask] = np.random.uniform(0.1, 0.2, size=int(nan_count))
                 
                 # For attention matrices, ensure correct dimension ordering (target x source)
                 # Often attention has dimensions (source_len, target_len) but we need (target_len, source_len)
