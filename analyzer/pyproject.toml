@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tokenlense"
+version = "0.1.0"
+description = ""
+authors = ["Ruben Kaiser <ruben@kaiser.fyi>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.12"
+numpy = "^2.2.4"
+pandas = "^2.2.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
