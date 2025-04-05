@@ -1,0 +1,601 @@
+model,attribution_method,prompt_id,token_count,output_token_count,attribution_time,tokens_per_second,prompt_text,success,device,gpu_info
+BART,input_x_gradient,prompt_1,20,0,1.983612060546875,10.082616655640855,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_2,22,0,1.4262137413024902,15.425457883969406,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_3,17,0,1.168161153793335,14.552786612357727,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_4,19,0,1.1983704566955566,15.854863488867624,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_5,18,0,1.1150915622711182,16.142172184801776,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_6,20,0,1.063279151916504,18.809735866588813,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_7,22,0,1.3683581352233887,16.07766229738418,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_8,19,0,1.2675902843475342,14.989070391762947,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_9,22,0,1.4276444911956787,15.409998872740784,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_10,21,0,1.2597057819366455,16.67055934895769,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_11,20,0,1.15028977394104,17.386923237157397,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_12,17,0,1.1834945678710938,14.364239990201325,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_13,19,0,1.1669566631317139,16.281667177777173,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_14,24,0,1.400780200958252,17.133308982795427,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_15,19,0,1.2415578365325928,15.303354737837234,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_16,20,0,1.2176549434661865,16.42501441588028,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_17,20,0,1.2458903789520264,16.05277666308242,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_18,19,0,1.230982780456543,15.43482191761719,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_19,18,0,1.0444719791412354,17.233588223974756,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_20,19,0,1.2174592018127441,15.606272449795297,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+BART,saliency,prompt_1,20,0,0.8605189323425293,23.24178963216466,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+BART,saliency,prompt_2,22,0,1.2616353034973145,17.43768578686323,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+BART,saliency,prompt_3,17,0,1.0880656242370605,15.624057613179545,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+BART,saliency,prompt_4,19,0,1.0427448749542236,18.22113966355778,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+BART,saliency,prompt_5,18,0,0.9842658042907715,18.287742926282185,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+BART,saliency,prompt_6,20,0,0.7773256301879883,25.729242962390426,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+BART,saliency,prompt_7,22,0,1.2366225719451904,17.790391748546448,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+BART,saliency,prompt_8,19,0,1.1797666549682617,16.104879655639312,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+BART,saliency,prompt_9,22,0,1.0335571765899658,21.285711616443905,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+BART,saliency,prompt_10,21,0,1.1701903343200684,17.94579854584247,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+BART,saliency,prompt_11,20,0,1.0097637176513672,19.806613815079892,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+BART,saliency,prompt_12,17,0,1.1061058044433594,15.369234960804803,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+BART,saliency,prompt_13,19,0,0.7607431411743164,24.975578446452726,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+BART,saliency,prompt_14,24,0,1.0517857074737549,22.818336310772573,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+BART,saliency,prompt_15,19,0,1.1632866859436035,16.333033146156996,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+BART,saliency,prompt_16,20,0,1.1474976539611816,17.429229533463232,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+BART,saliency,prompt_17,20,0,1.1378505229949951,17.5770011928781,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+BART,saliency,prompt_18,19,0,0.9966623783111572,19.06362717552906,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+BART,saliency,prompt_19,18,0,0.9731411933898926,18.49680202859138,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+BART,saliency,prompt_20,19,0,1.1443023681640625,16.60400304028376,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+BART,lime,prompt_1,20,0,8.986452341079712,2.2255723661465523,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+BART,lime,prompt_2,22,0,11.490511178970337,1.914623262389221,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+BART,lime,prompt_3,17,0,10.488505363464355,1.6208219770967345,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+BART,lime,prompt_4,19,0,11.10904312133789,1.7103183228720586,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+BART,lime,prompt_5,18,0,9.578667640686035,1.8791757554614161,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+BART,lime,prompt_6,20,0,8.537107229232788,2.3427139267404233,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+BART,lime,prompt_7,22,0,10.996199131011963,2.000691305958132,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+BART,lime,prompt_8,19,0,10.783203840255737,1.7619995208723969,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+BART,lime,prompt_9,22,0,11.276248693466187,1.9510034407761414,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+BART,lime,prompt_10,21,0,10.74852442741394,1.953756549730662,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+BART,lime,prompt_11,20,0,9.636855125427246,2.075365847020898,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+BART,lime,prompt_12,17,0,10.523335218429565,1.6154574236338894,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+BART,lime,prompt_13,19,0,7.884671449661255,2.4097389626572565,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+BART,lime,prompt_14,24,0,10.59899640083313,2.2643653316188965,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+BART,lime,prompt_15,19,0,11.093838453292847,1.7126624008447198,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+BART,lime,prompt_16,20,0,10.301605939865112,1.9414448695425324,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+BART,lime,prompt_17,20,0,10.976565837860107,1.8220635028686731,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+BART,lime,prompt_18,19,0,10.392237424850464,1.8282877135357014,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+BART,lime,prompt_19,18,0,9.605430841445923,1.8739398884985805,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+BART,lime,prompt_20,19,0,11.048048734664917,1.7197606976863378,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_1,20,0,1.7884786128997803,11.182688937818865,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_2,22,0,2.29909610748291,9.568977968513886,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_3,17,0,1.8661742210388184,9.109546047923025,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_4,19,0,2.11161208152771,8.997864790702407,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_5,18,0,1.8027970790863037,9.984484781350314,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_6,20,0,1.7065722942352295,11.719398039895315,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_7,22,0,2.296151638031006,9.581248744906683,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_8,19,0,2.132753849029541,8.908669891110733,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_9,22,0,2.285405158996582,9.626301889359173,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_10,21,0,2.2430882453918457,9.362092660929399,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_11,20,0,1.92384934425354,10.395824423434812,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_12,17,0,1.997232437133789,8.511778440969321,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_13,19,0,1.5003061294555664,12.66408210096079,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_14,24,0,2.2823662757873535,10.515402481453448,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_15,19,0,2.1397690773010254,8.879462836225974,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_16,20,0,2.0555412769317627,9.729797316380495,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_17,20,0,2.1920688152313232,9.12380116036159,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_18,19,0,2.001248836517334,9.494071728263778,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_19,18,0,1.8243005275726318,9.866795370579839,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+BART,integrated_gradients,prompt_20,19,0,2.130690574645996,8.917296685914499,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_1,20,0,1.0184426307678223,19.63782681104152,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_2,22,0,1.3232033252716064,16.626318555754978,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_3,17,0,1.1543686389923096,14.726664798205121,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_4,19,0,1.1847906112670898,16.036588929144365,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_5,18,0,1.102677822113037,16.323897732437384,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_6,20,0,1.0427005290985107,19.180962742285583,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_7,22,0,1.3581199645996094,16.198863556567975,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_8,19,0,1.2736659049987793,14.917569768830555,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_9,22,0,1.4348340034484863,15.332784104032315,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_10,21,0,1.2554008960723877,16.727724239882267,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_11,20,0,1.1485016345977783,17.413993500326438,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_12,17,0,1.190312385559082,14.281965143137791,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_13,19,0,1.1529262065887451,16.47980581187136,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_14,24,0,1.4045326709747314,17.08753416418875,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_15,19,0,1.2514872550964355,15.18193647008888,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_16,20,0,1.2129836082458496,16.488268979102614,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_17,20,0,1.249171257019043,16.010614947807042,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_18,19,0,1.2529675960540771,15.16399949993597,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_19,18,0,1.048081398010254,17.174238598426015,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+BART,layer_gradient_x_activation,prompt_20,19,0,1.2218084335327148,15.550719309625112,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+BART,attention,prompt_1,20,0,0.3124098777770996,64.0184623556293,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+BART,attention,prompt_2,22,0,0.3471853733062744,63.36672478593271,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+BART,attention,prompt_3,17,0,0.3132181167602539,54.27527684489683,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+BART,attention,prompt_4,19,0,0.22139310836791992,85.82019621146038,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+BART,attention,prompt_5,18,0,0.2179548740386963,82.58590260662963,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+BART,attention,prompt_6,20,0,0.30572509765625,65.41824715512078,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+BART,attention,prompt_7,22,0,0.33842015266418457,65.0079489262292,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+BART,attention,prompt_8,19,0,0.3164327144622803,60.044360559517486,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+BART,attention,prompt_9,22,0,0.3393590450286865,64.82809379116536,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+BART,attention,prompt_10,21,0,0.3322107791900635,63.21287963984317,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+BART,attention,prompt_11,20,0,0.21231985092163086,94.1975039695284,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+BART,attention,prompt_12,17,0,0.3079402446746826,55.205515660868926,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+BART,attention,prompt_13,19,0,0.29061293601989746,65.37905800139303,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+BART,attention,prompt_14,24,0,0.34230661392211914,70.11258042901979,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+BART,attention,prompt_15,19,0,0.32625818252563477,58.23608730029976,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+BART,attention,prompt_16,20,0,0.33306002616882324,60.049235658986866,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+BART,attention,prompt_17,20,0,0.33338356018066406,59.99096052955277,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+BART,attention,prompt_18,19,0,0.32300806045532227,58.82206150898218,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+BART,attention,prompt_19,18,0,0.3097565174102783,58.11015745686042,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+BART,attention,prompt_20,19,0,0.32277703285217285,58.86416338891659,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_1,18,0,1.3889191150665283,12.959717959629213,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_2,20,0,1.3884503841400146,14.404547853100059,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_3,15,0,1.138803243637085,13.171722230166228,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_4,17,0,1.292642593383789,13.151353736146504,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_5,16,0,1.122657299041748,14.251900391737452,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_6,18,0,1.2443816661834717,14.465015428269801,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_7,20,0,1.3836617469787598,14.454399743051518,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_8,17,0,1.2430899143218994,13.67559965223709,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_9,20,0,1.3002386093139648,15.381792123949042,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_10,19,0,1.1827716827392578,16.063962535860398,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_11,18,0,1.2826240062713623,14.033730783136281,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_12,15,0,1.199223279953003,12.508096074142125,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_13,17,0,1.3024721145629883,13.052102851126238,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_14,22,0,1.4111404418945312,15.590227128962322,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_15,17,0,1.281362533569336,13.267127416817132,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_16,18,0,1.410590648651123,12.760612029586682,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_17,18,0,1.2805852890014648,14.056072761881783,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_18,17,0,1.2913143634796143,13.164881055137721,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_19,16,0,1.2299213409423828,13.008962010318951,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+GPT-2,input_x_gradient,prompt_20,17,0,1.2045469284057617,14.113190278522223,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_1,18,0,1.0667271614074707,16.874043008570514,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_2,20,0,1.1343731880187988,17.630882156982505,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_3,15,0,1.0778040885925293,13.917186025512327,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_4,17,0,1.0675156116485596,15.924825655473999,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_5,16,0,1.0632655620574951,15.047981022764297,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_6,18,0,1.0833547115325928,16.615056738467388,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_7,20,0,1.1245856285095215,17.78432828321589,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_8,17,0,1.0617237091064453,16.01169857486495,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_9,20,0,1.1145546436309814,17.944387127439768,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_10,19,0,1.07063889503479,17.746412995188823,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_11,18,0,1.0519907474517822,17.110416649196836,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_12,15,0,1.071403980255127,14.000321332041478,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_13,17,0,1.03684401512146,16.395908885107037,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_14,22,0,1.1454577445983887,19.206295565021883,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_15,17,0,1.121025562286377,15.164685420132448,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_16,18,0,1.1160149574279785,16.128816088167547,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_17,18,0,1.1585960388183594,15.536044830912784,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_18,17,0,1.0784962177276611,15.76268856632448,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_19,16,0,1.0492355823516846,15.249196909752811,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+GPT-2,saliency,prompt_20,17,0,1.113041877746582,15.27345946265516,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+GPT-2,lime,prompt_1,18,0,13.13208532333374,1.3706886268867526,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+GPT-2,lime,prompt_2,20,0,13.584237813949585,1.4722946015758132,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+GPT-2,lime,prompt_3,15,0,13.308796405792236,1.1270741202015624,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+GPT-2,lime,prompt_4,17,0,13.406989097595215,1.2679953624374363,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+GPT-2,lime,prompt_5,16,0,13.291579008102417,1.203769694349073,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+GPT-2,lime,prompt_6,18,0,13.389147520065308,1.344372371207708,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+GPT-2,lime,prompt_7,20,0,13.362799644470215,1.4966923498158102,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+GPT-2,lime,prompt_8,17,0,13.056447505950928,1.3020387048047841,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+GPT-2,lime,prompt_9,20,0,13.530339241027832,1.4781595378890662,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+GPT-2,lime,prompt_10,19,0,13.721246480941772,1.3847138469810445,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+GPT-2,lime,prompt_11,18,0,13.180490732192993,1.3656547670137567,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+GPT-2,lime,prompt_12,15,0,13.265386819839478,1.130762351955411,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+GPT-2,lime,prompt_13,17,0,13.269115924835205,1.281170508743681,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+GPT-2,lime,prompt_14,22,0,13.547771215438843,1.6238833421492327,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+GPT-2,lime,prompt_15,17,0,12.796156406402588,1.3285239301618734,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+GPT-2,lime,prompt_16,18,0,12.741865396499634,1.4126659982568053,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+GPT-2,lime,prompt_17,18,0,12.976282358169556,1.3871461411802304,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+GPT-2,lime,prompt_18,17,0,12.92942190170288,1.3148306342885292,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+GPT-2,lime,prompt_19,16,0,12.91459059715271,1.2389088047070986,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+GPT-2,lime,prompt_20,17,0,13.115984678268433,1.2961283820472054,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_1,18,0,2.2485649585723877,8.005105625869126,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_2,20,0,2.295008659362793,8.714564068596143,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_3,15,0,2.0047659873962402,7.482170035956053,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_4,17,0,2.116018295288086,8.033957002099328,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_5,16,0,2.059523105621338,7.768788782378316,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_6,18,0,2.202502489089966,8.172521978595935,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_7,20,0,2.300858736038208,8.692406746551294,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_8,17,0,2.123971700668335,8.003873118766474,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_9,20,0,2.297990322113037,8.703256844706681,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_10,19,0,2.2368361949920654,8.494140090605695,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_11,18,0,2.173980712890625,8.279742268764828,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_12,15,0,1.9940459728240967,7.522394269955588,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_13,17,0,2.122896671295166,8.007926259372956,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_14,22,0,2.43393611907959,9.038856783274761,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_15,17,0,2.1245031356811523,8.001870985494925,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_16,18,0,2.186070442199707,8.233952416413315,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_17,18,0,2.1955137252807617,8.1985367673792,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_18,17,0,2.1276562213897705,7.990012591834839,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_19,16,0,2.0522751808166504,7.796225452394356,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+GPT-2,integrated_gradients,prompt_20,17,0,2.1074869632720947,8.066479316961333,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_1,18,0,1.3621599674224854,13.214307005409996,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_2,20,0,1.4771156311035156,13.539901398957173,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_3,15,0,1.210481882095337,12.391759200918472,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_4,17,0,1.379878282546997,12.31992721026175,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_5,16,0,1.1978940963745117,13.356773397936283,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_6,18,0,1.331895351409912,13.514575286223229,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_7,20,0,1.453411340713501,13.760729285476543,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_8,17,0,1.2967746257781982,13.109448366787907,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_9,20,0,1.3361520767211914,14.968356034051434,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_10,19,0,1.2610437870025635,15.066883637055955,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_11,18,0,1.3890581130981445,12.958421127430686,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_12,15,0,1.2826955318450928,11.694123529395364,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_13,17,0,1.3851191997528076,12.27331193086766,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_14,22,0,1.4908709526062012,14.756475040003735,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_15,17,0,1.3725597858428955,12.385617133289548,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_16,18,0,1.5056233406066895,11.955181295706346,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_17,18,0,1.3581418991088867,13.253401586248302,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_18,17,0,1.3579885959625244,12.518514551994912,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_19,16,0,1.2925896644592285,12.378251536378952,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+GPT-2,layer_gradient_x_activation,prompt_20,17,0,1.2412512302398682,13.695857523311215,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+GPT-2,attention,prompt_1,18,0,0.27943968772888184,64.41461535508147,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,Tesla T4
+GPT-2,attention,prompt_2,20,0,0.2121896743774414,94.25529332979771,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,Tesla T4
+GPT-2,attention,prompt_3,15,0,0.2787811756134033,53.805641528684426,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,Tesla T4
+GPT-2,attention,prompt_4,17,0,0.277446985244751,61.272967103979816,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,Tesla T4
+GPT-2,attention,prompt_5,16,0,0.20937013626098633,76.4196856616433,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,Tesla T4
+GPT-2,attention,prompt_6,18,0,0.2832775115966797,63.54193066207017,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,Tesla T4
+GPT-2,attention,prompt_7,20,0,0.28783178329467773,69.48502966235772,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,Tesla T4
+GPT-2,attention,prompt_8,17,0,0.27939915657043457,60.84485081727303,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,Tesla T4
+GPT-2,attention,prompt_9,20,0,0.28681516647338867,69.73131946233967,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,Tesla T4
+GPT-2,attention,prompt_10,19,0,0.21223807334899902,89.52210930013896,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,Tesla T4
+GPT-2,attention,prompt_11,18,0,0.2827720642089844,63.65551013800639,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,Tesla T4
+GPT-2,attention,prompt_12,15,0,0.2713139057159424,55.28651382765672,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,Tesla T4
+GPT-2,attention,prompt_13,17,0,0.27437567710876465,61.958844818671984,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,Tesla T4
+GPT-2,attention,prompt_14,22,0,0.28668761253356934,76.73857899048197,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,Tesla T4
+GPT-2,attention,prompt_15,17,0,0.278806209564209,60.97425170899899,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,Tesla T4
+GPT-2,attention,prompt_16,18,0,0.27670979499816895,65.0501005940867,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,Tesla T4
+GPT-2,attention,prompt_17,18,0,0.2866673469543457,62.79054866638389,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,Tesla T4
+GPT-2,attention,prompt_18,17,0,0.28242063522338867,60.193901860440775,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,Tesla T4
+GPT-2,attention,prompt_19,16,0,0.2733323574066162,58.53679436934717,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,Tesla T4
+GPT-2,attention,prompt_20,17,0,0.27806711196899414,61.13632022004668,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,Tesla T4
+BART,input_x_gradient,prompt_1,20,0,0.8080036640167236,24.75236300362377,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_2,22,0,1.0764715671539307,20.437139884860606,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_3,17,0,0.9889709949493408,17.189584008852364,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_4,19,0,0.9509549140930176,19.979916732562902,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_5,18,0,0.9205331802368164,19.55388505970998,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_6,20,0,0.7931416034698486,25.216178186220063,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_7,22,0,0.9711804389953613,22.652845049842565,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_8,19,0,0.9048149585723877,20.998768665339156,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_9,22,0,1.0780384540557861,20.407435298093315,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_10,21,0,0.8773713111877441,23.935134112797904,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_11,20,0,0.8886315822601318,22.506514959925585,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_12,17,0,0.8135325908660889,20.896519931551552,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_13,19,0,0.8341803550720215,22.776849016493056,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_14,24,0,1.0004456043243408,23.989310259610363,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_15,19,0,0.8622195720672607,22.036150205272577,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_16,20,0,0.862332820892334,23.192901296861443,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_17,20,0,0.8980505466461182,22.270461361771336,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_18,19,0,0.8663203716278076,21.93184025477686,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_19,18,0,0.7286050319671631,24.704742913182663,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+BART,input_x_gradient,prompt_20,19,0,0.7831246852874756,24.261781497827936,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+BART,saliency,prompt_1,20,0,0.5385949611663818,37.133655979045884,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+BART,saliency,prompt_2,22,0,0.8532288074493408,25.784408364934652,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+BART,saliency,prompt_3,17,0,0.7177402973175049,23.685447317833617,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+BART,saliency,prompt_4,19,0,0.6965498924255371,27.27729945350777,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+BART,saliency,prompt_5,18,0,0.6569042205810547,27.401254910614476,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+BART,saliency,prompt_6,20,0,0.4909350872039795,40.73858341212871,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+BART,saliency,prompt_7,22,0,0.8505585193634033,25.86535729071975,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+BART,saliency,prompt_8,19,0,0.8120903968811035,23.396410144696922,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+BART,saliency,prompt_9,22,0,0.6821243762969971,32.25218268760593,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+BART,saliency,prompt_10,21,0,0.8075158596038818,26.005681189099274,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+BART,saliency,prompt_11,20,0,0.7793335914611816,25.662951294710354,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+BART,saliency,prompt_12,17,0,0.7468314170837402,22.762834571665902,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+BART,saliency,prompt_13,19,0,0.5121080875396729,37.10154254989788,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+BART,saliency,prompt_14,24,0,0.7192373275756836,33.368679683097426,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+BART,saliency,prompt_15,19,0,0.7640647888183594,24.86700117326943,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+BART,saliency,prompt_16,20,0,0.8027691841125488,24.91376150930575,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+BART,saliency,prompt_17,20,0,0.7585391998291016,26.36646860769488,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+BART,saliency,prompt_18,19,0,0.6451520919799805,29.450419887330355,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+BART,saliency,prompt_19,18,0,0.6243326663970947,28.83078360111218,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+BART,saliency,prompt_20,19,0,0.7072479724884033,26.864693486712742,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+BART,lime,prompt_1,20,0,4.427603483200073,4.517116330739015,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+BART,lime,prompt_2,22,0,5.738482713699341,3.8337660140510543,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+BART,lime,prompt_3,17,0,5.1939592361450195,3.273033003743302,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+BART,lime,prompt_4,19,0,5.634685039520264,3.3719719676856434,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+BART,lime,prompt_5,18,0,4.990813970565796,3.606626114729615,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+BART,lime,prompt_6,20,0,4.483497142791748,4.460803556472562,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+BART,lime,prompt_7,22,0,5.72007155418396,3.846105733399095,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+BART,lime,prompt_8,19,0,5.628803730010986,3.375495204904385,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+BART,lime,prompt_9,22,0,5.723603248596191,3.843732530796202,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+BART,lime,prompt_10,21,0,5.71633505821228,3.6736824881933208,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+BART,lime,prompt_11,20,0,5.3633832931518555,3.728989502864108,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+BART,lime,prompt_12,17,0,5.6917173862457275,2.9867962244719335,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+BART,lime,prompt_13,19,0,4.12817907333374,4.602513520484569,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+BART,lime,prompt_14,24,0,5.617557048797607,4.2723197631142895,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+BART,lime,prompt_15,19,0,5.7520904541015625,3.3031469431173384,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+BART,lime,prompt_16,20,0,5.359633207321167,3.731598642362381,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+BART,lime,prompt_17,20,0,5.666027307510376,3.5298100264165333,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+BART,lime,prompt_18,19,0,5.311525821685791,3.5771265428904027,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+BART,lime,prompt_19,18,0,4.95444917678833,3.633098122053663,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+BART,lime,prompt_20,19,0,5.3312695026397705,3.5638791080796377,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_1,20,0,0.7228844165802002,27.666940303700827,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_2,22,0,0.6294374465942383,34.951844887903725,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_3,17,0,0.5550992488861084,30.625154031667492,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_4,19,0,0.5049049854278564,37.63084253149016,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_5,18,0,0.5331065654754639,33.764356257639164,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_6,20,0,0.5226945877075195,38.2632620852605,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_7,22,0,0.6254270076751709,35.175967347137934,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_8,19,0,0.5968637466430664,31.83306090688448,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_9,22,0,0.6150743961334229,35.76803088910846,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_10,21,0,0.6106786727905273,34.38797019722243,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_11,20,0,0.487138032913208,41.056125058425366,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_12,17,0,0.5781440734863281,29.404435294971528,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_13,19,0,0.4515995979309082,42.07266810478178,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_14,24,0,0.614344596862793,39.06602275426235,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_15,19,0,0.5927598476409912,32.053453140617364,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_16,20,0,0.5783016681671143,34.584026124960985,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_17,20,0,0.6071646213531494,32.939995672717664,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_18,19,0,0.5695750713348389,33.358201501818144,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_19,18,0,0.5322988033294678,33.815593586557156,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+BART,integrated_gradients,prompt_20,19,0,0.5663220882415771,33.54981272052227,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_1,20,0,0.7256731986999512,27.560615488942055,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_2,22,0,0.9694457054138184,22.693380224536725,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_3,17,0,0.8283264636993408,20.523309039381992,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_4,19,0,0.8385627269744873,22.657816033096903,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_5,18,0,0.813521146774292,22.126038236832734,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_6,20,0,0.7308025360107422,27.367173777440225,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_7,22,0,0.9784116744995117,22.485422622592573,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_8,19,0,0.9129533767700195,20.811577549798862,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_9,22,0,1.0965206623077393,20.06346141594702,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_10,21,0,0.887779712677002,23.654516655575303,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_11,20,0,0.8996014595031738,22.232067087847405,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_12,17,0,0.8271012306213379,20.553711408734333,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_13,19,0,0.8319766521453857,22.83717932589267,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_14,24,0,1.0175440311431885,23.58620292139744,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_15,19,0,0.8768813610076904,21.667697415948798,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_16,20,0,0.8699851036071777,22.988899369742025,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_17,20,0,0.9183671474456787,21.777782508474367,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_18,19,0,0.8773045539855957,21.657245381530252,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_19,18,0,0.740269660949707,24.315463606744917,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+BART,layer_gradient_x_activation,prompt_20,19,0,0.8042409420013428,23.62476094877582,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+BART,attention,prompt_1,20,0,0.18769574165344238,106.55542754362321,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+BART,attention,prompt_2,22,0,0.11450386047363281,192.13326004031117,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+BART,attention,prompt_3,17,0,0.18689465522766113,90.96033259641302,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+BART,attention,prompt_4,19,0,0.11462688446044922,165.75518116394193,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+BART,attention,prompt_5,18,0,0.18400335311889648,97.8243042580264,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+BART,attention,prompt_6,20,0,0.18132948875427246,110.29645612194317,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+BART,attention,prompt_7,22,0,0.20883727073669434,105.3451805915333,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+BART,attention,prompt_8,19,0,0.11344766616821289,167.47810370843612,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+BART,attention,prompt_9,22,0,0.21119427680969238,104.16948949721893,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+BART,attention,prompt_10,21,0,0.11365008354187012,184.77769083437002,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+BART,attention,prompt_11,20,0,0.19807171821594238,100.97352706455314,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+BART,attention,prompt_12,17,0,0.19241857528686523,88.3490586844629,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+BART,attention,prompt_13,19,0,0.17020726203918457,111.62860956911392,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+BART,attention,prompt_14,24,0,0.21071696281433105,113.89685803865306,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+BART,attention,prompt_15,19,0,0.11209678649902344,169.49638427115414,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+BART,attention,prompt_16,20,0,0.11392354965209961,175.55632756419647,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+BART,attention,prompt_17,20,0,0.20356178283691406,98.25026938393066,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+BART,attention,prompt_18,19,0,0.19525527954101562,97.30850835205626,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+BART,attention,prompt_19,18,0,0.18292951583862305,98.39855486131204,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+BART,attention,prompt_20,19,0,0.19196581840515137,98.9759539372773,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_1,18,0,0.9186592102050781,19.593772968304258,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_2,20,0,0.9360291957855225,21.366854890905252,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_3,15,0,0.7645614147186279,19.61909103864503,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_4,17,0,0.8800709247589111,19.31662496935349,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_5,16,0,0.7540249824523926,21.219456082159986,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_6,18,0,0.8399808406829834,21.429060197806784,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_7,20,0,0.9501614570617676,21.049054191112965,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_8,17,0,0.8173575401306152,20.79873147959627,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_9,20,0,0.8813152313232422,22.69335566795004,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_10,19,0,1.0223734378814697,18.58420739037509,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_11,18,0,0.37189579010009766,48.4006554501604,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_12,15,0,0.8012652397155762,18.7203927694711,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_13,17,0,0.8735663890838623,19.46045568194131,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_14,22,0,0.9512624740600586,23.12716058912991,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_15,17,0,0.873175859451294,19.469159409288807,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_16,18,0,0.9242589473724365,19.475061670944015,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_17,18,0,0.8518838882446289,21.129640140383874,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_18,17,0,0.8724942207336426,19.48436974826657,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_19,16,0,0.8056602478027344,19.85948797106047,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+GPT-2,input_x_gradient,prompt_20,17,0,0.7958183288574219,21.361659292777745,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_1,18,0,0.6530241966247559,27.564062852548865,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_2,20,0,0.7084238529205322,28.231686323870168,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_3,15,0,0.6848404407501221,21.90291213464284,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_4,17,0,0.3619577884674072,46.96680259867036,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_5,16,0,0.6782569885253906,23.58987857211152,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_6,18,0,0.6968364715576172,25.831024544058597,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_7,20,0,0.7171368598937988,27.88867943974015,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_8,17,0,0.6700215339660645,25.37231885574147,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_9,20,0,0.6974332332611084,28.676580131523938,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_10,19,0,0.6688127517700195,28.40854925345893,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_11,18,0,0.668391227722168,26.930335488307918,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_12,15,0,0.6942362785339355,21.606476733939182,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_13,17,0,0.6591064929962158,25.792493596475012,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_14,22,0,0.7418675422668457,29.654889514072742,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_15,17,0,0.6989226341247559,24.32314990240471,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_16,18,0,0.6780426502227783,26.547002602396624,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_17,18,0,0.7428638935089111,24.230549037694047,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_18,17,0,0.6639449596405029,25.604532052182087,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_19,16,0,0.6578760147094727,24.320692109539554,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+GPT-2,saliency,prompt_20,17,0,0.6863462924957275,24.768837809531583,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_1,18,0,6.507500648498535,2.766038909908232,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_2,20,0,6.587968826293945,3.035837073207734,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_3,15,0,6.384153842926025,2.3495674397979585,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_4,17,0,6.489973306655884,2.619425257506901,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_5,16,0,6.369311332702637,2.512045520188264,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_6,18,0,6.508503437042236,2.765612736340511,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_7,20,0,6.61166524887085,3.024956534727107,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_8,17,0,6.427015066146851,2.645084821652971,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_9,20,0,6.580528020858765,3.0392697875618166,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_10,19,0,6.544066905975342,2.9033932985390525,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_11,18,0,6.561020851135254,2.7434755060846148,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_12,15,0,6.386288166046143,2.3487822049356017,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_13,17,0,6.44748330116272,2.6366877130079995,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_14,22,0,6.665832757949829,3.3004128364550223,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_15,17,0,6.5338454246521,2.6018368809061903,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_16,18,0,6.50198221206665,2.7683865339703404,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_17,18,0,6.5039708614349365,2.767540074130768,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_18,17,0,6.434658527374268,2.641942836232684,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_19,16,0,6.372563123703003,2.5107636738014194,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+GPT-2,lime,prompt_20,17,0,6.451380968093872,2.635094731511853,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_1,18,0,0.5081202983856201,35.424682023506826,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_2,20,0,0.5049753189086914,39.605896072747186,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_3,15,0,0.4898257255554199,30.623136387929197,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_4,17,0,0.49019598960876465,34.68000628395195,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_5,16,0,0.4195835590362549,38.13304800776879,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_6,18,0,0.4960775375366211,36.28465035805258,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_7,20,0,0.5011811256408691,39.90573263194149,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_8,17,0,0.4928262233734131,34.494917668208465,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_9,20,0,0.5007765293121338,39.93797398506672,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_10,19,0,0.5002377033233643,37.98194313177949,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_11,18,0,0.4979414939880371,36.148825147784216,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_12,15,0,0.4869883060455322,30.80156096930495,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_13,17,0,0.49135279655456543,34.5983580824336,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_14,22,0,0.5090408325195312,43.21853689243267,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_15,17,0,0.4921576976776123,34.541774070017375,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_16,18,0,0.49352121353149414,36.47259632711072,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_17,18,0,0.4958665370941162,36.30009015224912,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_18,17,0,0.49221086502075195,34.53804295702263,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_19,16,0,0.49735093116760254,32.170443438072404,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+GPT-2,integrated_gradients,prompt_20,17,0,0.49229907989501953,34.53185409898627,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_1,18,0,0.8925254344940186,20.16749249303397,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_2,20,0,0.36228203773498535,55.20560755659185,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_3,15,0,0.7552218437194824,19.861713647111564,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_4,17,0,0.8716974258422852,19.502179880333596,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_5,16,0,0.3601107597351074,44.43077460881586,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_6,18,0,0.841569185256958,21.388615832581873,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_7,20,0,0.9532101154327393,20.98173285846886,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_8,17,0,0.8220458030700684,20.680112879976566,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_9,20,0,0.8859288692474365,22.575175834363826,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_10,19,0,0.8074703216552734,23.530276581622168,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_11,18,0,0.8789973258972168,20.47787799766843,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_12,15,0,0.8307793140411377,18.055336413031156,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_13,17,0,0.8742868900299072,19.44441829548476,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_14,22,0,0.9419357776641846,23.35615709868848,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_15,17,0,0.8529365062713623,19.93114361386173,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_16,18,0,0.9353928565979004,19.243251509817444,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_17,18,0,0.8555910587310791,21.038088016833264,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_18,17,0,0.8927717208862305,19.041821780739827,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_19,16,0,0.8356368541717529,19.147073181517953,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+GPT-2,layer_gradient_x_activation,prompt_20,17,0,0.8088183403015137,21.018316663866315,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_1,18,0,0.1526496410369873,117.91708043151287,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_2,20,0,0.0962820053100586,207.72313513406434,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_3,15,0,0.1446361541748047,103.70850971238676,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_4,17,0,0.14947056770324707,113.73476572157755,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_5,16,0,0.09601902961730957,166.6336356841878,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_6,18,0,0.1548004150390625,116.27875800887136,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_7,20,0,0.15703916549682617,127.35676438884418,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_8,17,0,0.09522891044616699,178.51721625661273,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_9,20,0,0.15607929229736328,128.13999670049677,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_10,19,0,0.09593892097473145,198.04266930419462,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_11,18,0,0.15183377265930176,118.5506997866016,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_12,15,0,0.14876055717468262,100.83317974122802,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_13,17,0,0.15078258514404297,112.74511564952849,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_14,22,0,0.1621565818786621,135.67133535450367,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_15,17,0,0.09668445587158203,175.82971168167606,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_16,18,0,0.09506535530090332,189.3434252996366,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_17,18,0,0.09825658798217773,183.19382312832732,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_18,17,0,0.0974431037902832,174.46078109937216,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_19,16,0,0.1478443145751953,108.221949866474,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+GPT-2,attention,prompt_20,17,0,0.15306305885314941,111.0653356033477,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_1,18,0,2.1600637435913086,8.333087416241389,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_2,20,0,2.464911699295044,8.113880917405654,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_3,15,0,2.018878221511841,7.429868646939597,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_4,17,0,2.2448346614837646,7.572940801245263,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_5,16,0,2.168389081954956,7.378749567201689,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_6,17,0,2.180161714553833,7.797586704928917,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_7,20,0,3.1151232719421387,6.4202916719667735,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_8,17,0,2.1925320625305176,7.7535924288283375,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_9,20,0,2.6028506755828857,7.6838829778512645,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_10,18,0,2.1872739791870117,8.22942172369756,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_11,18,0,2.171048879623413,8.290923419062889,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_12,16,0,2.188389301300049,7.311313389484647,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_13,17,0,2.155357837677002,7.887321401035771,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_14,23,0,2.5342814922332764,9.075550632590458,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_15,18,0,2.2086703777313232,8.149699557472688,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_16,18,0,2.2384655475616455,8.041222711516534,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_17,17,0,2.2552602291107178,7.537932776255869,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_18,16,0,2.21053409576416,7.238069763619256,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_19,16,0,2.1776809692382812,7.347265382769336,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+Llama-3-2-1B,input_x_gradient,prompt_20,17,0,2.113527536392212,8.043424893824175,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_1,18,0,1.7483904361724854,10.295183288353467,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_2,20,0,2.2290737628936768,8.97233655203808,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_3,15,0,1.6874058246612549,8.88938498420274,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_4,17,0,2.0103042125701904,8.456431565780465,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_5,16,0,2.083580732345581,7.679088096571173,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_6,17,0,1.9794950485229492,8.588048761569262,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_7,20,0,2.1026041507720947,9.512013943592676,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_8,17,0,1.787463903427124,9.510681568117663,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_9,20,0,2.2334251403808594,8.954855767670574,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_10,18,0,1.8242371082305908,9.867138388309074,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_11,18,0,1.6933400630950928,10.62987901384648,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_12,16,0,1.9663598537445068,8.136862624372371,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_13,17,0,2.028945207595825,8.37873784681645,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_14,23,0,1.8023765087127686,12.760929744044583,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_15,18,0,2.1389846801757812,8.415207535998231,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_16,18,0,2.0908665657043457,8.60887074060433,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_17,17,0,2.1314878463745117,7.975649511169216,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_18,16,0,2.0488531589508057,7.809246812101175,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_19,16,0,1.726689100265503,9.266288874783406,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+Llama-3-2-1B,saliency,prompt_20,17,0,1.8322715759277344,9.27810059564581,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_1,18,0,0.707024097442627,25.45882108560048,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_2,20,0,0.7068207263946533,28.29571806986458,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_3,15,0,0.692913293838501,21.647730146589,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_4,17,0,0.6945235729217529,24.477210944019706,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_5,16,0,0.6907081604003906,23.164631485930467,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_6,17,0,0.6967287063598633,24.399741025195294,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_7,20,0,0.6989028453826904,28.616280692130854,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_8,17,0,0.6910107135772705,24.601644614152598,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_9,20,0,0.6949007511138916,28.781088476219068,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_10,18,0,0.6842741966247559,26.30524443094102,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_11,18,0,0.6917679309844971,26.020286853111426,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_12,16,0,0.6886556148529053,23.23367392193201,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_13,17,0,0.6909677982330322,24.603172598597233,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_14,23,0,0.7181520462036133,32.0266441091208,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_15,18,0,0.7141358852386475,25.20528707780148,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_16,18,0,0.7077476978302002,25.43279201781096,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_17,17,0,0.700913667678833,24.254056931572922,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_18,16,0,0.6999232769012451,22.859648375799768,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_19,16,0,0.6925678253173828,23.102430426460664,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+Llama-3-2-1B,lime,prompt_20,17,0,0.6894633769989014,24.65685715461445,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_1,18,0,1.3775866031646729,13.066329157563919,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_2,20,0,1.4148309230804443,14.135964710507562,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_3,15,0,1.3303847312927246,11.274933969983717,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_4,17,0,1.3557679653167725,12.539018795910247,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_5,16,0,1.3418781757354736,11.923586126758874,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_6,17,0,1.3632559776306152,12.470145210400304,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_7,20,0,1.4287006855010986,13.998733396691312,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_8,17,0,1.3637661933898926,12.465479847204133,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_9,20,0,1.428426742553711,14.001418066595718,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_10,18,0,1.3844337463378906,13.001705605352129,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_11,18,0,1.376554250717163,13.076128304149497,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_12,16,0,1.3483991622924805,11.865922530534359,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_13,17,0,1.3664567470550537,12.440935314372656,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_14,23,0,1.4813947677612305,15.525908758783407,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_15,18,0,1.3802404403686523,13.041206063482917,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_16,18,0,1.369213342666626,13.14623473135597,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_17,17,0,1.367509126663208,12.43136127470013,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_18,16,0,1.3523783683776855,11.831008521079509,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_19,16,0,1.357076644897461,11.790048896765843,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+Llama-3-2-1B,integrated_gradients,prompt_20,17,0,1.3740816116333008,12.371899788246905,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_1,18,0,2.2665274143218994,7.9416643656107055,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_2,20,0,2.431581735610962,8.225098793553316,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_3,15,0,2.106783390045166,7.119858676918097,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_4,17,0,2.1657495498657227,7.849476409243168,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_5,16,0,2.124969482421875,7.5295198977466935,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_6,17,0,2.156111240386963,7.884565360806229,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_7,20,0,1.7583744525909424,11.374141594545039,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_8,17,0,2.228083848953247,7.629874435823676,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_9,20,0,2.3261961936950684,8.597727076593145,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_10,18,0,2.169522762298584,8.296755541264389,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_11,18,0,2.032762050628662,8.85494689082435,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_12,16,0,2.1384036540985107,7.482216918837588,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_13,17,0,2.0977790355682373,8.103808700421641,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_14,23,0,2.448770761489868,9.392467584841,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_15,18,0,2.275146007537842,7.911580153697284,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_16,18,0,2.2944045066833496,7.84517287495207,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_17,17,0,2.1693215370178223,7.83655152539996,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_18,16,0,2.129610061645508,7.513112512079847,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_19,16,0,2.3206968307495117,6.894480911077259,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+Llama-3-2-1B,layer_gradient_x_activation,prompt_20,17,0,2.1225738525390625,8.009144171668883,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_1,18,0,0.42481255531311035,42.37162902761432,Answer this yes/no question: do iran and afghanistan speak the same language,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_2,20,0,0.219649076461792,91.05433231119915,Answer this yes/no question: do good samaritan laws protect those who help at an accident,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_3,15,0,0.38870954513549805,38.58922475076149,Answer this yes/no question: is windows movie maker part of windows essentials,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_4,17,0,0.21977996826171875,77.35008852015135,Answer this yes/no question: is confectionary sugar the same as powdered sugar,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_5,16,0,0.21687889099121094,73.77389254839191,Answer this yes/no question: is elder scrolls online the same as skyrim,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_6,17,0,0.4118459224700928,41.27757268553387,Answer this yes/no question: can you use oyster card at epsom station,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_7,20,0,0.4341545104980469,46.06654892760805,Answer this yes/no question: will there be a season 4 of da vinci's demons,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_8,17,0,0.40529346466064453,41.94491518444354,Answer this yes/no question: is the federal court the same as the supreme court,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_9,20,0,0.43120741844177246,46.38139128559699,Answer this yes/no question: did abraham lincoln write the letter in saving private ryan,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_10,18,0,0.41155219078063965,43.736858661491446,Answer this yes/no question: is batman and robin a sequel to batman forever,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_11,18,0,0.40922975540161133,43.985071374722246,Answer this yes/no question: is a wolverine the same as a badger,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_12,16,0,0.4120616912841797,38.82913733168548,Answer this yes/no question: will there be a green lantern 2 movie,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_13,17,0,0.41836977005004883,40.63391099688278,Answer this yes/no question: does the icc has jurisdiction in the united states,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_14,23,0,0.4641420841217041,49.55379136438983,Answer this yes/no question: calcium carbide cac2 is the raw material for the production of acetylene,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_15,18,0,0.42147326469421387,42.7073352162902,Answer this yes/no question: is there a now you see me 3 coming out,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_16,18,0,0.40587377548217773,44.34876330360594,Answer this yes/no question: does a penalty shoot out goal count towards the golden boot,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_17,17,0,0.3959472179412842,42.93501565282109,Answer this yes/no question: will there be a new season of cutthroat kitchen,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_18,16,0,0.39905381202697754,40.09484314591221,Answer this yes/no question: is jack sikma in the hall of fame,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_19,16,0,0.3990442752838135,40.09580137096384,Answer this yes/no question: can elves and humans mate lord of the rings,True,CUDA,NVIDIA H200
+Llama-3-2-1B,attention,prompt_20,17,0,0.4160938262939453,40.856169752421465,Answer this yes/no question: the boy in the plastic bubble based on true story,True,CUDA,NVIDIA H200
