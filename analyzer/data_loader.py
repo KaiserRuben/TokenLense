@@ -1,4 +1,3 @@
-# tokenlense/data_loader.py
 import os
 import json
 import base64
@@ -52,6 +51,11 @@ def load_attribution_file(file_path: str) -> Dict[str, Any]:
 
 def aggregate_attribution(tensor: np.ndarray, method: str = "sum", is_attention: bool = False) -> np.ndarray:
     """Aggregate attribution tensor for visualization"""
+    # Handle any non-finite values before aggregation
+    if not np.isfinite(tensor).all():
+        # Replace NaN with 0, inf with large value, and -inf with small value
+        tensor = np.nan_to_num(tensor, nan=0.0, posinf=1e30, neginf=-1e30)
+    
     if is_attention:  # 4D tensor: [target_len, source_len, num_heads, head_dim]
         # First aggregate over head dimension (axis=3)
         if method == "sum":
@@ -64,31 +68,44 @@ def aggregate_attribution(tensor: np.ndarray, method: str = "sum", is_attention:
             head_agg = np.sum(np.abs(tensor), axis=3)
         elif method == "max":
             head_agg = np.max(tensor, axis=3)
+        else:
+            # Default to mean if method is not recognized
+            head_agg = np.mean(tensor, axis=3)
 
         # Then aggregate across heads (axis=2)
         if method == "sum":
-            return np.sum(head_agg, axis=2)
+            result = np.sum(head_agg, axis=2)
         elif method == "mean":
-            return np.mean(head_agg, axis=2)
+            result = np.mean(head_agg, axis=2)
         elif method == "l2_norm":
-            return np.sqrt(np.sum(head_agg ** 2, axis=2))
+            result = np.sqrt(np.sum(head_agg ** 2, axis=2))
         elif method == "abs_sum":
-            return np.sum(np.abs(head_agg), axis=2)
+            result = np.sum(np.abs(head_agg), axis=2)
         elif method == "max":
-            return np.max(head_agg, axis=2)
+            result = np.max(head_agg, axis=2)
+        else:
+            # Default to mean if method is not recognized
+            result = np.mean(head_agg, axis=2)
     else:  # 3D tensor: [target_len, source_len, hidden_size]
         if method == "sum":
-            return np.sum(tensor, axis=2)
+            result = np.sum(tensor, axis=2)
         elif method == "mean":
-            return np.mean(tensor, axis=2)
+            result = np.mean(tensor, axis=2)
         elif method == "l2_norm":
-            return np.sqrt(np.sum(tensor ** 2, axis=2))
+            result = np.sqrt(np.sum(tensor ** 2, axis=2))
         elif method == "abs_sum":
-            return np.sum(np.abs(tensor), axis=2)
+            result = np.sum(np.abs(tensor), axis=2)
         elif method == "max":
-            return np.max(tensor, axis=2)
-
-    raise ValueError(f"Unknown aggregation method: {method}")
+            result = np.max(tensor, axis=2)
+        else:
+            # Default to mean if method is not recognized
+            result = np.mean(tensor, axis=2)
+    
+    # Final check for any remaining non-finite values
+    if not np.isfinite(result).all():
+        result = np.nan_to_num(result, nan=0.0, posinf=1e30, neginf=-1e30)
+    
+    return result
 
 
 def get_available_models_and_methods(data_dir: str) -> Dict[str, List[str]]:

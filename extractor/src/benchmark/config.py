@@ -32,13 +32,13 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
-       {
-           "llm_id": "meta-llama/Llama-3.2-1B",
-           "name": "Llama-3-2-1B",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
+    {
+        "llm_id": "meta-llama/Llama-3.2-1B",
+        "name": "Llama-3-2-1B",
+        "device": "auto",
+        "torch_dtype": "float16",
+        "type": "causal"
+    },
     #    {
     #        "name": "Llama-3-1-8B",
     #        "llm_id": "meta-llama/Llama-3.1-8B",
@@ -46,14 +46,22 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
+    {
+        "llm_id": "meta-llama/Llama-4-Scout-17B-16E",
+        "name": "Llama-4-Scout-17B-16E",
+        "device": "auto",
+        "torch_dtype": "float16",
+        "type": "causal"
+
+    },
     #    # ----------
-       {
-           "name": "DeepSeek-R1-Distill-Llama-8B",
-           "llm_id": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
+    {
+        "name": "DeepSeek-R1-Distill-Llama-8B",
+        "llm_id": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+        "device": "auto",
+        "torch_dtype": "float16",
+        "type": "causal"
+    },
     #    {
     #        "llm_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
     #        "name": "DeepSeek-R1-Distill-Qwen-1.5B",
@@ -61,13 +69,13 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
-       {
-           "name": "DeepSeek-R1-Distill-Qwen-7B",
-           "llm_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
+    {
+        "name": "DeepSeek-R1-Distill-Qwen-7B",
+        "llm_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "device": "auto",
+        "torch_dtype": "float16",
+        "type": "causal"
+    },
     #    {
     #        "llm_id": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
     #        "name": "DeepSeek-R1-Distill-Qwen-14B",
@@ -83,13 +91,13 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
-       {
-           "llm_id": "Qwen/Qwen2.5-VL-3B-Instruct",
-           "name": "Qwen2.5-VL-3B-Instruct",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
+    #    {
+    #        "llm_id": "Qwen/Qwen2.5-VL-3B-Instruct",
+    #        "name": "Qwen2.5-VL-3B-Instruct",
+    #        "device": "auto",
+    #        "torch_dtype": "float16",
+    #        "type": "causal"
+    #    },
     #    {
     #        "llm_id": "Qwen/Qwen2.5-VL-7B-Instruct",
     #        "name": "Qwen2.5-VL-7B-Instruct",
@@ -112,13 +120,13 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
-       {
-           "llm_id": "mistralai/Mistral-Nemo-Base-2407",
-           "name": "Mistral-Nemo-Base-2407",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
+    #    {
+    #        "llm_id": "mistralai/Mistral-Nemo-Base-2407",
+    #        "name": "Mistral-Nemo-Base-2407",
+    #        "device": "auto",
+    #        "torch_dtype": "float16",
+    #        "type": "causal"
+    #    },
     #    # ----------
     #    {
     #        "llm_id": "google/gemma-3-27b-it",
@@ -148,20 +156,20 @@ MODELS = [
     #        "torch_dtype": "float16",
     #        "type": "causal"
     #    },
-       {
-           "llm_id": "google/gemma-3-4b-it",
-           "name": "Gemma-3-4b-it",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
-       {
-           "llm_id": "google/gemma-3-4b-pt",
-           "name": "Gemma-3-4b-pt",
-           "device": "auto",
-           "torch_dtype": "float16",
-           "type": "causal"
-       },
+    #    {
+    #        "llm_id": "google/gemma-3-4b-it",
+    #        "name": "Gemma-3-4b-it",
+    #        "device": "auto",
+    #        "torch_dtype": "float16",
+    #        "type": "causal"
+    #    },
+    #    {
+    #        "llm_id": "google/gemma-3-4b-pt",
+    #        "name": "Gemma-3-4b-pt",
+    #        "device": "auto",
+    #        "torch_dtype": "float16",
+    #        "type": "causal"
+    #    },
     #    {
     #        "llm_id": "google/gemma-3-1b-it",
     #        "name": "Gemma-3-1b-it",
