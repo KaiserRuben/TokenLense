@@ -57,6 +57,9 @@ def get_files(model: str, method: str, include_details: bool = False) -> ModelMe
     files = [f.name for f in method_dir.glob("*.json")]
     files = [f for f in files if "_inseq" in f]
     
+    # Sort files alphabetically to ensure consistent ordering across models
+    files.sort()
+    
     file_details = None
     if include_details:
         # Extract basic information from each file without loading the full content

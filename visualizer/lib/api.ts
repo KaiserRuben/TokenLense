@@ -185,6 +185,7 @@ export async function getDetailedAttribution(
 
 /**
  * Get token importance across all files for a model and method
+ * This function works on the client side by aggregating data from existing endpoints
  */
 export async function getTokenImportanceAcrossFiles(
   model: string,
@@ -193,19 +194,30 @@ export async function getTokenImportanceAcrossFiles(
 ): Promise<TokenImportanceData[]> {
   try {
     // First get all files for this model/method
-    const filesData = await getModelMethodFiles(model, method, true);
+    const filesData = await getModelMethodFiles(model, method);
     
     if (!filesData.files || filesData.files.length === 0) {
       return [];
     }
     
-    // Get attributions for each file
-    const fileIds = filesData.files.map(file => parseInt(file));
-    const attributionPromises = fileIds.map(fileId => 
-      getAttribution(model, method, fileId, aggregation)
+    // Use file indices instead of actual file IDs - this matches the way files are accessed
+    // in the model pages (0, 1, 2...) rather than using the actual file IDs
+    const fileIndices = Array.from({ length: filesData.files.length }, (_, index) => index);
+    
+    // Get attributions for each file by index, not by ID
+    const attributionPromises = fileIndices.map(index => 
+      getAttribution(model, method, index, aggregation)
+        .catch(error => {
+          console.error(`Error fetching attribution for file index ${index}:`, error);
+          return null;
+        })
     );
     
-    const attributions = await Promise.all(attributionPromises);
+    const attributions = (await Promise.all(attributionPromises)).filter(Boolean) as AttributionResponse[];
+    
+    if (attributions.length === 0) {
+      return [];
+    }
     
     // Process all tokens and their importance across files
     const tokenMap = new Map<string, { 
@@ -215,17 +227,27 @@ export async function getTokenImportanceAcrossFiles(
     }>();
     
     attributions.forEach((attribution, index) => {
-      const fileId = fileIds[index].toString();
+      if (!attribution) return;
+      
+      const fileId = attribution.file_id.toString();
       const sourceTokens = attribution.source_tokens;
       const matrix = attribution.attribution_matrix;
       
-      // Calculate importance for input tokens
-      const inputImportance = sourceTokens.map((_, colIdx) => {
-        return matrix.reduce((sum, row) => sum + (row[colIdx] || 0), 0);
+      // Calculate importance for input tokens using the same logic as in calculateTokenImportance
+      const inputImportance = Array(sourceTokens.length).fill(0);
+      
+      matrix.forEach(row => {
+        row.forEach((value, colIdx) => {
+          if (colIdx < sourceTokens.length) {
+            inputImportance[colIdx] += value;
+          }
+        });
       });
       
       // Add to token map
       sourceTokens.forEach((token, idx) => {
+        if (!token.trim()) return; // Skip empty tokens
+        
         const importance = inputImportance[idx];
         if (!tokenMap.has(token)) {
           tokenMap.set(token, { 
