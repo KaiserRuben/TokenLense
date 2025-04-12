@@ -212,7 +212,7 @@ const ComparisonTokenCloud: React.FC<ComparisonTokenCloudProps> = ({
         <div key={index} className="group">
             <div className="flex flex-col items-center">
                 <div className="relative">
-                    {/* @ts-ignore */}
+                    {/* @ts-expect-error */}
                     <span ref={el => wordRefs.current[globalIndex] = el}
                         className="px-2 py-1 rounded-lg cursor-pointer transition-all duration-300 ease-in-out
                      hover:shadow-lg hover:scale-105 text-sm"

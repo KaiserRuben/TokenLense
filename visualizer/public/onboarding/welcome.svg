@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>TokenLense Welcome</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle fill="#F97316" cx="100" cy="100" r="80"></circle>
+        <path d="M70,70 L130,70 L130,130 L70,130 L70,70 Z" stroke="#FFFFFF" stroke-width="4"></path>
+        <circle fill="#FFFFFF" cx="85" cy="85" r="8"></circle>
+        <circle fill="#FFFFFF" cx="115" cy="85" r="8"></circle>
+        <circle fill="#FFFFFF" cx="85" cy="115" r="8"></circle>
+        <circle fill="#FFFFFF" cx="115" cy="115" r="8"></circle>
+        <line x1="85" y1="85" x2="115" y2="115" stroke="#FFFFFF" stroke-width="3"></line>
+        <line x1="85" y1="115" x2="115" y2="85" stroke="#FFFFFF" stroke-width="3"></line>
+    </g>
+</svg>

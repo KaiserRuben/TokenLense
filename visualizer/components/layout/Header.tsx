@@ -1,107 +1,68 @@
 "use client"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils"
+import ResetOnboarding from "./ResetOnboarding"
+import { Github } from "lucide-react"
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Eye, BarChart2, Code, SplitSquareVertical, Hash } from 'lucide-react';
+const navItems = [
+  { href: "/", label: "Models" },
+  { href: "/performance", label: "Performance" },
+  { href: "/compare-selector", label: "Compare" },
+  { href: "/token-importance", label: "Token Importance" },
+]
 
 export default function Header() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const isActive = (path: string) => {
-    return pathname.startsWith(path);
-  };
+  // Check if current path matches a nav item (including subpaths)
+  const isActivePath = (path: string) => {
+    if (path === "/") {
+      return pathname === "/"
+    }
+    return pathname.startsWith(path)
+  }
 
   return (
-      <header className="border-b">
-        <div className="container mx-auto px-4 flex items-center justify-between h-16">
-          <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center space-x-2">
-              <Eye className="h-6 w-6" />
-              <span className="text-xl font-bold">TokenLense</span>
+      <header className="border-b border-border sticky top-0 bg-background z-10">
+        <div className="container mx-auto px-4 flex h-16 items-center justify-between">
+          <div className="flex gap-6 items-center">
+            <Link href="/" className="flex items-center gap-2">
+              <span className="font-semibold text-xl">TokenLense</span>
             </Link>
 
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link
-                  href="/"
-                  className={`${
-                      pathname === '/' ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
-                  } hover:text-foreground transition-colors`}
-              >
-                Models
-              </Link>
-              {/*<Link */}
-              {/*  href="/attribution" */}
-              {/*  className={`${*/}
-              {/*    isActive('/attribution') ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'*/}
-              {/*  } hover:text-foreground transition-colors`}*/}
-              {/*>*/}
-              {/*  Attribution*/}
-              {/*</Link>*/}
-
-              <Link
-                  href="/compare-selector"
-                  className={`${
-                      isActive('/compare') ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
-                  } hover:text-foreground transition-colors flex items-center gap-1`}
-              >
-                <SplitSquareVertical className="h-4 w-4" />
-                <span>Compare</span>
-              </Link>
-              <Link
-                  href="/token-importance"
-                  className={`${
-                      isActive('/token-importance') ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
-                  } hover:text-foreground transition-colors flex items-center gap-1`}
-              >
-                <Hash className="h-4 w-4" />
-                <span>Token Importance</span>
-              </Link>
-              <Link
-                  href="/performance"
-                  className={`${
-                      isActive('/performance') ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
-                  } hover:text-foreground transition-colors flex items-center gap-1`}
-              >
-                <BarChart2 className="h-4 w-4" />
-                <span>Performance</span>
-              </Link>
+            <nav className="hidden md:flex gap-6">
+              {navItems.map((item) => (
+                  <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                          "text-sm transition-colors hover:text-foreground/80",
+                          isActivePath(item.href)
+                              ? "text-foreground font-medium"
+                              : "text-foreground/60"
+                      )}
+                  >
+                    {item.label}
+                  </Link>
+              ))}
             </nav>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <Link
-                href="/performance"
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-                title="Performance Metrics"
-            >
-              <BarChart2 className="h-5 w-5" />
-            </Link>
-            <Link
-                href="/compare-selector"
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-                title="Compare Models/Methods"
-            >
-              <SplitSquareVertical className="h-5 w-5" />
-            </Link>
-            <Link
-                href="/token-importance"
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-                title="Token Importance"
-            >
-              <Hash className="h-5 w-5" />
-            </Link>
+          <div className="flex items-center gap-4">
+            <ResetOnboarding />
+
             <a
                 href="https://github.com/KaiserRuben/TokenLense"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground transition-colors"
-                title="View on GitHub"
+                className="transition-colors hover:text-foreground/80 flex items-center gap-1 text-foreground/60"
             >
-              <Code className="h-5 w-5" />
+              <Github size={18} />
+              <span className="hidden sm:inline">GitHub</span>
             </a>
           </div>
         </div>
       </header>
-  );
+  )
 }

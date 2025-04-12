@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Attribution Methods</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#F0F0F0" x="30" y="40" width="140" height="40" rx="4"></rect>
+        <rect fill="#F0F0F0" x="30" y="90" width="140" height="40" rx="4"></rect>
+        <rect stroke="#3B82F6" stroke-width="3" fill="#EFF6FF" x="30" y="140" width="140" height="40" rx="4"></rect>
+        
+        <text font-family="sans-serif" font-size="10" fill="#666666" text-anchor="middle">
+            <tspan x="100" y="65">Attention</tspan>
+        </text>
+        <text font-family="sans-serif" font-size="10" fill="#666666" text-anchor="middle">
+            <tspan x="100" y="115">Integrated Gradients</tspan>
+        </text>
+        <text font-family="sans-serif" font-size="10" fill="#3B82F6" font-weight="bold" text-anchor="middle">
+            <tspan x="100" y="165">Saliency</tspan>
+        </text>
+        
+        <circle fill="#3B82F6" cx="45" cy="160" r="5"></circle>
+        <path d="M50,160 L55,160" stroke="#3B82F6" stroke-width="2"></path>
+    </g>
+</svg>

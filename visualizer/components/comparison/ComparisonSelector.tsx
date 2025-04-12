@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getModels, getModelMethods, getModelMethodFiles, getAggregationMethods } from '@/lib/api';
-import { ModelInfo, ModelMethods, ModelMethodFile, AggregationOptions } from '@/lib/types';
 
 interface ComparisonSelectorProps {
     initialFileId?: number;

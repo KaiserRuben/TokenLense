@@ -225,7 +225,7 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
       <div key={index} className="group">
         <div className="flex flex-col items-center">
           <div className="relative">
-            {/* @ts-ignore */}
+            {/* @ts-expect-error */}
             <span ref={el => wordRefs.current[globalIndex] = el}
                   className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-in-out
                 hover:shadow-lg hover:scale-105"

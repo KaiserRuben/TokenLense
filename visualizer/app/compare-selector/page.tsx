@@ -2,8 +2,6 @@
 
 import React from 'react';
 import ComparisonSelector from '@/components/comparison/ComparisonSelector';
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
 
 export default function ComparisonSelectorPage() {
     return (

@@ -83,7 +83,7 @@ export default function Home() {
           <p>
             TokenLense provides advanced visualizations for token attribution data from language models.
             It helps researchers and developers understand how different parts of an input prompt influence
-            the model's output generation, revealing insights into the model's internal decision-making.
+            the model&#39;s output generation, revealing insights into the model&#39;s internal decision-making.
           </p>
           <p>
             Select a model above to explore its attribution methods and visualize token relationships.

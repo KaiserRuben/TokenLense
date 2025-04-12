@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getAttribution } from '@/lib/api';
 import { convertAttributionToAnalysisResult } from '@/lib/utils';
@@ -10,7 +10,33 @@ import SplitView from '@/components/comparison/SplitView';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
-export default function ComparisonPage() {
+// Loading component for the Suspense boundary
+function ComparisonLoading() {
+    return (
+        <div className="space-y-8">
+            <div className="flex items-center gap-2">
+                <div className="flex items-center text-sm text-muted-foreground">
+                    <div className="h-4 w-4 mr-1 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-4 w-40 bg-gray-200 rounded animate-pulse" />
+                </div>
+            </div>
+
+            <div>
+                <div className="h-8 w-64 bg-gray-200 rounded animate-pulse mb-2" />
+                <div className="h-4 w-80 bg-gray-200 rounded animate-pulse" />
+            </div>
+
+            <div className="h-12 w-full bg-gray-200 rounded animate-pulse" />
+
+            <div className="flex items-center justify-center h-64">
+                <div className="animate-pulse text-muted-foreground">Loading comparison data...</div>
+            </div>
+        </div>
+    );
+}
+
+// Content component that uses the searchParams
+function ComparisonContent() {
     const searchParams = useSearchParams();
 
     // Parse parameters from URL
@@ -217,5 +243,14 @@ export default function ComparisonPage() {
                 />
             )}
         </div>
+    );
+}
+
+// Main component with Suspense boundary
+export default function ComparisonPage() {
+    return (
+        <Suspense fallback={<ComparisonLoading />}>
+            <ComparisonContent />
+        </Suspense>
     );
 }

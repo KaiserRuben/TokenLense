@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Select Model</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#F0F0F0" x="40" y="60" width="50" height="80" rx="4"></rect>
+        <rect fill="#F0F0F0" x="100" y="60" width="50" height="80" rx="4"></rect>
+        <rect stroke="#F97316" stroke-width="3" fill="#FFF7ED" x="70" y="40" width="50" height="80" rx="4"></rect>
+        <text font-family="sans-serif" font-size="12" font-weight="bold" fill="#F97316" x="83" y="80">
+            <tspan>LLM</tspan>
+        </text>
+        <path d="M95,100 L95,105 L90,105 L95,115 L100,105 L95,105 Z" fill="#F97316"></path>
+    </g>
+</svg>

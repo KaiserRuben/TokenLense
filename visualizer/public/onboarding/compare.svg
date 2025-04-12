@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>Compare</title>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#F0F0F0" x="30" y="60" width="60" height="80" rx="4"></rect>
+        <rect fill="#F0F0F0" x="110" y="60" width="60" height="80" rx="4"></rect>
+        
+        <circle fill="#F97316" cx="45" cy="80" r="6"></circle>
+        <circle fill="#F97316" cx="65" cy="80" r="6"></circle>
+        <circle fill="#3B82F6" cx="55" cy="110" r="6"></circle>
+        <circle fill="#3B82F6" cx="75" cy="110" r="6"></circle>
+        
+        <circle fill="#F97316" cx="125" cy="80" r="6"></circle>
+        <circle fill="#F97316" cx="145" cy="80" r="6"></circle>
+        <circle fill="#3B82F6" cx="135" cy="110" r="6"></circle>
+        <circle fill="#3B82F6" cx="155" cy="110" r="6"></circle>
+        
+        <path d="M45,80 C45,95 55,95 55,110" stroke="#F97316" stroke-width="2" stroke-dasharray="2,2"></path>
+        <path d="M125,80 C125,95 135,95 135,110" stroke="#F97316" stroke-width="2"></path>
+        
+        <line x1="95" y1="100" x2="105" y2="100" stroke="#666666" stroke-width="2"></line>
+        <line x1="95" y1="105" x2="105" y2="105" stroke="#666666" stroke-width="2"></line>
+        
+        <text font-family="sans-serif" font-size="9" fill="#666666" text-anchor="middle">
+            <tspan x="60" y="140">Model A</tspan>
+            <tspan x="140" y="140">Model B</tspan>
+        </text>
+    </g>
+</svg>

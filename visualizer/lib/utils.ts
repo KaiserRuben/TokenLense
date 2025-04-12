@@ -28,28 +28,28 @@ export function cleanTokenText(tokenText: string): string {
 /**
  * Clean system tokens that shouldn't be displayed
  */
-export function cleanSystemTokens(tokens: TokenData[], startIndex = 0, endIndex?: number): string {
-  const SYSTEM_TOKENS = new Set([
-    "<|begin_of_text|>", "<|start_header_id|>", "<|end_header_id|>",
-    "<|eot_id|>", "system"
-  ]);
-  
-  return tokens
-    .slice(startIndex, endIndex)
-    .filter(t => !SYSTEM_TOKENS.has(t.clean_token))
-    .map(t => {
-      if (t.token === 'assistant' && t.clean_token === 'assistant') {
-        return "\nAssistant: ";
-      }
-      if (t.token === 'user' && t.clean_token === 'user') {
-        return "\nUser: ";
-      }
-      return t.clean_token;
-    })
-    .filter(t => t.trim() !== '') // Remove empty tokens
-    .join(' ')
-    .trim();
-}
+// export function cleanSystemTokens(tokens: TokenData[], startIndex = 0, endIndex?: number): string {
+//   const SYSTEM_TOKENS = new Set([
+//     "<|begin_of_text|>", "<|start_header_id|>", "<|end_header_id|>",
+//     "<|eot_id|>", "system"
+//   ]);
+//
+//   return tokens
+//     .slice(startIndex, endIndex)
+//     .filter(t => !SYSTEM_TOKENS.has(t.clean_token))
+//     .map(t => {
+//       if (t.token === 'assistant' && t.clean_token === 'assistant') {
+//         return "\nAssistant: ";
+//       }
+//       if (t.token === 'user' && t.clean_token === 'user') {
+//         return "\nUser: ";
+//       }
+//       return t.clean_token;
+//     })
+//     .filter(t => t.trim() !== '') // Remove empty tokens
+//     .join(' ')
+//     .trim();
+// }
 
 /**
  * Calculate token importance based on attribution matrix
