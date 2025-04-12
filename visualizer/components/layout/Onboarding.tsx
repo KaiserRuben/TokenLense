@@ -503,7 +503,7 @@ export default function Onboarding({ path }: OnboardingProps) {
                     </div>
                 </div>
 
-                <SheetFooter className="flex justify-between sm:justify-between border-t pt-4">
+                <SheetFooter className="flex-row justify-between sm:justify-between border-t pt-4">
                     <div className="flex items-center gap-2">
                         {currentStep > 0 ? (
                             <Button
