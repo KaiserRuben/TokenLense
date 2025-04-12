@@ -1,12 +1,22 @@
 import { NextResponse } from 'next/server';
-import { getTimingResults } from '@/lib/api';
+import { MethodTimingResult, PromptTimingResult } from '@/lib/types';
+
+// Base API URL from server environment variable
+const API_BASE_URL = process.env.API_URL || 'http://localhost:8000';
 
 export async function GET() {
   try {
-    const { method_timing, prompt_timing } = await getTimingResults();
+    const response = await fetch(`${API_BASE_URL}/performance/timing`);
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    const { method_timing, prompt_timing } = data;
 
     // Process data for different visualizations
-    const methodPerformance = method_timing.map(item => {
+    const methodPerformance = method_timing.map((item: MethodTimingResult) => {
       // Determine hardware type (CPU vs GPU)
       const hardware = item.cuda_available && item.gpu_info ? 'GPU' : 'CPU';
       
@@ -21,13 +31,13 @@ export async function GET() {
       };
     });
     
-    const tokensPerSecond = prompt_timing.map(item => ({
+    const tokensPerSecond = prompt_timing.map((item: PromptTimingResult) => ({
       method: item.attribution_method,
       model: item.model,
       tokens_per_second: item.tokens_per_second
     }));
     
-    const hardwareComparison = method_timing.map(item => {
+    const hardwareComparison = method_timing.map((item: MethodTimingResult) => {
       const hardware = item.gpu_info || item.cpu_model || 'Unknown';
       
       // Use either average_time or average_prompt_time, whichever is available
@@ -51,9 +61,9 @@ export async function GET() {
       }
     });
   } catch (error) {
-    console.error('Error in performance API route:', error);
+    console.error('Performance data API error:', error);
     return NextResponse.json(
-      { error: 'Failed to process performance data' },
+      { error: 'Failed to fetch performance data' }, 
       { status: 500 }
     );
   }
