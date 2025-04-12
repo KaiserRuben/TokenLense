@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 
 # Install poetry and dependencies
-RUN pip install -requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy the application code
 COPY . .
