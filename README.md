@@ -7,10 +7,6 @@ TokenLense is a comprehensive framework for analyzing, visualizing, and interpre
 [![Next.js](https://img.shields.io/badge/Next.js-15+-blue.svg)](https://nextjs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://www.docker.com/)
 
-<p align="center">
-  <img src="https://via.placeholder.com/800x400?text=TokenLense+Visualization" alt="TokenLense Visualization" width="800"/>
-</p>
-
 ## Overview
 
 TokenLense consists of three main components:
@@ -29,6 +25,7 @@ TokenLense consists of three main components:
   - Layer Gradient × Activation
   - LIME
   - Saliency maps
+  - [...](https://inseq.org/en/v0.6.0/main_classes/feature_attribution.html#inseq.attr.FeatureAttribution)
 - **Interactive Visualization**: Explore token relationships through intuitive UI
 - **Performance Analysis**: Compare attribution methods across models and hardware
 - **Comparison View**: Side-by-side analysis of different models and methods
@@ -54,7 +51,19 @@ The easiest way to run TokenLense is using Docker Compose:
 
 2. Make sure you have attribution data in the `analyzer/data` directory. If not, either:
    - Run the extractor to generate data (see [Extractor Usage](#extractor-usage))
-   - Use the sample data provided in the repository
+   - download [sample data](https://tumde-my.sharepoint.com/:f:/g/personal/ruben_kaiser_tum_de/Et5_y-L6FJJPkaswFl-VfYkB_t_C2xPPhsJzvfufynZtOQ?e=peIRzA) (only available for [TUM](https://tum.de) members)
+
+   Notice that the data must be organized in the following structure:
+   ```
+   analyzer/data/
+   ├── MODEL_NAME/
+   │   ├── method_ATTRIBUTION_METHOD/
+   │   │   └── data/
+   │   │       ├── <attribution_data>_inseq.json
+   │   │       └── ...
+   ```
+
+   where `MODEL_NAME` is the name of the model (e.g., `gpt2`), `ATTRIBUTION_METHOD` is the name of the attribution method (e.g., `input_times_gradient`), and `<attribution_data>` is the name of the generated attribution data file ending with `_inseq.json`.
 
 3. Start the services:
    ```bash
