@@ -183,6 +183,87 @@ export async function getDetailedAttribution(
   );
 }
 
+/**
+ * Get token importance across all files for a model and method
+ */
+export async function getTokenImportanceAcrossFiles(
+  model: string,
+  method: string,
+  aggregation: AggregationMethod = 'sum'
+): Promise<TokenImportanceData[]> {
+  try {
+    // First get all files for this model/method
+    const filesData = await getModelMethodFiles(model, method, true);
+    
+    if (!filesData.files || filesData.files.length === 0) {
+      return [];
+    }
+    
+    // Get attributions for each file
+    const fileIds = filesData.files.map(file => parseInt(file));
+    const attributionPromises = fileIds.map(fileId => 
+      getAttribution(model, method, fileId, aggregation)
+    );
+    
+    const attributions = await Promise.all(attributionPromises);
+    
+    // Process all tokens and their importance across files
+    const tokenMap = new Map<string, { 
+      token: string, 
+      importances: Record<string, number>,
+      totalImportance: number 
+    }>();
+    
+    attributions.forEach((attribution, index) => {
+      const fileId = fileIds[index].toString();
+      const sourceTokens = attribution.source_tokens;
+      const matrix = attribution.attribution_matrix;
+      
+      // Calculate importance for input tokens
+      const inputImportance = sourceTokens.map((_, colIdx) => {
+        return matrix.reduce((sum, row) => sum + (row[colIdx] || 0), 0);
+      });
+      
+      // Add to token map
+      sourceTokens.forEach((token, idx) => {
+        const importance = inputImportance[idx];
+        if (!tokenMap.has(token)) {
+          tokenMap.set(token, { 
+            token, 
+            importances: {}, 
+            totalImportance: 0 
+          });
+        }
+        
+        const tokenData = tokenMap.get(token)!;
+        tokenData.importances[fileId] = importance;
+        tokenData.totalImportance += importance;
+      });
+    });
+    
+    // Convert map to array and sort by importance
+    const result = Array.from(tokenMap.values())
+      .map(({ token, importances, totalImportance }) => ({
+        token,
+        token_index: -1, // Not applicable for aggregated view
+        files: Object.keys(importances),
+        importances,
+        importance: totalImportance
+      }))
+      .sort((a, b) => b.importance - a.importance);
+    
+    // Normalize importance values to [0,1]
+    const maxImportance = Math.max(...result.map(item => item.importance), 0.0001);
+    return result.map(item => ({
+      ...item,
+      importance: item.importance / maxImportance
+    }));
+  } catch (error) {
+    console.error('Error fetching token importance across files:', error);
+    return [];
+  }
+}
+
 // /**
 //  * Get raw attribution data (for debugging)
 //  */

@@ -205,4 +205,5 @@ export interface TokenImportanceData {
   token_index: number;
   files: string[];
   importances: Record<string, number>;
+  importance?: number; // Normalized importance value between 0 and 1
 }
