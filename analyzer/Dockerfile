@@ -29,6 +29,5 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Expose the API port
 EXPOSE 8000
 
-# Run with gunicorn for better performance in production
-# Using uvicorn workers - adjust worker count based on CPU cores (2-4 × num_cores + 1)
-CMD ["gunicorn", "main:app", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]
+# Run with uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
