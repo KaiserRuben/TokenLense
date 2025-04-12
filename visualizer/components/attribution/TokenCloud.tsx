@@ -11,7 +11,6 @@ interface TokenCloudProps {
   useRelativeStrength?: boolean;
   showBackground?: boolean;
   showConnections?: boolean;
-  showImportanceBars?: boolean;
   contextSize?: number;
 }
 
@@ -22,14 +21,13 @@ interface Connection {
 }
 
 const TokenCloud: React.FC<TokenCloudProps> = ({
-  analysis,
-  maxConnections = 3,
-  useRelativeStrength = true,
-  showBackground = true,
-  showConnections = true,
-  showImportanceBars = true,
-  contextSize = 10
-}) => {
+                                                 analysis,
+                                                 maxConnections = 3,
+                                                 useRelativeStrength = true,
+                                                 showBackground = true,
+                                                 showConnections = true,
+                                                 contextSize = 10
+                                               }) => {
   const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null);
   const [lockedWordIndex, setLockedWordIndex] = useState<number | null>(null);
   const [connections, setConnections] = useState<Connection[]>([]);
@@ -41,8 +39,8 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
   useEffect(() => {
     if (analysis?.data) {
       const importance = calculateTokenImportance(
-        analysis.data.input_tokens,
-        analysis.data.normalized_association
+          analysis.data.input_tokens,
+          analysis.data.normalized_association
       );
       setTokenImportance(importance);
     }
@@ -50,10 +48,10 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
 
   // Function to create a visual connection between tokens
   const createConnection = (
-    startIndex: number,
-    endIndex: number,
-    strength: number,
-    influences: Array<{index: number, value: number}>
+      startIndex: number,
+      endIndex: number,
+      strength: number,
+      influences: Array<{index: number, value: number}>
   ): Connection | null => {
     const startEl = wordRefs.current[startIndex];
     const endEl = wordRefs.current[endIndex];
@@ -90,32 +88,35 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
 
   // Update connections when a token is hovered/clicked
   const updateConnections = (index: number) => {
-    if (!analysis?.data) return;
-    
+    if (!analysis?.data || !showConnections) {
+      setConnections([]);
+      return;
+    }
+
     const newConnections: Connection[] = [];
     const inputLength = analysis.data.input_tokens.length;
-    
+
     // Find top influences for this token
     const influences = findTopInfluences(
-      index,
-      inputLength,
-      analysis.data.normalized_association,
-      maxConnections
+        index,
+        inputLength,
+        analysis.data.normalized_association,
+        maxConnections
     );
-    
+
     // Create connection for each influence
     for (const {index: influenceIndex, value} of influences) {
       if (value > 0) {
         const startIndex = Math.min(index, influenceIndex);
         const endIndex = Math.max(index, influenceIndex);
-        
+
         const connection = createConnection(
-          startIndex,
-          endIndex,
-          value,
-          influences
+            startIndex,
+            endIndex,
+            value,
+            influences
         );
-        
+
         if (connection) newConnections.push(connection);
       }
     }
@@ -152,92 +153,93 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
 
   // Calculate background highlight color for tokens
   const getTokenStyle = (index: number): React.CSSProperties => {
-    if (!showBackground || activeWordIndex === null || !analysis?.data) return {};
-
-    const inputLength = analysis.data.input_tokens.length;
-    const isInputToken = index < inputLength;
-    let strength = 0;
-
-    if (activeWordIndex < inputLength) {
-      if (!isInputToken) {
-        const outputIndex = index - inputLength;
-        if (outputIndex < analysis.data.normalized_association.length) {
-          const row = analysis.data.normalized_association[outputIndex];
-          strength = row[activeWordIndex] || 0;
-        }
-      }
-    } else {
-      const activeOutputIndex = activeWordIndex - inputLength;
-      if (activeOutputIndex < analysis.data.normalized_association.length) {
-        const row = analysis.data.normalized_association[activeOutputIndex];
-        
-        if (isInputToken && index < row.length) {
-          strength = row[index] || 0;
-        } else if (index < activeWordIndex && index - inputLength < row.length) {
-          strength = row[index - inputLength] || 0;
-        }
-      }
-    }
-
+    // Always highlight the active token, regardless of visualization mode
     if (index === activeWordIndex) {
-      return {};
+      return {
+        backgroundColor: 'rgba(234, 88, 12, 0.3)',
+        boxShadow: '0 0 5px rgba(234, 88, 12, 0.5)'
+      };
     }
 
-    return {
-      backgroundColor: `rgba(234, 88, 12, ${strength})`,
-      opacity: 0.5 + (strength * 0.5)
-    };
+    // If a token is active/hovered AND we're in background mode, show relationship strength
+    if (showBackground && activeWordIndex !== null && analysis?.data) {
+      const inputLength = analysis.data.input_tokens.length;
+      const isInputToken = index < inputLength;
+      let strength = 0;
+
+      if (activeWordIndex < inputLength) {
+        if (!isInputToken) {
+          const outputIndex = index - inputLength;
+          if (outputIndex < analysis.data.normalized_association.length) {
+            const row = analysis.data.normalized_association[outputIndex];
+            strength = row[activeWordIndex] || 0;
+          }
+        }
+      } else {
+        const activeOutputIndex = activeWordIndex - inputLength;
+        if (activeOutputIndex < analysis.data.normalized_association.length) {
+          const row = analysis.data.normalized_association[activeOutputIndex];
+
+          if (isInputToken && index < row.length) {
+            strength = row[index] || 0;
+          } else if (index < activeWordIndex && index - inputLength < row.length) {
+            strength = row[index - inputLength] || 0;
+          }
+        }
+      }
+
+      return {
+        backgroundColor: `rgba(234, 88, 12, ${strength * 0.7})`
+      };
+    }
+    // If no token is hovered OR we're in connection mode, show the general importance
+    else if (tokenImportance[index] !== undefined) {
+      const importance = tokenImportance[index];
+      return {
+        backgroundColor: `rgba(234, 88, 12, ${importance * 0.5})`
+      };
+    }
+
+    return {};
   };
 
   // Render a legend for the visualization
   const renderLegend = () => (
-    <div className="absolute top-4 right-4 flex items-center gap-4 text-sm">
-      <div className="flex items-center gap-2">
-        <div className="w-3 h-3 rounded-full bg-orange-500" />
-        <span>Input Tokens</span>
+      <div className="absolute top-4 right-4 flex items-center gap-4 text-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-orange-500" />
+          <span>Input Tokens</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-blue-500" />
+          <span>Output Tokens</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Info size={16} className="text-muted-foreground cursor-help" />
+        </div>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="w-3 h-3 rounded-full bg-blue-500" />
-        <span>Output Tokens</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <Info size={16} className="text-muted-foreground cursor-help" 
-          // title="Hover over tokens to see relationships. Click to lock selection. Connection strength shown by line thickness."
-        />
-      </div>
-    </div>
   );
 
-  // Render a single token with its hover effects and importance bar
+  // Render a single token with its hover effects
   const renderToken = (token: { clean_token: string, token_id: number }, index: number, globalIndex: number) => (
-    <div key={index} className="group">
-      <div className="flex flex-col items-center gap-1">
-        <div className="relative">
-          {/* @ts-ignore */}
-          <span ref={el => wordRefs.current[globalIndex] = el}
-            className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-in-out
+      <div key={index} className="group">
+        <div className="flex flex-col items-center">
+          <div className="relative">
+            {/* @ts-ignore */}
+            <span ref={el => wordRefs.current[globalIndex] = el}
+                  className="px-3 py-1.5 rounded-lg cursor-pointer transition-all duration-300 ease-in-out
                 hover:shadow-lg hover:scale-105"
-            style={getTokenStyle(globalIndex)}
-            onMouseEnter={() => handleWordHover(globalIndex)}
-            onMouseLeave={handleWordLeave}
-            onClick={() => handleWordClick(globalIndex)}
-            title={`Token: ${token.clean_token}, ID: ${token.token_id}`}
-          >
+                  style={getTokenStyle(globalIndex)}
+                  onMouseEnter={() => handleWordHover(globalIndex)}
+                  onMouseLeave={handleWordLeave}
+                  onClick={() => handleWordClick(globalIndex)}
+                  title={`Token: ${token.clean_token}, ID: ${token.token_id}`}
+            >
             {token.clean_token || '<empty>'}
           </span>
-        </div>
-        {showImportanceBars && (
-          <div className="w-full bg-muted rounded-full h-1.5">
-            <div
-              className="bg-foreground rounded-full h-1.5 transition-all duration-300"
-              style={{
-                width: `${(tokenImportance[globalIndex] || 0) * 100}%`
-              }}
-            />
           </div>
-        )}
+        </div>
       </div>
-    </div>
   );
 
   if (!analysis?.data) {
@@ -245,60 +247,60 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
   }
 
   return (
-    <div className="space-y-4">
-      <div
-        ref={containerRef}
-        className="relative min-h-[400px] rounded-xl border backdrop-blur-sm"
-      >
-        {renderLegend()}
+      <div className="space-y-4">
+        <div
+            ref={containerRef}
+            className="relative min-h-[400px] rounded-xl border backdrop-blur-sm"
+        >
+          {renderLegend()}
 
-        <div className="relative p-8 border-b">
-          <h3 className="absolute -top-3 left-4 px-2 bg-background text-sm text-orange-500">
-            Input Tokens
-          </h3>
-          <div className="flex flex-wrap gap-4">
-            {analysis.data.input_tokens.map((token, index) =>
-              renderToken(token, index, index)
-            )}
+          <div className="relative p-8 border-b">
+            <h3 className="absolute -top-3 left-4 px-2 bg-background text-sm text-orange-500">
+              Input Tokens
+            </h3>
+            <div className="flex flex-wrap gap-4 mt-4">
+              {analysis.data.input_tokens.map((token, index) =>
+                  renderToken(token, index, index)
+              )}
+            </div>
           </div>
-        </div>
 
-        {showConnections && (
-          <svg className="absolute inset-0 pointer-events-none overflow-visible">
-            <defs>
-              <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="rgb(234, 88, 12)" />
-                <stop offset="100%" stopColor="rgb(59, 130, 246)" />
-              </linearGradient>
-            </defs>
-            <g className="connection-lines">
-              {connections.map((connection, index) => (
-                <path
-                  key={index}
-                  d={connection.path}
-                  fill="none"
-                  stroke="url(#connectionGradient)"
-                  strokeWidth={connection.strokeWidth}
-                  strokeOpacity={connection.opacity}
-                  className="transition-all duration-300"
-                />
-              ))}
-            </g>
-          </svg>
-        )}
+          {showConnections && (
+              <svg className="absolute inset-0 pointer-events-none overflow-visible">
+                <defs>
+                  <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="rgb(234, 88, 12)" />
+                    <stop offset="100%" stopColor="rgb(59, 130, 246)" />
+                  </linearGradient>
+                </defs>
+                <g className="connection-lines">
+                  {connections.map((connection, index) => (
+                      <path
+                          key={index}
+                          d={connection.path}
+                          fill="none"
+                          stroke="url(#connectionGradient)"
+                          strokeWidth={connection.strokeWidth}
+                          strokeOpacity={connection.opacity}
+                          className="transition-all duration-300"
+                      />
+                  ))}
+                </g>
+              </svg>
+          )}
 
-        <div className="relative p-8">
-          <h3 className="absolute -top-3 left-4 px-2 bg-background text-sm text-blue-500">
-            Output Tokens
-          </h3>
-          <div className="flex flex-wrap gap-4">
-            {analysis.data.output_tokens.map((token, index) =>
-              renderToken(token, index, index + analysis.data.input_tokens.length)
-            )}
+          <div className="relative p-8">
+            <h3 className="absolute -top-3 left-4 px-2 bg-background text-sm text-blue-500">
+              Output Tokens
+            </h3>
+            <div className="flex flex-wrap gap-4">
+              {analysis.data.output_tokens.map((token, index) =>
+                  renderToken(token, index, index + analysis.data.input_tokens.length)
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
