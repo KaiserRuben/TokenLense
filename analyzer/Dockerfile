@@ -8,13 +8,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy dependency files first to leverage Docker caching
-COPY pyproject.toml poetry.lock poetry.toml ./
+COPY requirements.txt .
 
 # Install poetry and dependencies
-RUN pip install --no-cache-dir poetry && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-interaction --no-ansi --no-dev && \
-    pip install --no-cache-dir gunicorn
+RUN pip install -requirements.txt
 
 # Copy the application code
 COPY . .
