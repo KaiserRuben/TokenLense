@@ -56,7 +56,7 @@ export default function ResetOnboarding() {
                 <div className="py-4">
                     {!resetComplete ? (
                         <p>
-                            If you'd like to see the onboarding guides again, you can reset them here.
+                            If you&#39;d like to see the onboarding guides again, you can reset them here.
                             This will clear your onboarding preferences and show the guides the next time
                             you visit each page.
                         </p>

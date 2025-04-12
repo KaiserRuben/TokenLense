@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { AttributionResponse, TokenImportanceData } from '@/lib/types';
+import { AttributionResponse } from '@/lib/types';
 
 // Base API URL from server environment variable
 const API_BASE_URL = process.env.API_URL || 'http://localhost:8000';

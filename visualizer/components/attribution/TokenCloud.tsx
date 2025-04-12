@@ -26,7 +26,6 @@ const TokenCloud: React.FC<TokenCloudProps> = ({
                                                  useRelativeStrength = true,
                                                  showBackground = true,
                                                  showConnections = true,
-                                                 contextSize = 10
                                                }) => {
   const [activeWordIndex, setActiveWordIndex] = useState<number | null>(null);
   const [lockedWordIndex, setLockedWordIndex] = useState<number | null>(null);

@@ -85,7 +85,7 @@ export const TokenExplorer: React.FC<TokenExplorerProps> = ({ analysis }) => {
                 Normalize strengths
               </label>
               <p className="text-xs text-muted-foreground">
-                Make strengths relative within each token's connections
+                Make strengths relative within each token&#39;s connections
               </p>
             </div>
           </div>

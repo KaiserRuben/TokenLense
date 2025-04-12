@@ -149,7 +149,7 @@ export default function Onboarding({ path }: OnboardingProps) {
                                 represents a different model that you can explore.
                             </p>
                             <p>
-                                After selecting a model, you'll choose an attribution method to visualize
+                                After selecting a model, you&#39;ll choose an attribution method to visualize
                                 token relationships and gain insights into how the model processes information.
                             </p>
                         </div>
@@ -322,7 +322,7 @@ export default function Onboarding({ path }: OnboardingProps) {
                             </p>
                             <p>
                                 By analyzing patterns across different inputs, you can discover which tokens
-                                consistently have high influence in the model's decision-making process.
+                                consistently have high influence in the model&#39;s decision-making process.
                             </p>
                         </div>
                     ),
@@ -377,7 +377,7 @@ export default function Onboarding({ path }: OnboardingProps) {
                     content: (
                         <div className="space-y-4">
                             <p>
-                                You're now viewing the core visualization of TokenLense: a detailed view of
+                                You&#39;re now viewing the core visualization of TokenLense: a detailed view of
                                 token relationships and attribution scores between input and output tokens.
                             </p>
                             <p>

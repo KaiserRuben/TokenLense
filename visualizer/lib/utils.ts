@@ -11,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function cleanTokenText(tokenText: string): string {
   // Remove special token markers
-  let cleaned = tokenText
+  const cleaned = tokenText
     .replace(/^<.*>$/, '') // Remove tokens like <s>, </s>
     .replace(/\u0120/g, ' ') // Replace U+0120 (common in tokenizers) with space
     .replace('<|eot_id|>', '') // Remove EOT marker

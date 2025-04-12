@@ -152,17 +152,3 @@ export function processTimingResults(results: MethodTimingResult[]): MethodTimin
     } as MethodTimingResult;
   });
 }
-
-/**
- * Helper function to normalize an attribution matrix
- */
-function normalizeMatrix(matrix: number[][]): number[][] {
-  if (!matrix.length) return [];
-  
-  const normalized = matrix.map(row => {
-    const max = Math.max(...row.filter(v => v > 0), 0.0001);
-    return row.map(val => val / max);
-  });
-  
-  return normalized;
-}
