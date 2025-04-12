@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>TokenLense</title>
+    <defs>
+        <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#EFF6FF" />
+            <stop offset="100%" stop-color="#DBEAFE" />
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Lens circle -->
+        <circle fill="url(#lensGradient)" stroke="#3B82F6" stroke-width="4" cx="100" cy="100" r="70"></circle>
+
+        <!-- Lens handle -->
+        <rect fill="#3B82F6" transform="translate(160, 160) rotate(45) translate(-160, -160)" x="155" y="135" width="10" height="50" rx="5"></rect>
+
+        <!-- Cross-connections between tokens (strongest are most visible) -->
+        <path d="M50,65 C80,75 120,60 150,65" stroke="#F97316" stroke-width="2.5" stroke-opacity="0.9"></path>
+        <path d="M50,65 C80,85 120,90 150,100" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"></path>
+        <path d="M50,65 C80,95 120,120 150,135" stroke="#F97316" stroke-width="1" stroke-opacity="0.3"></path>
+
+        <path d="M50,100 C80,80 120,60 150,65" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"></path>
+        <path d="M50,100 C80,100 120,100 150,100" stroke="#F97316" stroke-width="2.5" stroke-opacity="0.9"></path>
+        <path d="M50,100 C80,110 120,120 150,135" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"></path>
+
+        <path d="M50,135 C80,105 120,70 150,65" stroke="#F97316" stroke-width="1" stroke-opacity="0.3"></path>
+        <path d="M50,135 C80,115 120,110 150,100" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"></path>
+        <path d="M50,135 C80,125 120,130 150,135" stroke="#F97316" stroke-width="2.5" stroke-opacity="0.9"></path>
+
+        <!-- Input tokens (orange) -->
+        <circle fill="#F97316" cx="50" cy="65" r="8"></circle>
+        <circle fill="#F97316" cx="50" cy="100" r="8"></circle>
+        <circle fill="#F97316" cx="50" cy="135" r="8"></circle>
+
+        <!-- Output tokens (blue) -->
+        <circle fill="#3B82F6" cx="150" cy="65" r="8"></circle>
+        <circle fill="#3B82F6" cx="150" cy="100" r="8"></circle>
+        <circle fill="#3B82F6" cx="150" cy="135" r="8"></circle>
+
+        <!-- "T" mark in the center of the lens -->
+        <text x="100" y="115" font-family="sans-serif" font-size="60" font-weight="bold" fill="#3B82F6" fill-opacity="0.2" text-anchor="middle">T</text>
+
+        <!-- Lens highlights -->
+        <path d="M70,65 C80,60 90,58 100,60" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-opacity="0.8"></path>
+        <path d="M65,85 C70,80 75,78 80,80" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"></path>
+    </g>
+</svg>
