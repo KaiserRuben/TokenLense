@@ -29,7 +29,7 @@ export default function Header() {
   return (
       <header className="border-b border-border sticky top-0 bg-background z-10">
         <div className="container mx-auto px-4 flex h-16 items-center justify-between">
-          <div className="flex gap-6 items-center">
+          <div className="flex gap-4 items-center">
             <Link href="/" className="flex items-center gap-2">
               <span className="font-semibold text-xl">TokenLense</span>
             </Link>
@@ -52,8 +52,11 @@ export default function Header() {
             </nav>
           </div>
 
-          <div className="flex items-center gap-4">
-            <ResetOnboarding />
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* Hide Reset Onboarding on mobile */}
+            <div className="hidden sm:block">
+              <ResetOnboarding />
+            </div>
 
             <a
                 href="https://github.com/KaiserRuben/TokenLense"
@@ -72,13 +75,9 @@ export default function Header() {
                 </button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[250px] sm:w-[300px]">
-                <div className="flex flex-col gap-6 py-6">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold text-lg">Menu</span>
-                    <button onClick={() => setOpen(false)}>
-                      <X size={18} />
-                    </button>
-                  </div>
+                <div className="flex flex-col gap-6 p-6">
+                  <span className="font-semibold text-lg">Menu</span>
+
                   <nav className="flex flex-col gap-4">
                     {navItems.map((item) => (
                         <Link
@@ -86,7 +85,7 @@ export default function Header() {
                             href={item.href}
                             onClick={() => setOpen(false)}
                             className={cn(
-                                "px-2 py-2 rounded-md transition-colors hover:bg-muted",
+                                "px-4 py-2 rounded-md transition-colors hover:bg-muted",
                                 isActivePath(item.href)
                                     ? "bg-muted font-medium"
                                     : ""
@@ -96,6 +95,11 @@ export default function Header() {
                         </Link>
                     ))}
                   </nav>
+
+                  {/* Add Reset Onboarding inside the mobile menu */}
+                  <div className="mt-4 py-2 px-4">
+                    <ResetOnboarding />
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
