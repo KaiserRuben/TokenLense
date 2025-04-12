@@ -22,6 +22,8 @@ services:
     build:
       context: ./visualizer
       dockerfile: Dockerfile
+      platforms:
+            - linux/amd64
     ports:
       - "3000:3000"
     environment:
