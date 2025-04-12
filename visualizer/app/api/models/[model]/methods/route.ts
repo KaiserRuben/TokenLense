@@ -9,7 +9,7 @@ const API_BASE_URL = process.env.API_URL || 'http://localhost:8000';
  */
 export async function GET(
   request: Request,
-  { params }: { params: { model: string } }
+  { params }: { params: Promise<{ model: string }> }
 ) {
   const { model } = await params;
   
