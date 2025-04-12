@@ -38,15 +38,7 @@ export default function Header() {
               {/*>*/}
               {/*  Attribution*/}
               {/*</Link>*/}
-              <Link
-                  href="/performance"
-                  className={`${
-                      isActive('/performance') ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
-                  } hover:text-foreground transition-colors flex items-center gap-1`}
-              >
-                <BarChart2 className="h-4 w-4" />
-                <span>Performance</span>
-              </Link>
+
               <Link
                   href="/compare-selector"
                   className={`${
@@ -64,6 +56,15 @@ export default function Header() {
               >
                 <Hash className="h-4 w-4" />
                 <span>Token Importance</span>
+              </Link>
+              <Link
+                  href="/performance"
+                  className={`${
+                      isActive('/performance') ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
+                  } hover:text-foreground transition-colors flex items-center gap-1`}
+              >
+                <BarChart2 className="h-4 w-4" />
+                <span>Performance</span>
               </Link>
             </nav>
           </div>

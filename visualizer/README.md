@@ -1,14 +1,44 @@
-# TokenLense Visualization Framework
+# TokenLense: Advanced Token Attribution Visualization
 
-TokenLense is an advanced visualization framework for exploring language model token attribution data. It provides interactive visualizations that help researchers and developers understand how language models make decisions during text generation.
+TokenLense is an advanced visualization platform for analyzing and exploring language model token attribution. It provides intuitive, interactive tools for researchers and developers to understand how different parts of an input prompt influence a model's output generation, revealing insights into internal decision-making processes.
 
 ## Features
 
-- **Token Attribution Visualization**: See how tokens influence each other during text generation
-- **Method Comparison**: Compare different attribution methods side-by-side
-- **Model Comparison**: Compare attribution patterns across different models
-- **Context Window Adjustment**: Explore different context sizes for token relationships
-- **Performance Metrics**: Analyze attribution method performance and efficiency
+- **Model Exploration**: Browse and select from multiple language models
+- **Attribution Methods**: Visualize token relationships using various attribution techniques:
+  - Attention: Visualizes attention weights between tokens
+  - Input × Gradient: Identifies influential input dimensions by multiplying inputs by gradients
+  - Integrated Gradients: Calculates path integrals for more accurate attribution
+  - Layer Gradient × Activation: Identifies important layer activations
+  - LIME: Uses local perturbations to approximate model behavior
+  - Saliency: Uses gradient magnitude to identify impactful tokens
+- **Interactive Visualizations**: Explore token relationships through:
+  - Token Cloud with interactive highlighting
+  - Connection visualization between related tokens
+  - Background highlighting to show relationship strength
+- **Performance Analysis**: Compare attribution method performance across:
+  - Different models
+  - Attribution methods
+  - Hardware configurations
+- **Comparison View**: Side-by-side comparison of attribution results between:
+  - Different models using the same method
+  - Different methods on the same model
+  - Both different models and methods
+- **Token Importance**: Analyze token importance across multiple files
+
+## Dashboard Pages
+
+### Models
+Entry point for exploring different language models and their attribution methods. Users can select a model and then choose an attribution method to analyze.
+
+### Performance
+Comprehensive benchmarking dashboard showing execution time, tokens per second, and hardware comparisons across different attribution methods and models.
+
+### Compare
+Side-by-side comparison tool for directly contrasting how different models or attribution methods interpret the same prompt, with synchronized token selection.
+
+### Token Importance
+Global view of token importance across multiple files, showing which tokens consistently have high influence across different inputs.
 
 ## Getting Started
 
@@ -53,43 +83,39 @@ bun run build
 npm run build
 ```
 
+## Technical Overview
+
+- **Frontend**: Next.js 15+ with React 19+ and TypeScript
+- **UI Components**: shadcn/ui component library with Tailwind CSS
+- **Charts**: Recharts for performance visualizations
+- **Data Fetching**: API integration with backend attribution service
+- **State Management**: React hooks for component state
+
 ## Project Structure
 
-- `/app`: Next.js application pages and routes
+- `/app`: Next.js app router pages
+  - `/models`: Model selection pages
+  - `/performance`: Performance analysis dashboard
+  - `/compare`: Comparison visualization
+  - `/token-importance`: Token importance analysis
 - `/components`: React components
-  - `/attribution`: Attribution visualization components
-  - `/layout`: Layout components like Header and Footer
-- `/lib`: Utility functions and API client
-- `/docs`: Project documentation
+  - `/attribution`: Token visualization components
+  - `/charts`: Performance visualization components
+  - `/comparison`: Comparison view components
+  - `/ui`: Base UI components from shadcn/ui
+- `/lib`: Shared utilities
+  - `api.ts`: API integration
+  - `types.ts`: TypeScript type definitions
+  - `utils.ts`: Shared utility functions
+- `/docs`: Component and feature documentation
 
-## Usage
+## Usage Flow
 
-1. Select a model from the homepage
-2. Choose an attribution method for the model
-3. Select an attribution file to visualize
-4. Explore token relationships using the visualization tools
-5. Adjust settings like context window size and aggregation method
-6. Compare different methods and models
-
-## Development
-
-To contribute to the development of TokenLense:
-
-1. Create a feature branch: `git checkout -b feature/your-feature-name`
-2. Implement your changes
-3. Add tests if appropriate
-4. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgements
-
-- Built with Next.js 15, React 19, and Tailwind CSS
-- Uses D3.js for data visualization
-- Based on InSeq attribution data format
-
-## Contact
-
-For questions or support, please open an issue on the GitHub repository.
+1. **Select a Model**: Start by choosing a language model from the homepage
+2. **Choose an Attribution Method**: Select a method to analyze how tokens influence each other
+3. **Explore Visualizations**: Interact with the token cloud to see relationships
+   - Hover over tokens to see their influence on other tokens
+   - Click tokens to lock the selection for detailed exploration
+   - Adjust visualization settings to customize the view
+4. **Compare Results**: Use the comparison view to contrast different models or methods
+5. **Analyze Performance**: Review performance metrics to understand efficiency tradeoffs

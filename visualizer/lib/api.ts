@@ -9,7 +9,12 @@ import {
   AttributionResponse,
   AttributionDetailedResponse,
   AggregationMethod,
-  PerformancePageData, MethodPerformanceData, PromptTimingResult, TokensPerSecondData, HardwareComparisonData
+  PerformancePageData,
+  MethodPerformanceData,
+  PromptTimingResult,
+  TokensPerSecondData,
+  HardwareComparisonData,
+  TokenImportanceData
 } from './types';
 
 // Base API URL - in a real environment, this would come from environment variables
