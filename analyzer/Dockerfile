@@ -14,7 +14,7 @@ COPY pyproject.toml poetry.lock poetry.toml ./
 RUN pip install --no-cache-dir poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-interaction --no-ansi --no-dev && \
-    pip install --no-cache-dir gunicorn && 
+    pip install --no-cache-dir gunicorn
 
 # Copy the application code
 COPY . .
