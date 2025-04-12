@@ -9,11 +9,10 @@ ENV NEXT_DISABLE_CSS_OPTIMIZATION=1
 
 # Install dependencies
 COPY package.json package-lock.json* ./
-RUN npm ci
-
-# Fixes a stupid bug with lightningcss (tailwind 4)
+# Fixes a bug with lightningcss (tailwind 4)
 RUN npm install lightningcss-linux-x64-gnu@1.29.3
 RUN npm install @tailwindcss/oxide-linux-x64-gnu
+RUN npm ci
 
 
 # Copy the application code
