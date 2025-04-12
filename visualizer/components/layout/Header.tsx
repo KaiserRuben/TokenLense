@@ -1,9 +1,11 @@
 "use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import ResetOnboarding from "./ResetOnboarding"
-import { Github } from "lucide-react"
+import { Github, Menu, X } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 const navItems = [
   { href: "/", label: "Models" },
@@ -14,6 +16,7 @@ const navItems = [
 
 export default function Header() {
   const pathname = usePathname()
+  const [open, setOpen] = useState(false)
 
   // Check if current path matches a nav item (including subpaths)
   const isActivePath = (path: string) => {
@@ -61,6 +64,41 @@ export default function Header() {
               <Github size={18} />
               <span className="hidden sm:inline">GitHub</span>
             </a>
+
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <button className="p-2">
+                  <Menu size={20} />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[250px] sm:w-[300px]">
+                <div className="flex flex-col gap-6 py-6">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold text-lg">Menu</span>
+                    <button onClick={() => setOpen(false)}>
+                      <X size={18} />
+                    </button>
+                  </div>
+                  <nav className="flex flex-col gap-4">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className={cn(
+                                "px-2 py-2 rounded-md transition-colors hover:bg-muted",
+                                isActivePath(item.href)
+                                    ? "bg-muted font-medium"
+                                    : ""
+                            )}
+                        >
+                          {item.label}
+                        </Link>
+                    ))}
+                  </nav>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </header>
