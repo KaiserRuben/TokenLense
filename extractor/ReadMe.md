@@ -1,9 +1,12 @@
-# Llama Token Analyzer
+# TokenLense Extractor
 
-[![Python](https://img.shields.io/badge/Python-3.9-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![Poetry](https://img.shields.io/badge/Poetry-Package_Manager-blue)](https://python-poetry.org/)
+[![Inseq](https://img.shields.io/badge/Inseq-0.6.0-blue)](https://inseq.org/)
 
-A comprehensive framework for analyzing, visualizing, and interpreting token relationships and attribution metrics in Large Language Model outputs. This tool provides deep insights into how LLMs generate text through gradient-based attribution analysis.
+The Extractor component of the [TokenLense](../README.md) framework for analyzing, visualizing, and interpreting token relationships in Large Language Models. This tool generates the attribution data for visualization.
+
+🔗 **Project**: [Main Documentation](../README.md) | [Analyzer API](../analyzer/Documentation/get_attribution_endpoint.md) | [Visualizer](../visualizer/README.md) | [Custom Datasets](docs/custom_dataset_guide.md)
 
 ## Features
 

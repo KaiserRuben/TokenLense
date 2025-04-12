@@ -7,6 +7,8 @@ TokenLense is a comprehensive framework for analyzing, visualizing, and interpre
 [![Next.js](https://img.shields.io/badge/Next.js-15+-blue.svg)](https://nextjs.org/)
 [![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://www.docker.com/)
 
+🔗 **Documentation**: [Extractor](extractor/ReadMe.md) | [Visualizer](visualizer/README.md) | [Analyzer](analyzer/README.md) | [Custom Datasets](extractor/docs/custom_dataset_guide.md)
+
 ## Overview
 
 TokenLense consists of three main components:

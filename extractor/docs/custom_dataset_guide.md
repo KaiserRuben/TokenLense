@@ -1,6 +1,8 @@
 # Running TokenLense with Custom Datasets
 
-This guide explains how to run the TokenLense extractor with your own custom datasets to generate token attribution data.
+This guide explains how to run the [TokenLense Extractor](../ReadMe.md) with your own custom datasets to generate token attribution data for visualization and analysis.
+
+🔗 **Related Documentation**: [Main Project](../../README.md) | [Extractor](../ReadMe.md) | [Analyzer API](../../analyzer/README.md) | [Visualizer](../../visualizer/README.md)
 
 ## Overview
 
