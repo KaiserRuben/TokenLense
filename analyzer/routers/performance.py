@@ -47,6 +47,30 @@ def get_timing_results() -> TimingResults:
     # Load CSVs using pandas
     method_df = pd.read_csv(method_timing_path)
     prompt_df = pd.read_csv(prompt_timing_path)
+    
+    # Keep original column names for compatibility with both frontend and Pydantic model
+    method_df = method_df.rename(columns={
+        'cuda_available': 'torch_cuda_available',
+        'mps_available': 'torch_mps_available'
+    })
+    
+    # Ensure both field names are present for maximum compatibility
+    if 'average_prompt_time' in method_df.columns and 'average_time' not in method_df.columns:
+        method_df['average_time'] = method_df['average_prompt_time']
+        
+    # Keep attribution_method for frontend compatibility, while still adding method field
+    if 'attribution_method' in method_df.columns and 'method' not in method_df.columns:
+        method_df['method'] = method_df['attribution_method']
+    
+    # Do the same for prompt_df
+    if 'attribution_method' in prompt_df.columns and 'method' not in prompt_df.columns:
+        prompt_df['method'] = prompt_df['attribution_method']
+        
+    prompt_df = prompt_df.rename(columns={
+        'prompt_text': 'prompt',
+        'token_count': 'tokens',
+        'attribution_time': 'time'
+    })
 
     # Convert to dictionaries for JSON response
     method_timing = method_df.to_dict(orient="records")

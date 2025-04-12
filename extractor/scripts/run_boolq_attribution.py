@@ -54,7 +54,7 @@ from src.benchmark.reporting import (
 )
 
 # Maximum number of BoolQ questions to use
-MAX_QUESTIONS = 1
+MAX_QUESTIONS = 50
 
 
 def load_boolq_dataset() -> Result[list, Exception]:

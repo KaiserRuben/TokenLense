@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TokenLense Visualization Framework
+
+TokenLense is an advanced visualization framework for exploring language model token attribution data. It provides interactive visualizations that help researchers and developers understand how language models make decisions during text generation.
+
+## Features
+
+- **Token Attribution Visualization**: See how tokens influence each other during text generation
+- **Method Comparison**: Compare different attribution methods side-by-side
+- **Model Comparison**: Compare attribution patterns across different models
+- **Context Window Adjustment**: Explore different context sizes for token relationships
+- **Performance Metrics**: Analyze attribution method performance and efficiency
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ and Bun (recommended) or npm
+- Access to a TokenLense API instance (locally or remote)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/tokenlense.git
+   cd tokenlense/visualizer
+   ```
+
+2. Install dependencies:
+   ```bash
+   bun install
+   # or with npm
+   npm install
+   ```
+
+3. Configure the API endpoint:
+   - Create a `.env.local` file in the `visualizer` directory
+   - Add `NEXT_PUBLIC_API_URL=http://your-api-endpoint` (default: http://localhost:8000)
+
+4. Start the development server:
+   ```bash
+   bun run dev
+   # or with npm
+   npm run dev
+   ```
+
+5. Open your browser to http://localhost:3000
+
+### Building for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun run build
+# or with npm
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/app`: Next.js application pages and routes
+- `/components`: React components
+  - `/attribution`: Attribution visualization components
+  - `/layout`: Layout components like Header and Footer
+- `/lib`: Utility functions and API client
+- `/docs`: Project documentation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+1. Select a model from the homepage
+2. Choose an attribution method for the model
+3. Select an attribution file to visualize
+4. Explore token relationships using the visualization tools
+5. Adjust settings like context window size and aggregation method
+6. Compare different methods and models
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To contribute to the development of TokenLense:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a feature branch: `git checkout -b feature/your-feature-name`
+2. Implement your changes
+3. Add tests if appropriate
+4. Submit a pull request
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgements
+
+- Built with Next.js 15, React 19, and Tailwind CSS
+- Uses D3.js for data visualization
+- Based on InSeq attribution data format
+
+## Contact
+
+For questions or support, please open an issue on the GitHub repository.

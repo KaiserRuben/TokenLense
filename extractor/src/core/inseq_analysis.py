@@ -102,7 +102,7 @@ class InseqTokenAnalyzer:
                 
                 try:
                     # Save native Inseq format
-                    inseq_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    inseq_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
                     model_name = self.model_manager.config.llm_id.split('/')[-1]
                     clean_prompt = "".join(c for c in prompt.split()[:5] if c.isalnum() or c in "._- ").replace(" ", "_")[:50]
                     inseq_filename = f"{inseq_timestamp}_{model_name}_{clean_prompt}_inseq.json"

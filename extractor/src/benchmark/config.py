@@ -9,6 +9,7 @@ settings used in benchmark experiments.
 MAX_PROMPTS = 20  # Adjust based on available compute and time constraints
 
 # Define models to test - starting with smaller subset for initial tests
+
 MODELS = [
     {
         "name": "BART",
@@ -39,21 +40,21 @@ MODELS = [
         "torch_dtype": "float16",
         "type": "causal"
     },
-    #    {
-    #        "name": "Llama-3-1-8B",
-    #        "llm_id": "meta-llama/Llama-3.1-8B",
-    #        "device": "auto",
-    #        "torch_dtype": "float16",
-    #        "type": "causal"
-    #    },
-    {
-        "llm_id": "meta-llama/Llama-4-Scout-17B-16E",
-        "name": "Llama-4-Scout-17B-16E",
-        "device": "auto",
-        "torch_dtype": "float16",
-        "type": "causal"
-
-    },
+       {
+           "name": "Llama-3-1-8B",
+           "llm_id": "meta-llama/Llama-3.1-8B",
+           "device": "auto",
+           "torch_dtype": "float16",
+           "type": "causal"
+       },
+    # {
+    #     "llm_id": "meta-llama/Llama-4-Scout-17B-16E",
+    #     "name": "Llama-4-Scout-17B-16E",
+    #     "device": "auto",
+    #     "torch_dtype": "float16",
+    #     "type": "causal"
+    #
+    # },
     #    # ----------
     {
         "name": "DeepSeek-R1-Distill-Llama-8B",

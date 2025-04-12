@@ -90,34 +90,77 @@ class SystemHardwareInfo(BaseModel):
 
 class SystemInfo(BaseModel):
     """System information model"""
-    cpu: Dict[str, Any] = Field(..., description="CPU information")
-    memory: Dict[str, Any] = Field(..., description="Memory information")
-    gpu: Optional[List[Dict[str, Any]]] = Field(None, description="GPU information if available")
-    python_version: str = Field(..., description="Python version")
-    os: Dict[str, Any] = Field(..., description="Operating system information")
-    timestamp: str = Field(..., description="When the information was collected")
+    hostname: Optional[str] = None
+    platform: Optional[str] = None
+    platform_version: Optional[str] = None
+    processor: Optional[str] = None
+    cpu_model: Optional[str] = None
+    cpu_cores: Optional[int] = None
+    memory_total_gb: Optional[float] = None
+    gpu_info: Optional[str] = None
+    cuda_version: Optional[str] = None
+    torch_version: Optional[str] = None
+    torch_cuda_available: Optional[bool] = None
+    torch_mps_available: Optional[bool] = None
+    
+    model_config = {
+        "populate_by_name": True
+    }
 
 
 class MethodTimingResult(BaseModel):
     """Model for method timing result"""
     model: str
-    method: str
-    average_time: float
-    min_time: float
-    max_time: float
+    method: str  # This is 'attribution_method' in CSV
+    attribution_method: Optional[str] = None  # For compatibility with CSV
+    successful_prompts: Optional[int] = None
+    total_prompts: Optional[int] = None
     success_rate: float
-    tokens_per_second: float
+    model_loading_time: Optional[float] = None
+    attribution_time: Optional[float] = None
+    average_time: Optional[float] = None  # CSV field for 'average_prompt_time'
+    average_prompt_time: Optional[float] = None  # Field for CSV
+    total_time: Optional[float] = None
+    min_time: Optional[float] = None
+    max_time: Optional[float] = None
+    tokens_per_second: Optional[float] = None
+    platform: Optional[str] = None
+    cpu_model: Optional[str] = None
+    cpu_cores: Optional[int] = None
+    memory_gb: Optional[float] = None
+    gpu_info: Optional[str] = None
+    cuda_available: Optional[bool] = None
+    mps_available: Optional[bool] = None
+    torch_cuda_available: Optional[bool] = None  # CSV field
+    torch_mps_available: Optional[bool] = None  # CSV field
+    torch_version: Optional[str] = None
+    
+    model_config = {
+        "populate_by_name": True  # Allow both alias and original names to be used
+    }
 
 
 class PromptTimingResult(BaseModel):
     """Model for prompt timing result"""
-    prompt: str
     model: str
-    method: str
-    time: float
-    success: bool
-    tokens: int
-    tokens_per_second: float
+    method: str  # This is 'attribution_method' in CSV
+    attribution_method: Optional[str] = None  # For compatibility
+    prompt: str  # This is 'prompt_text' in CSV
+    prompt_text: Optional[str] = None  # For compatibility
+    prompt_id: Optional[str] = None
+    tokens: Optional[int] = None  # This is 'token_count' in CSV
+    token_count: Optional[int] = None  # For compatibility
+    output_token_count: Optional[int] = None
+    time: Optional[float] = None  # This is 'attribution_time' in CSV
+    attribution_time: Optional[float] = None  # For compatibility
+    tokens_per_second: Optional[float] = None
+    success: Optional[bool] = None
+    device: Optional[str] = None
+    gpu_info: Optional[str] = None
+    
+    model_config = {
+        "populate_by_name": True  # Allow both alias and original names to be used
+    }
 
 
 class TimingResults(BaseModel):

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
+                                   children,
                                    }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -30,24 +31,24 @@ export default function RootLayout({
       <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-      {/*<Header />*/}
+      <Header />
       <main className="flex-1 container mx-auto px-4 py-8">
         {children}
       </main>
-      <footer className="border-t border-border py-6 mt-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} TokenLense. All rights reserved.
-            </div>
-            <div className="flex gap-6">
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Documentation</a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">GitHub</a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Privacy</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/*<footer className="border-t border-border py-6 mt-12">*/}
+      {/*  <div className="container mx-auto px-4">*/}
+      {/*    <div className="flex flex-col md:flex-row justify-between items-center gap-4">*/}
+      {/*      <div className="text-sm text-muted-foreground">*/}
+      {/*        &copy; {new Date().getFullYear()} TokenLense. All rights reserved.*/}
+      {/*      </div>*/}
+      {/*      <div className="flex gap-6">*/}
+      {/*        <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Documentation</a>*/}
+      {/*        <a href="#" className="text-sm text-muted-foreground hover:text-foreground">GitHub</a>*/}
+      {/*        <a href="#" className="text-sm text-muted-foreground hover:text-foreground">Privacy</a>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</footer>*/}
       </body>
       </html>
   );
