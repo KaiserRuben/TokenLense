@@ -11,7 +11,7 @@ export async function GET(
   request: Request,
   { params }: { params: { model: string; method: string } }
 ) {
-  const { model, method } = params;
+  const { model, method } = await params;
   const url = new URL(request.url);
   const includeDetails = url.searchParams.get('include_details') === 'true';
   

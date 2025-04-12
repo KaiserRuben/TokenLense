@@ -11,7 +11,7 @@ export async function GET(
   request: Request,
   { params }: { params: { model: string; method: string; fileId: string } }
 ) {
-  const { model, method, fileId } = params;
+  const { model, method, fileId } = await params;
   const url = new URL(request.url);
   const aggregation = url.searchParams.get('aggregation') || 'sum';
   

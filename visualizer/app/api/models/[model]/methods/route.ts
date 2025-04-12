@@ -11,7 +11,7 @@ export async function GET(
   request: Request,
   { params }: { params: { model: string } }
 ) {
-  const { model } = params;
+  const { model } = await params;
   
   try {
     const response = await fetch(`${API_BASE_URL}/models/${model}/methods`);
