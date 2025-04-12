@@ -53,7 +53,7 @@ The easiest way to run TokenLense is using Docker Compose:
 
 2. Make sure you have attribution data in the `analyzer/data` directory. If not, either:
    - Run the extractor to generate data (see [Extractor Usage](#extractor-usage))
-   - download [sample data](https://tumde-my.sharepoint.com/:f:/g/personal/ruben_kaiser_tum_de/Et5_y-L6FJJPkaswFl-VfYkB_t_C2xPPhsJzvfufynZtOQ?e=peIRzA) (only available for [TUM](https://tum.de) members)
+   - Download [sample data](https://tumde-my.sharepoint.com/:f:/g/personal/ruben_kaiser_tum_de/Et5_y-L6FJJPkaswFl-VfYkB_t_C2xPPhsJzvfufynZtOQ?e=peIRzA) (only available for [TUM](https://tum.de) members)
 
    Notice that the data must be organized in the following structure:
    ```
@@ -69,7 +69,7 @@ The easiest way to run TokenLense is using Docker Compose:
 
 3. Start the services:
    ```bash
-   docker-compose up -d
+   docker compose up -d
    ```
 
 4. Access the web interface at: http://localhost:3000
@@ -80,7 +80,7 @@ The easiest way to run TokenLense is using Docker Compose:
 
 ```bash
 cd extractor
-poetry install
+poetry install --no-root
 # Run attribution analysis (see Extractor Usage below)
 ```
 
@@ -88,7 +88,7 @@ poetry install
 
 ```bash
 cd analyzer
-poetry install
+poetry install --no-root
 poetry run uvicorn main:app --reload
 ```
 
