@@ -69,6 +69,7 @@ The easiest way to run TokenLense is using Docker Compose:
 3. Navigate into the visualizer directory and install dependencies:
    ```bash
    cd visualizer && npm install
+   cd ..
    ```
 
 4. Start the services:
