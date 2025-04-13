@@ -12,7 +12,7 @@ COPY package.json package-lock.json* ./
 # Fixes a bug with lightningcss (tailwind 4)
 RUN npm install lightningcss-linux-x64-gnu@1.29.3
 RUN npm install @tailwindcss/oxide-linux-x64-gnu
-RUN npm instal # better to use `npm ci` here, but for some reason, this leads to Error: Cannot find module '@tailwindcss/postcss'
+RUN npm install # better to use `npm ci` here, but for some reason, this leads to Error: Cannot find module '@tailwindcss/postcss'
 
 
 # Copy the application code
