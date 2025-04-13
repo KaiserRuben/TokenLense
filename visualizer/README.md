@@ -59,7 +59,7 @@ Global view of token importance across multiple files, showing which tokens cons
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/tokenlense.git
+   git clone https://github.com/kaiserruben/tokenlense.git
    cd tokenlense/visualizer
    ```
 

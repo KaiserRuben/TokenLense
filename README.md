@@ -94,7 +94,7 @@ poetry install --no-root
 ```bash
 cd analyzer
 poetry install --no-root
-poetry run uvicorn main:app --reload
+poetry run python api.py
 ```
 
 #### 3. Visualizer Setup
