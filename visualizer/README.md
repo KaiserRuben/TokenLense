@@ -72,7 +72,7 @@ Global view of token importance across multiple files, showing which tokens cons
 
 3. Configure the API endpoint:
    - Create a `.env.local` file in the `visualizer` directory
-   - Add `NEXT_PUBLIC_API_URL=http://your-api-endpoint` (default: http://localhost:8000)
+   - Add `API_URL=http://your-api-endpoint` (default: http://localhost:8000)
 
 4. Start the development server:
    ```bash
