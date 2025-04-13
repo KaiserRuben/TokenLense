@@ -13,8 +13,10 @@ COPY requirements.txt .
 # Install poetry and dependencies
 RUN pip install -r requirements.txt
 
-# Copy the application code
-COPY . .
+# Copy the application code (excluding data directory)
+COPY api.py data_loader.py inseq_processor.py main.py models.py .
+COPY routers ./routers/
+COPY tests ./tests/
 
 # Create a non-root user to run the application
 RUN adduser --disabled-password --gecos "" appuser && \

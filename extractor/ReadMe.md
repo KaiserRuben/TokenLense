@@ -22,7 +22,7 @@ The Extractor component of the [TokenLense](../README.md) framework for analyzin
 
 ### Using Poetry (Recommended)
 ```bash
-poetry install
+poetry install --no-root
 ```
 
 ### Using pip

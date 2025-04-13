@@ -112,7 +112,7 @@ The extractor component generates attribution data by analyzing LLM token relati
 1. Install dependencies:
    ```bash
    cd extractor
-   poetry install
+   poetry install --no-root
    ```
 
 2. Run attribution analysis with a benchmark script:
