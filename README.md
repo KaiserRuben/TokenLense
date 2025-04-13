@@ -37,7 +37,7 @@ TokenLense consists of three main components:
 
 ### Prerequisites
 
-- Docker and Docker Compose (for containerized setup)
+- Node.js 18+, Docker and Docker Compose (for containerized setup)
 - Python 3.10+ (for local development)
 - Node.js 18+ (for local frontend development)
 
@@ -66,13 +66,17 @@ The easiest way to run TokenLense is using Docker Compose:
    ```
 
    where `MODEL_NAME` is the name of the model (e.g., `gpt2`), `ATTRIBUTION_METHOD` is the name of the attribution method (e.g., `input_times_gradient`), and `<attribution_data>` is the name of the generated attribution data file ending with `_inseq.json`.
+3. Navigate into the visualizer directory and install dependencies:
+   ```bash
+   cd visualizer && npm install
+   ```
 
-3. Start the services:
+4. Start the services:
    ```bash
    docker compose up -d
    ```
 
-4. Access the web interface at: http://localhost:3000
+5. Access the web interface at: http://localhost:3000
 
 ### Manual Setup
 
