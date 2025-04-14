@@ -132,7 +132,6 @@ export default function FilesPage() {
             
             {/* Search bar with shadcn input */}
             <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                 <Input
                     type="text"
                     className="w-full pl-10"
