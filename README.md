@@ -47,7 +47,7 @@ The easiest way to run TokenLense is using Docker Compose:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/TokenLense.git
+   git clone https://github.com/KaiserRuben/TokenLense
    cd TokenLense
    ```
 
